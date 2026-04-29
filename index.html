@@ -14,16 +14,17 @@
 :root {
   --orange: #FF6B1A;
   --orange-deep: #E55600;
-  --orange-soft: #FFE3D1;
-  --navy: #1A2A44;
-  --navy-deep: #0F1B2D;
-  --navy-soft: #2A3D5C;
+  --orange-soft: rgba(255, 107, 26, 0.15);
+  --navy: #0F1B2D;
+  --navy-deep: #08111E;
+  --navy-soft: #1A2A44;
+  --navy-card: #1A2A44;
   --cream: #FAF6F0;
   --cream-warm: #F4EEE3;
-  --ink: #0F1B2D;
-  --muted: #5C6B82;
-  --line: rgba(26, 42, 68, 0.10);
-  --line-strong: rgba(26, 42, 68, 0.20);
+  --ink: #FAF6F0;
+  --muted: #8A99B0;
+  --line: rgba(250, 246, 240, 0.10);
+  --line-strong: rgba(250, 246, 240, 0.20);
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -37,7 +38,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--cream);
+  background: var(--navy);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -59,7 +60,7 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 246, 240, 0.85);
+  background: rgba(15, 27, 45, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -84,6 +85,7 @@ body::before {
   height: 32px;
   width: auto;
   display: block;
+  filter: brightness(0) invert(1);
 }
 .nav-tag {
   font-family: var(--font-mono);
@@ -95,21 +97,45 @@ body::before {
   border-left: 1px solid var(--line-strong);
   margin-left: 4px;
 }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: all 0.2s;
+}
+.nav-link:hover {
+  opacity: 1;
+  color: var(--orange);
+}
+@media (max-width: 720px) {
+  .nav-actions { gap: 12px; }
+  .nav-link { display: none; }
+}
 .nav-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: var(--navy);
-  color: var(--cream);
+  background: var(--orange);
+  color: white;
   text-decoration: none;
+  border: none;
   border-radius: 999px;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 .nav-cta:hover {
-  background: var(--orange);
+  background: var(--orange-deep);
   transform: translateY(-1px);
 }
 
@@ -142,11 +168,12 @@ body::before {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--orange-deep);
+  color: var(--orange);
   background: var(--orange-soft);
   padding: 8px 16px;
   border-radius: 999px;
   margin-bottom: 32px;
+  border: 1px solid rgba(255, 107, 26, 0.25);
 }
 .pulse {
   width: 8px; height: 8px; border-radius: 50%;
@@ -166,13 +193,13 @@ h1.hero-title {
   font-size: clamp(36px, 4.8vw, 64px);
   line-height: 1.02;
   letter-spacing: -0.03em;
-  color: var(--navy);
+  color: var(--cream);
   margin-bottom: 24px;
 }
 h1.hero-title em {
   font-style: italic;
   font-weight: 500;
-  color: var(--orange-deep);
+  color: var(--orange);
   font-variation-settings: "opsz" 144;
 }
 .hero-sub {
@@ -211,7 +238,7 @@ h1.hero-title em {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--orange-deep);
+  color: var(--orange);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -226,7 +253,7 @@ h1.hero-title em {
   font-style: italic;
   font-weight: 500;
   font-size: 18px;
-  color: var(--navy);
+  color: var(--cream);
 }
 
 .hero-jobs-grid {
@@ -242,8 +269,8 @@ h1.hero-title em {
 }
 
 .vaga-card {
-  background: white;
-  border: 1px solid var(--line);
+  background: var(--cream);
+  border: 1px solid rgba(15, 27, 45, 0.08);
   border-radius: 18px;
   padding: 22px 22px 18px;
   text-align: left;
@@ -255,20 +282,21 @@ h1.hero-title em {
   display: flex;
   flex-direction: column;
   min-height: 260px;
+  color: #0F1B2D;
 }
 .vaga-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 3px;
+  width: 100%; height: 4px;
   background: var(--orange);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   transition: transform 0.4s;
 }
 .vaga-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(15, 27, 45, 0.12);
-  border-color: transparent;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  border-color: var(--orange);
 }
 .vaga-card:hover::before { transform: translateY(0); }
 .vaga-card:focus-visible {
@@ -304,7 +332,7 @@ h1.hero-title em {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--orange-deep);
-  background: var(--orange-soft);
+  background: rgba(255, 107, 26, 0.12);
   padding: 5px 10px;
   border-radius: 999px;
   font-weight: 500;
@@ -314,13 +342,13 @@ h1.hero-title em {
   font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--navy);
+  color: #0F1B2D;
   line-height: 1.15;
   margin-bottom: 8px;
 }
 .vaga-desc {
   font-size: 13.5px;
-  color: var(--muted);
+  color: #5C6B82;
   line-height: 1.5;
   margin-bottom: auto;
   padding-bottom: 16px;
@@ -330,7 +358,7 @@ h1.hero-title em {
   align-items: center;
   justify-content: space-between;
   padding-top: 14px;
-  border-top: 1px dashed var(--line-strong);
+  border-top: 1px dashed rgba(15, 27, 45, 0.15);
   gap: 12px;
 }
 .vaga-salary {
@@ -344,29 +372,29 @@ h1.hero-title em {
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--muted);
+  color: #5C6B82;
 }
 .vaga-salary-value {
   font-size: 14px;
   font-weight: 600;
-  color: var(--navy);
+  color: #0F1B2D;
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 .vaga-salary-value small {
   font-size: 11px;
   font-weight: 500;
-  color: var(--muted);
+  color: #5C6B82;
 }
 .vaga-arrow {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--cream);
+  background: var(--cream-warm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--navy);
+  color: #0F1B2D;
   flex-shrink: 0;
   transition: all 0.3s;
 }
@@ -395,12 +423,14 @@ h1.hero-title em {
 
 /* ====== STATS BAR ====== */
 .stats {
-  background: var(--navy);
+  background: var(--navy-deep);
   color: var(--cream);
   padding: 60px 32px;
   position: relative;
   z-index: 2;
   overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .stats::before {
   content: '';
@@ -474,14 +504,14 @@ h1.hero-title em {
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: -0.015em;
-  color: var(--navy);
+  color: var(--cream);
   margin-bottom: 28px;
   padding-bottom: 28px;
   border-bottom: 1px solid var(--line);
 }
 .quem-lead strong {
   font-weight: 600;
-  color: var(--orange-deep);
+  color: var(--orange);
   font-style: italic;
 }
 .quem-body {
@@ -491,7 +521,7 @@ h1.hero-title em {
   margin-bottom: 20px;
 }
 .quem-body strong {
-  color: var(--navy);
+  color: var(--cream);
   font-weight: 600;
 }
 .quem-body:last-child { margin-bottom: 0; }
@@ -522,7 +552,7 @@ h1.hero-title em {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--orange-deep);
+  color: var(--orange);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -539,12 +569,12 @@ h1.hero-title em {
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--navy);
+  color: var(--cream);
 }
 .section-title em {
   font-style: italic;
   font-weight: 500;
-  color: var(--orange-deep);
+  color: var(--orange);
 }
 .section-desc {
   font-size: 17px;
@@ -674,8 +704,15 @@ h1.hero-title em {
 
 /* ====== WHY US ====== */
 .why {
-  background: var(--cream-warm);
+  background: var(--cream);
+  color: #0F1B2D;
 }
+.why .section-title { color: #0F1B2D; }
+.why .section-title em { color: var(--orange-deep); }
+.why .section-desc { color: #5C6B82; }
+.why .section-eyebrow { color: var(--orange-deep); }
+.why .section-eyebrow::before { background: var(--orange-deep); }
+
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -687,8 +724,9 @@ h1.hero-title em {
   background: white;
   padding: 40px 32px;
   border-radius: 20px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(15, 27, 45, 0.08);
   position: relative;
+  color: #0F1B2D;
 }
 .why-num {
   font-family: var(--font-display);
@@ -704,13 +742,13 @@ h1.hero-title em {
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 600;
-  color: var(--navy);
+  color: #0F1B2D;
   margin-bottom: 10px;
   letter-spacing: -0.02em;
 }
 .why-desc {
   font-size: 15px;
-  color: var(--muted);
+  color: #5C6B82;
   line-height: 1.6;
 }
 
@@ -744,7 +782,7 @@ h1.hero-title em {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: white;
+  background: rgba(255, 107, 26, 0.08);
   border: 2px solid var(--orange);
   display: flex;
   align-items: center;
@@ -752,7 +790,7 @@ h1.hero-title em {
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 600;
-  color: var(--orange-deep);
+  color: var(--orange);
   margin-bottom: 20px;
   transition: all 0.3s;
 }
@@ -765,7 +803,7 @@ h1.hero-title em {
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--cream);
   margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
@@ -773,10 +811,11 @@ h1.hero-title em {
 
 /* ====== APPLY ====== */
 .apply {
-  background: var(--navy);
+  background: var(--navy-deep);
   color: var(--cream);
   position: relative;
   overflow: hidden;
+  border-top: 1px solid var(--line);
 }
 .apply::before {
   content: '';
@@ -877,9 +916,10 @@ h1.hero-title em {
 .footer {
   background: var(--navy-deep);
   color: var(--cream);
-  padding: 50px 32px 30px;
+  padding: 40px 32px;
   position: relative;
   z-index: 2;
+  border-top: 1px solid var(--line);
 }
 .footer-inner {
   max-width: 1280px;
@@ -897,6 +937,270 @@ h1.hero-title em {
   font-weight: 500;
 }
 .footer-link:hover { text-decoration: underline; }
+
+/* ====== CTA FINAL ====== */
+.cta-final {
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+.cta-final-box {
+  background: linear-gradient(135deg, var(--navy-soft) 0%, var(--navy-deep) 100%);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1.6fr auto;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-final-box::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.18) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cta-final-content { position: relative; z-index: 1; }
+.cta-final-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 32px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 12px 32px rgba(255, 107, 26, 0.35);
+  white-space: nowrap;
+}
+.cta-final-btn:hover {
+  background: var(--orange-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(255, 107, 26, 0.45);
+}
+.cta-final-btn svg { transition: transform 0.3s; }
+.cta-final-btn:hover svg { transform: translateX(4px); }
+
+@media (max-width: 860px) {
+  .cta-final-box { grid-template-columns: 1fr; padding: 40px 32px; gap: 28px; text-align: left; }
+}
+
+/* ====== MODAL ====== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 17, 30, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+.modal {
+  background: var(--cream);
+  color: #0F1B2D;
+  border-radius: 24px;
+  padding: 48px;
+  max-width: 540px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  border-top: 4px solid var(--orange);
+}
+.modal-backdrop.active .modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(15, 27, 45, 0.06);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F1B2D;
+  transition: all 0.2s;
+}
+.modal-close:hover {
+  background: var(--orange);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  margin-bottom: 32px;
+  padding-right: 32px;
+}
+.modal-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #0F1B2D;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.modal-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange-deep);
+}
+.modal-sub {
+  font-size: 15px;
+  color: #5C6B82;
+  line-height: 1.55;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+}
+.modal-field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #5C6B82;
+  margin-bottom: 8px;
+}
+.modal-field input {
+  padding: 14px 16px;
+  background: white;
+  border: 1px solid rgba(15, 27, 45, 0.12);
+  border-radius: 12px;
+  color: #0F1B2D;
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.2s;
+}
+.modal-field input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.15);
+}
+.modal-field input::placeholder { color: #A0AAB8; }
+
+.modal-submit {
+  padding: 16px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+.modal-submit:hover:not(:disabled) {
+  background: var(--orange-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(255, 107, 26, 0.3);
+}
+.modal-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.modal-note {
+  text-align: center;
+  font-size: 12px;
+  color: #8A99B0;
+  margin-top: 8px;
+}
+
+.modal-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+.modal-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+.modal-success h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: #0F1B2D;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.modal-success p {
+  color: #5C6B82;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .modal { padding: 32px 24px; border-radius: 20px; }
+  .modal-row { grid-template-columns: 1fr; }
+  .modal-title { font-size: 26px; }
+}
+
+/* Lock scroll quando modal está aberto */
+body.modal-open {
+  overflow: hidden;
+}
 
 /* ====== ANIMATIONS ====== */
 .reveal {
@@ -929,10 +1233,13 @@ h1.hero-title em {
       </a>
       <span class="nav-tag">Carreiras · Brasil</span>
     </div>
-    <a href="#aplicar" class="nav-cta">
-      Candidatar-se
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-    </a>
+    <div class="nav-actions">
+      <a href="/sobre.html" class="nav-link">Sobre a Yep Ads</a>
+      <button onclick="openModal('')" class="nav-cta">
+        Candidatar-se
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -946,7 +1253,7 @@ h1.hero-title em {
         Vagas emergenciais · 100% home office · Brasil
       </span>
       <h1 class="hero-title">
-        Estamos contratando <em>8 talentos</em><br>pra crescer com a gente.
+        <em>Vagas abertas</em> pra fazer<br>parte do nosso time.
       </h1>
       <p class="hero-sub">
         A Yep Ads é uma agência global de performance marketing presente em mais de 140 países. Agora estamos montando o time brasileiro — 100% home office, com a estrutura de uma operação internacional.
@@ -1169,59 +1476,65 @@ h1.hero-title em {
   </div>
 </section>
 
-<!-- APLICAR -->
-<section class="section apply" id="aplicar">
+<!-- CTA FINAL -->
+<section class="section cta-final" id="aplicar">
   <div class="section-inner">
-    <div class="section-head reveal" style="text-align: center; grid-template-columns: 1fr; max-width: 720px; margin-left: auto; margin-right: auto;">
-      <div>
-        <div class="section-eyebrow" style="justify-content: center;">Candidatar-se</div>
-        <h2 class="section-title" id="form-title">Bora? <em>Manda seu perfil.</em></h2>
-        <p class="section-desc" id="form-subtitle" style="margin-top: 20px;">Selecione uma das vagas acima ou escolha aqui qual te interessa. Nosso time entra em contato em até 5 dias úteis.</p>
+    <div class="cta-final-box reveal">
+      <div class="cta-final-content">
+        <span class="section-eyebrow" style="justify-content: flex-start;">Bora?</span>
+        <h2 class="section-title" style="font-size: clamp(32px, 4vw, 52px);">Não viu uma vaga que combine?<br><em>Manda seu perfil mesmo assim.</em></h2>
+        <p class="section-desc" style="margin-top: 16px; max-width: 540px;">A gente está sempre aberto a conhecer talentos. Se seu perfil bater com algo no time, entramos em contato.</p>
       </div>
+      <button class="cta-final-btn" onclick="openModal('')">
+        Enviar perfil
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
     </div>
-
-    <form class="apply-form reveal" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <div class="form-field">
-          <label for="nome">Nome completo</label>
-          <input type="text" id="nome" name="nome" placeholder="Como te chamam" required />
-        </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="whats">WhatsApp</label>
-          <input type="tel" id="whats" name="whats" placeholder="(00) 00000-0000" required />
-        </div>
-        <div class="form-field">
-          <label for="vaga">Vaga de interesse</label>
-          <select id="vaga" name="vaga" required>
-            <option value="">Selecione...</option>
-            <option>SDR</option>
-            <option>Atendimento ao Cliente</option>
-            <option>Designer Júnior</option>
-            <option>Social Media</option>
-          </select>
-          <p id="vaga-locked-hint" style="display:none; font-size:11px; color:var(--orange); margin-top:6px; font-family:var(--font-mono); letter-spacing:0.05em;">
-            🔒 Vaga selecionada · <a href="#" onclick="unlockVaga(event)" style="color:var(--orange); text-decoration:underline;">trocar</a>
-          </p>
-        </div>
-      </div>
-
-      <div class="form-field">
-        <label for="link">LinkedIn ou portfólio (opcional)</label>
-        <input type="url" id="link" name="link" placeholder="https://..." />
-      </div>
-
-      <button type="submit" class="form-submit">Enviar candidatura</button>
-      <p class="form-note">Seus dados ficam só com a gente. Sem spam, sem repassar.</p>
-    </form>
   </div>
 </section>
+
+<!-- MODAL DE CANDIDATURA -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModalOnBackdrop(event)" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" onclick="closeModal()" aria-label="Fechar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="modal-header">
+      <span class="modal-eyebrow" id="modal-eyebrow">Candidatura</span>
+      <h2 class="modal-title" id="modal-title">Candidatura</h2>
+      <p class="modal-sub" id="modal-sub">Preencha seus dados e nosso time entra em contato em até 5 dias úteis.</p>
+    </div>
+
+    <form class="modal-form" id="modal-form" onsubmit="handleModalSubmit(event)">
+      <input type="hidden" id="modal-vaga" name="vaga" value="" />
+
+      <div class="modal-field">
+        <label for="modal-nome">Nome completo</label>
+        <input type="text" id="modal-nome" name="nome" placeholder="Como te chamam" required />
+      </div>
+
+      <div class="modal-row">
+        <div class="modal-field">
+          <label for="modal-email">Email</label>
+          <input type="email" id="modal-email" name="email" placeholder="seu@email.com" required />
+        </div>
+        <div class="modal-field">
+          <label for="modal-whats">WhatsApp</label>
+          <input type="tel" id="modal-whats" name="whats" placeholder="(00) 00000-0000" required />
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label for="modal-link">LinkedIn ou portfólio (opcional)</label>
+        <input type="url" id="modal-link" name="link" placeholder="https://..." />
+      </div>
+
+      <button type="submit" class="modal-submit" id="modal-submit">Enviar candidatura</button>
+      <p class="modal-note">Seus dados ficam só com a gente. Sem spam, sem repassar.</p>
+    </form>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1243,78 +1556,79 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-// Pré-preencher vaga ao clicar no botão do card e travar a seleção
+// Pré-preencher vaga ao clicar no card e abrir modal
 function prefillRole(role) {
-  const select = document.getElementById('vaga');
-  if (select) {
-    for (let i = 0; i < select.options.length; i++) {
-      if (select.options[i].text === role) { select.selectedIndex = i; break; }
+  openModal(role);
+}
+
+// === MODAL ===
+function openModal(vaga) {
+  const backdrop = document.getElementById('modal-backdrop');
+  const title = document.getElementById('modal-title');
+  const eyebrow = document.getElementById('modal-eyebrow');
+  const sub = document.getElementById('modal-sub');
+  const vagaInput = document.getElementById('modal-vaga');
+
+  if (vaga) {
+    title.innerHTML = `Candidatura para <em>${vaga}</em>`;
+    eyebrow.textContent = `Vaga: ${vaga}`;
+    sub.textContent = 'Preencha seus dados e nosso time entra em contato em até 5 dias úteis sobre essa vaga.';
+    vagaInput.value = vaga;
+  } else {
+    title.innerHTML = 'Candidatura';
+    eyebrow.textContent = 'Candidatura';
+    sub.textContent = 'Preencha seus dados e selecione a vaga de interesse.';
+    vagaInput.value = '';
+  }
+
+  backdrop.classList.add('active');
+  backdrop.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+
+  setTimeout(() => document.getElementById('modal-nome')?.focus(), 200);
+}
+
+function closeModal() {
+  const backdrop = document.getElementById('modal-backdrop');
+  backdrop.classList.remove('active');
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+
+  // Reset form depois da animação
+  setTimeout(() => {
+    const form = document.getElementById('modal-form');
+    if (form && form.querySelector('.modal-success')) {
+      // Se mostrou sucesso, recriar o form
+      location.reload();
+    } else if (form) {
+      form.reset();
     }
-    // Trava a seleção e mostra visualmente que está fixa
-    select.setAttribute('data-locked', 'true');
-    select.style.opacity = '0.85';
-    select.style.cursor = 'not-allowed';
-  }
-
-  // Mostra o hint de "vaga travada"
-  const hint = document.getElementById('vaga-locked-hint');
-  if (hint) hint.style.display = 'block';
-
-  // Atualiza o título do form pra deixar claro pra qual vaga é
-  const formTitle = document.getElementById('form-title');
-  if (formTitle) {
-    formTitle.innerHTML = `Candidatura para <em>${role}</em>`;
-  }
-  const formSubtitle = document.getElementById('form-subtitle');
-  if (formSubtitle) {
-    formSubtitle.textContent = `Preencha seus dados e nosso time entra em contato em até 5 dias úteis sobre essa vaga.`;
-  }
-
-  document.getElementById('aplicar').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => document.getElementById('nome')?.focus(), 700);
+  }, 400);
 }
 
-// Destravar a vaga (caso o candidato queira trocar)
-function unlockVaga(e) {
-  e.preventDefault();
-  const select = document.getElementById('vaga');
-  const hint = document.getElementById('vaga-locked-hint');
-  const formTitle = document.getElementById('form-title');
-  const formSubtitle = document.getElementById('form-subtitle');
-
-  select.removeAttribute('data-locked');
-  select.style.opacity = '';
-  select.style.cursor = '';
-  if (hint) hint.style.display = 'none';
-  if (formTitle) formTitle.innerHTML = 'Bora? <em>Manda seu perfil.</em>';
-  if (formSubtitle) formSubtitle.textContent = 'Selecione uma das vagas acima ou escolha aqui qual te interessa. Nosso time entra em contato em até 5 dias úteis.';
+function closeModalOnBackdrop(e) {
+  if (e.target.id === 'modal-backdrop') {
+    closeModal();
+  }
 }
 
-// Impedir mudança da vaga quando travada
-document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('vaga');
-  if (select) {
-    select.addEventListener('mousedown', (e) => {
-      if (select.getAttribute('data-locked') === 'true') {
-        e.preventDefault();
-      }
-    });
-    select.addEventListener('keydown', (e) => {
-      if (select.getAttribute('data-locked') === 'true') {
-        e.preventDefault();
-      }
-    });
+// Fechar com ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const backdrop = document.getElementById('modal-backdrop');
+    if (backdrop && backdrop.classList.contains('active')) {
+      closeModal();
+    }
   }
 });
 
-// Form
-async function handleSubmit(e) {
+// Submit do modal
+async function handleModalSubmit(e) {
   e.preventDefault();
   const form = e.target;
-  const submitBtn = form.querySelector('.form-submit');
+  const submitBtn = document.getElementById('modal-submit');
   const originalText = submitBtn.textContent;
 
-  // Loading state
   submitBtn.disabled = true;
   submitBtn.textContent = 'Enviando...';
 
@@ -1322,7 +1636,7 @@ async function handleSubmit(e) {
     nome: form.nome.value,
     email: form.email.value,
     whatsapp: form.whats.value,
-    vaga: form.vaga.value,
+    vaga: form.vaga.value || 'Não especificada',
     link: form.link.value || null
   };
 
@@ -1338,12 +1652,16 @@ async function handleSubmit(e) {
       throw new Error(err.error || 'Falha no envio');
     }
 
-    // Success
+    // Tela de sucesso dentro do modal
+    const firstName = data.nome.split(' ')[0];
     form.innerHTML = `
-      <div style="text-align: center; padding: 40px 20px;">
-        <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
-        <h3 style="font-family: var(--font-display); font-size: 28px; color: var(--cream); margin-bottom: 12px;">Candidatura recebida!</h3>
-        <p style="color: rgba(250, 246, 240, 0.7); font-size: 16px;">Valeu, ${data.nome.split(' ')[0]}! Em até 5 dias úteis nosso time entra em contato.</p>
+      <div class="modal-success">
+        <div class="modal-success-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Recebemos sua candidatura, ${firstName}!</h3>
+        <p>Em até 5 dias úteis nosso time entra em contato sobre a vaga de <strong>${data.vaga}</strong>.</p>
+        <button type="button" onclick="closeModal()" class="modal-submit" style="max-width:200px; margin: 0 auto;">Fechar</button>
       </div>
     `;
   } catch (error) {
