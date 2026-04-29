@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carreiras Brasil — Yep Ads | 8 Vagas Home Office</title>
+<meta name="description" content="A Yep Ads, agência global de performance marketing presente em 140+ países, está expandindo no Brasil. 8 vagas 100% home office: SDR, Atendimento, Designer Jr e Social Media." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange: #FF6B1A;
+  --orange-deep: #E55600;
+  --orange-soft: #FFE3D1;
+  --navy: #1A2A44;
+  --navy-deep: #0F1B2D;
+  --navy-soft: #2A3D5C;
+  --cream: #FAF6F0;
+  --cream-warm: #F4EEE3;
+  --ink: #0F1B2D;
+  --muted: #5C6B82;
+  --line: rgba(26, 42, 68, 0.10);
+  --line-strong: rgba(26, 42, 68, 0.20);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ====== TEXTURE / NOISE ====== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* ====== NAV ====== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 246, 240, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  flex-shrink: 0;
+}
+.logo-mark .sq {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+.sq-1 { top: 0; left: 0; background: var(--orange); }
+.sq-2 { top: 0; right: 0; background: var(--navy); }
+.sq-3 { bottom: 0; left: 0; background: var(--orange); }
+.sq-4 { bottom: 0; right: 0; background: var(--orange); }
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.nav-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  padding-left: 18px;
+  border-left: 1px solid var(--line-strong);
+  margin-left: 4px;
+}
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--navy);
+  color: var(--cream);
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.nav-cta:hover {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 720px) {
+  .nav-tag { display: none; }
+  .nav-inner { padding: 14px 20px; }
+}
+
+/* ====== HERO ====== */
+.hero {
+  position: relative;
+  padding: 70px 32px 90px;
+  overflow: hidden;
+  z-index: 2;
+}
+.hero-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-text {
+  max-width: 880px;
+  margin-bottom: 64px;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
+  background: var(--orange-soft);
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin-bottom: 32px;
+}
+.pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 0 var(--orange);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 107, 26, 0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(255, 107, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 107, 26, 0); }
+}
+
+h1.hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(44px, 6.5vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+h1.hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange-deep);
+  font-variation-settings: "opsz" 144;
+}
+.hero-sub {
+  font-size: 19px;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* Hero deco */
+.hero-deco {
+  position: absolute;
+  pointer-events: none;
+}
+.hero-deco-1 {
+  top: 80px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.10) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Hero jobs grid */
+.hero-jobs { position: relative; }
+.hero-jobs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.hero-jobs-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-jobs-label::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--orange);
+}
+.hero-jobs-count {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.hero-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1080px) {
+  .hero-jobs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .hero-jobs-grid { grid-template-columns: 1fr; }
+}
+
+.vaga-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.vaga-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--orange);
+  transform: translateY(-3px);
+  transition: transform 0.4s;
+}
+.vaga-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(15, 27, 45, 0.12);
+  border-color: transparent;
+}
+.vaga-card:hover::before { transform: translateY(0); }
+.vaga-card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+.vaga-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.vaga-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: var(--cream-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange-deep);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.vaga-card:hover .vaga-icon {
+  background: var(--orange);
+  color: white;
+}
+.vaga-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-deep);
+  background: var(--orange-soft);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.vaga-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.vaga-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: auto;
+  padding-bottom: 16px;
+}
+.vaga-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-strong);
+  gap: 12px;
+}
+.vaga-salary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.vaga-salary-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+.vaga-salary-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.vaga-salary-value small {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.vaga-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.vaga-card:hover .vaga-arrow {
+  background: var(--orange);
+  color: white;
+  transform: rotate(-45deg);
+}
+
+.hero-jobs-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+.hero-jobs-note svg { color: var(--orange); }
+
+@media (max-width: 720px) {
+  .hero { padding: 50px 20px 70px; }
+  .hero-text { margin-bottom: 48px; }
+}
+
+/* ====== STATS BAR ====== */
+.stats {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 60px 32px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.stats::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.15) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.stats-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  position: relative;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  color: var(--orange);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 13px;
+  color: rgba(250, 246, 240, 0.7);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+@media (max-width: 720px) {
+  .stats-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .stat-num { font-size: 42px; }
+}
+
+/* ====== QUEM SOMOS ====== */
+.quem-somos {
+  padding-top: 110px;
+  padding-bottom: 110px;
+  position: relative;
+}
+.quem-somos::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -150px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.quem-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 80px;
+  align-items: start;
+  position: relative;
+}
+.quem-left .section-title {
+  position: sticky;
+  top: 120px;
+}
+.quem-lead {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.quem-lead strong {
+  font-weight: 600;
+  color: var(--orange-deep);
+  font-style: italic;
+}
+.quem-body {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.quem-body strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+.quem-body:last-child { margin-bottom: 0; }
+
+@media (max-width: 860px) {
+  .quem-somos { padding-top: 70px; padding-bottom: 70px; }
+  .quem-grid { grid-template-columns: 1fr; gap: 32px; }
+  .quem-left .section-title { position: static; }
+}
+
+/* ====== SECTION BASE ====== */
+.section {
+  padding: 120px 32px;
+  position: relative;
+  z-index: 2;
+}
+.section-inner { max-width: 1280px; margin: 0 auto; }
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--orange);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+.section-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange-deep);
+}
+.section-desc {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+@media (max-width: 860px) {
+  .section { padding: 80px 20px; }
+  .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px; }
+}
+
+/* ====== JOBS GRID ====== */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 860px) { .jobs-grid { grid-template-columns: 1fr; } }
+
+.job-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 36px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.job-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: var(--orange);
+  transform: translateY(-4px);
+  transition: transform 0.4s;
+}
+.job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(15, 27, 45, 0.10);
+  border-color: transparent;
+}
+.job-card:hover::before { transform: translateY(0); }
+
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.job-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--cream-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange-deep);
+  flex-shrink: 0;
+}
+.job-card:hover .job-icon {
+  background: var(--orange);
+  color: white;
+  transition: all 0.3s;
+}
+.job-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-deep);
+  background: var(--orange-soft);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.job-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.job-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.job-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+  margin-bottom: 24px;
+}
+.job-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--navy);
+  font-weight: 500;
+}
+.job-meta-item svg { color: var(--orange); }
+
+.job-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: gap 0.3s;
+}
+.job-cta:hover { gap: 14px; color: var(--orange-deep); }
+
+/* ====== WHY US ====== */
+.why {
+  background: var(--cream-warm);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 860px) { .why-grid { grid-template-columns: 1fr; } }
+
+.why-card {
+  background: white;
+  padding: 40px 32px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  position: relative;
+}
+.why-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--orange);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+.why-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.why-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ====== PROCESS ====== */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: repeating-linear-gradient(to right, var(--line-strong) 0, var(--line-strong) 6px, transparent 6px, transparent 12px);
+  z-index: 0;
+}
+@media (max-width: 860px) {
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  .process-steps::before { display: none; }
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--orange-deep);
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+.step:hover .step-num {
+  background: var(--orange);
+  color: white;
+  transform: scale(1.05);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.step-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+/* ====== APPLY ====== */
+.apply {
+  background: var(--navy);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.apply::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.20) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.apply::after {
+  content: '';
+  position: absolute;
+  bottom: -200px; right: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.12) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.apply .section-title { color: var(--cream); }
+.apply .section-title em { color: var(--orange); }
+.apply .section-desc { color: rgba(250, 246, 240, 0.7); }
+.apply .section-eyebrow { color: var(--orange); }
+.apply .section-eyebrow::before { background: var(--orange); }
+
+.apply-form {
+  max-width: 640px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(250, 246, 240, 0.12);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  z-index: 2;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-field { margin-bottom: 16px; }
+.form-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(250, 246, 240, 0.6);
+  margin-bottom: 8px;
+}
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(250, 246, 240, 0.06);
+  border: 1px solid rgba(250, 246, 240, 0.15);
+  border-radius: 12px;
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--orange);
+  background: rgba(250, 246, 240, 0.10);
+}
+.form-field input::placeholder { color: rgba(250, 246, 240, 0.35); }
+.form-field select option { background: var(--navy-deep); color: var(--cream); }
+.form-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--orange-deep); transform: translateY(-1px); }
+.form-note {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(250, 246, 240, 0.5);
+  margin-top: 20px;
+}
+@media (max-width: 600px) {
+  .apply-form { padding: 32px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  background: var(--navy-deep);
+  color: var(--cream);
+  padding: 50px 32px 30px;
+  position: relative;
+  z-index: 2;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-text { font-size: 13px; color: rgba(250, 246, 240, 0.5); }
+.footer-link {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-link:hover { text-decoration: underline; }
+
+/* ====== ANIMATIONS ====== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+/* Fallback: se JS estiver desativado, mostrar tudo */
+.no-js .reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-mark" aria-hidden="true">
+        <span class="sq sq-1"></span>
+        <span class="sq sq-2"></span>
+        <span class="sq sq-3"></span>
+        <span class="sq sq-4"></span>
+      </div>
+      <span class="logo-text">yep</span>
+      <span class="nav-tag">Carreiras · Brasil</span>
+    </div>
+    <a href="#aplicar" class="nav-cta">
+      Candidatar-se
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-content">
+    <div class="hero-text reveal">
+      <span class="hero-eyebrow">
+        <span class="pulse"></span>
+        Expansão Brasil · Time remoto
+      </span>
+      <h1 class="hero-title">
+        Estamos contratando<br>
+        <em>8 talentos</em> pra crescer com a gente.
+      </h1>
+      <p class="hero-sub">
+        A Yep Ads é uma agência global de performance marketing presente em mais de 140 países. Agora estamos montando o time brasileiro — 100% home office, com a estrutura de uma operação internacional.
+      </p>
+    </div>
+
+    <div class="hero-jobs">
+      <div class="hero-jobs-head">
+        <span class="hero-jobs-label">As vagas abertas</span>
+        <span class="hero-jobs-count">8 posições</span>
+      </div>
+      <div class="hero-jobs-grid">
+
+        <!-- SDR -->
+        <button class="vaga-card reveal" onclick="prefillRole('SDR')">
+          <div class="vaga-card-head">
+            <div class="vaga-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span class="vaga-tag">3 vagas</span>
+          </div>
+          <h3 class="vaga-title">SDR — Sales Development</h3>
+          <p class="vaga-desc">Prospecção ativa de anunciantes e publishers. Inglês básico é um plus.</p>
+          <div class="vaga-foot">
+            <div class="vaga-salary">
+              <span class="vaga-salary-label">Base</span>
+              <span class="vaga-salary-value">R$ 2.500 – 3.500 <small>+ comissão</small></span>
+            </div>
+            <span class="vaga-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </button>
+
+        <!-- Atendimento -->
+        <button class="vaga-card reveal" onclick="prefillRole('Atendimento ao Cliente')">
+          <div class="vaga-card-head">
+            <div class="vaga-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span class="vaga-tag">2 vagas</span>
+          </div>
+          <h3 class="vaga-title">Atendimento ao Cliente</h3>
+          <p class="vaga-desc">Suporte aos parceiros, acompanhamento de campanhas e escalada técnica.</p>
+          <div class="vaga-foot">
+            <div class="vaga-salary">
+              <span class="vaga-salary-label">Base</span>
+              <span class="vaga-salary-value">R$ 2.800 – 3.800</span>
+            </div>
+            <span class="vaga-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </button>
+
+        <!-- Designer -->
+        <button class="vaga-card reveal" onclick="prefillRole('Designer Júnior')">
+          <div class="vaga-card-head">
+            <div class="vaga-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            </div>
+            <span class="vaga-tag">1 vaga</span>
+          </div>
+          <h3 class="vaga-title">Designer Júnior</h3>
+          <p class="vaga-desc">Peças para campanhas digitais, redes sociais e materiais internos.</p>
+          <div class="vaga-foot">
+            <div class="vaga-salary">
+              <span class="vaga-salary-label">Base</span>
+              <span class="vaga-salary-value">R$ 3.000 – 4.500</span>
+            </div>
+            <span class="vaga-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </button>
+
+        <!-- Social Media -->
+        <button class="vaga-card reveal" onclick="prefillRole('Social Media')">
+          <div class="vaga-card-head">
+            <div class="vaga-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </div>
+            <span class="vaga-tag">2 vagas</span>
+          </div>
+          <h3 class="vaga-title">Social Media</h3>
+          <p class="vaga-desc">Planejamento, copy e gestão das redes sociais Yep Brasil — do zero.</p>
+          <div class="vaga-foot">
+            <div class="vaga-salary">
+              <span class="vaga-salary-label">Base</span>
+              <span class="vaga-salary-value">R$ 3.500 – 5.000</span>
+            </div>
+            <span class="vaga-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </button>
+
+      </div>
+      <p class="hero-jobs-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        Clique numa vaga para se candidatar diretamente
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">4B+</div>
+      <div class="stat-label">Cliques anuais</div>
+    </div>
+    <div>
+      <div class="stat-num">7K+</div>
+      <div class="stat-label">Parceiros globais</div>
+    </div>
+    <div>
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Anos no mercado</div>
+    </div>
+    <div>
+      <div class="stat-num">140+</div>
+      <div class="stat-label">Países atendidos</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="section quem-somos" id="quem-somos">
+  <div class="section-inner">
+    <div class="quem-grid">
+      <div class="quem-left reveal">
+        <div class="section-eyebrow">Quem somos</div>
+        <h2 class="section-title">A <em>Yep Ads</em> em poucas palavras.</h2>
+      </div>
+      <div class="quem-right reveal">
+        <p class="quem-lead">
+          Somos uma agência de <strong>marketing e performance</strong> de grandes empresas, com atuação internacional.
+        </p>
+        <p class="quem-body">
+          Como uma das principais agências de marketing de performance do mundo, nos destacamos por oferecer <strong>soluções completas</strong> no amplo universo do marketing digital — tanto para anunciantes quanto para editores.
+        </p>
+        <p class="quem-body">
+          Do <strong>planejamento estratégico à execução</strong>, nossa equipe se dedica a maximizar a presença online dos nossos parceiros e gerar resultados reais. É essa estrutura, esse playbook, e esse time que agora chega ao Brasil — e você pode fazer parte dele desde o começo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE A YEP -->
+<section class="section why" id="por-que">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Por que a Yep</div>
+        <h2 class="section-title">Não é só trabalho. <em>É operação global.</em></h2>
+      </div>
+      <p class="section-desc">
+        A Yep tem mais de 10 anos no mercado internacional, parceiros como Norton, Vivint e Amazon, e agora abre o capítulo brasileiro. Isso significa estrutura madura, mas ainda com a energia de quem está construindo.
+      </p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <h3 class="why-title">Home office de verdade</h3>
+        <p class="why-desc">Sem híbrido escondido. O time todo é remoto, com cultura desenhada pra trabalho à distância. Você trabalha de onde quiser no Brasil.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">02</div>
+        <h3 class="why-title">Crescer junto com a operação</h3>
+        <p class="why-desc">Você entra na fundação do time Brasil. Quem chega agora tem caminho aberto pra liderar áreas conforme a operação cresce.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">03</div>
+        <h3 class="why-title">Aprender com quem já fez</h3>
+        <p class="why-desc">Acesso direto a um time global que opera em 140+ países, com playbooks de performance marketing testados em escala internacional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Processo seletivo</div>
+        <h2 class="section-title">Direto, sem <em>enrolação.</em></h2>
+      </div>
+      <p class="section-desc">
+        Sabemos que processo seletivo longo cansa. O nosso é objetivo: 4 etapas, feedback em até 5 dias úteis em cada uma.
+      </p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Inscrição</h3>
+        <p class="step-desc">Preenche o formulário aqui mesmo. Anexa portfólio se for vaga criativa.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Triagem</h3>
+        <p class="step-desc">Análise do perfil pelo time de RH. Feedback em até 5 dias.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Entrevistas</h3>
+        <p class="step-desc">Bate-papo com gestor da área e teste prático curto, quando aplicável.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Proposta</h3>
+        <p class="step-desc">Alinhamento final, proposta e boas-vindas ao time Yep Brasil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APLICAR -->
+<section class="section apply" id="aplicar">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align: center; grid-template-columns: 1fr; max-width: 720px; margin-left: auto; margin-right: auto;">
+      <div>
+        <div class="section-eyebrow" style="justify-content: center;">Candidatar-se</div>
+        <h2 class="section-title">Bora? <em>Manda seu perfil.</em></h2>
+        <p class="section-desc" style="margin-top: 20px;">Preenche os campos abaixo e nosso time entra em contato em até 5 dias úteis.</p>
+      </div>
+    </div>
+
+    <form class="apply-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Como te chamam" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="whats">WhatsApp</label>
+          <input type="tel" id="whats" name="whats" placeholder="(00) 00000-0000" required />
+        </div>
+        <div class="form-field">
+          <label for="vaga">Vaga de interesse</label>
+          <select id="vaga" name="vaga" required>
+            <option value="">Selecione...</option>
+            <option>SDR</option>
+            <option>Atendimento ao Cliente</option>
+            <option>Designer Júnior</option>
+            <option>Social Media</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="link">LinkedIn ou portfólio (opcional)</label>
+        <input type="url" id="link" name="link" placeholder="https://..." />
+      </div>
+
+      <button type="submit" class="form-submit">Enviar candidatura</button>
+      <p class="form-note">Seus dados ficam só com a gente. Sem spam, sem repassar.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-text">© 2026 Yep Ads · Carreiras Brasil · Todas as vagas 100% home office</p>
+    <p class="footer-text">Conheça mais em <a href="https://yepads.com" class="footer-link" target="_blank" rel="noopener">yepads.com</a></p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+// Pré-preencher vaga ao clicar no botão do card
+function prefillRole(role) {
+  const select = document.getElementById('vaga');
+  if (select) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === role) { select.selectedIndex = i; break; }
+    }
+  }
+  document.getElementById('aplicar').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => document.getElementById('nome')?.focus(), 700);
+}
+
+// Form
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const submitBtn = form.querySelector('.form-submit');
+  const originalText = submitBtn.textContent;
+
+  // Loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  const data = {
+    nome: form.nome.value,
+    email: form.email.value,
+    whatsapp: form.whats.value,
+    vaga: form.vaga.value,
+    link: form.link.value || null
+  };
+
+  try {
+    const response = await fetch('/api/candidatar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error || 'Falha no envio');
+    }
+
+    // Success
+    form.innerHTML = `
+      <div style="text-align: center; padding: 40px 20px;">
+        <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
+        <h3 style="font-family: var(--font-display); font-size: 28px; color: var(--cream); margin-bottom: 12px;">Candidatura recebida!</h3>
+        <p style="color: rgba(250, 246, 240, 0.7); font-size: 16px;">Valeu, ${data.nome.split(' ')[0]}! Em até 5 dias úteis nosso time entra em contato.</p>
+      </div>
+    `;
+  } catch (error) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+    alert('Ops, deu um erro: ' + error.message + '\n\nTenta de novo ou nos chama no email.');
+  }
+}
+</script>
+
+</body>
+</html>
