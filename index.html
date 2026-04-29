@@ -76,29 +76,14 @@ body::before {
   align-items: center;
   gap: 14px;
 }
-.logo-mark {
-  width: 38px;
-  height: 38px;
-  position: relative;
-  flex-shrink: 0;
+.logo-link {
+  display: block;
+  line-height: 0;
 }
-.logo-mark .sq {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-}
-.sq-1 { top: 0; left: 0; background: var(--orange); }
-.sq-2 { top: 0; right: 0; background: var(--navy); }
-.sq-3 { bottom: 0; left: 0; background: var(--orange); }
-.sq-4 { bottom: 0; right: 0; background: var(--orange); }
-.logo-text {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--navy);
-  letter-spacing: -0.02em;
-  line-height: 1;
+.logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 .nav-tag {
   font-family: var(--font-mono);
@@ -178,11 +163,11 @@ body::before {
 h1.hero-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(44px, 6.5vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   color: var(--navy);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 h1.hero-title em {
   font-style: italic;
@@ -191,9 +176,9 @@ h1.hero-title em {
   font-variation-settings: "opsz" 144;
 }
 .hero-sub {
-  font-size: 19px;
+  font-size: 17px;
   color: var(--muted);
-  max-width: 680px;
+  max-width: 620px;
   line-height: 1.6;
 }
 
@@ -934,13 +919,14 @@ h1.hero-title em {
 <nav class="nav">
   <div class="nav-inner">
     <div class="logo-wrap">
-      <div class="logo-mark" aria-hidden="true">
-        <span class="sq sq-1"></span>
-        <span class="sq sq-2"></span>
-        <span class="sq sq-3"></span>
-        <span class="sq sq-4"></span>
-      </div>
-      <span class="logo-text">yep</span>
+      <a href="/" class="logo-link" aria-label="Yep Ads — Carreiras Brasil">
+        <img
+          src="https://yepads.com/wp-content/uploads/2020/08/LogoBig_DarkText.png"
+          alt="Yep Ads"
+          class="logo-img"
+          onerror="this.onerror=null; this.outerHTML='<svg class=&quot;logo-svg&quot; viewBox=&quot;0 0 200 80&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><rect x=&quot;2&quot; y=&quot;2&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23F26522&quot;/><rect x=&quot;36&quot; y=&quot;2&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%231A2A44&quot;/><rect x=&quot;2&quot; y=&quot;36&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23F26522&quot;/><rect x=&quot;36&quot; y=&quot;36&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23F26522&quot;/><text x=&quot;80&quot; y=&quot;55&quot; font-family=&quot;Plus Jakarta Sans, sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;56&quot; fill=&quot;%231A2A44&quot;>yep</text></svg>'"
+        />
+      </a>
       <span class="nav-tag">Carreiras · Brasil</span>
     </div>
     <a href="#aplicar" class="nav-cta">
@@ -957,11 +943,10 @@ h1.hero-title em {
     <div class="hero-text reveal">
       <span class="hero-eyebrow">
         <span class="pulse"></span>
-        Expansão Brasil · Time remoto
+        Vagas emergenciais · 100% home office · Brasil
       </span>
       <h1 class="hero-title">
-        Estamos contratando<br>
-        <em>8 talentos</em> pra crescer com a gente.
+        Estamos contratando <em>8 talentos</em><br>pra crescer com a gente.
       </h1>
       <p class="hero-sub">
         A Yep Ads é uma agência global de performance marketing presente em mais de 140 países. Agora estamos montando o time brasileiro — 100% home office, com a estrutura de uma operação internacional.
@@ -1190,8 +1175,8 @@ h1.hero-title em {
     <div class="section-head reveal" style="text-align: center; grid-template-columns: 1fr; max-width: 720px; margin-left: auto; margin-right: auto;">
       <div>
         <div class="section-eyebrow" style="justify-content: center;">Candidatar-se</div>
-        <h2 class="section-title">Bora? <em>Manda seu perfil.</em></h2>
-        <p class="section-desc" style="margin-top: 20px;">Preenche os campos abaixo e nosso time entra em contato em até 5 dias úteis.</p>
+        <h2 class="section-title" id="form-title">Bora? <em>Manda seu perfil.</em></h2>
+        <p class="section-desc" id="form-subtitle" style="margin-top: 20px;">Selecione uma das vagas acima ou escolha aqui qual te interessa. Nosso time entra em contato em até 5 dias úteis.</p>
       </div>
     </div>
 
@@ -1221,6 +1206,9 @@ h1.hero-title em {
             <option>Designer Júnior</option>
             <option>Social Media</option>
           </select>
+          <p id="vaga-locked-hint" style="display:none; font-size:11px; color:var(--orange); margin-top:6px; font-family:var(--font-mono); letter-spacing:0.05em;">
+            🔒 Vaga selecionada · <a href="#" onclick="unlockVaga(event)" style="color:var(--orange); text-decoration:underline;">trocar</a>
+          </p>
         </div>
       </div>
 
@@ -1255,17 +1243,69 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-// Pré-preencher vaga ao clicar no botão do card
+// Pré-preencher vaga ao clicar no botão do card e travar a seleção
 function prefillRole(role) {
   const select = document.getElementById('vaga');
   if (select) {
     for (let i = 0; i < select.options.length; i++) {
       if (select.options[i].text === role) { select.selectedIndex = i; break; }
     }
+    // Trava a seleção e mostra visualmente que está fixa
+    select.setAttribute('data-locked', 'true');
+    select.style.opacity = '0.85';
+    select.style.cursor = 'not-allowed';
   }
+
+  // Mostra o hint de "vaga travada"
+  const hint = document.getElementById('vaga-locked-hint');
+  if (hint) hint.style.display = 'block';
+
+  // Atualiza o título do form pra deixar claro pra qual vaga é
+  const formTitle = document.getElementById('form-title');
+  if (formTitle) {
+    formTitle.innerHTML = `Candidatura para <em>${role}</em>`;
+  }
+  const formSubtitle = document.getElementById('form-subtitle');
+  if (formSubtitle) {
+    formSubtitle.textContent = `Preencha seus dados e nosso time entra em contato em até 5 dias úteis sobre essa vaga.`;
+  }
+
   document.getElementById('aplicar').scrollIntoView({ behavior: 'smooth' });
   setTimeout(() => document.getElementById('nome')?.focus(), 700);
 }
+
+// Destravar a vaga (caso o candidato queira trocar)
+function unlockVaga(e) {
+  e.preventDefault();
+  const select = document.getElementById('vaga');
+  const hint = document.getElementById('vaga-locked-hint');
+  const formTitle = document.getElementById('form-title');
+  const formSubtitle = document.getElementById('form-subtitle');
+
+  select.removeAttribute('data-locked');
+  select.style.opacity = '';
+  select.style.cursor = '';
+  if (hint) hint.style.display = 'none';
+  if (formTitle) formTitle.innerHTML = 'Bora? <em>Manda seu perfil.</em>';
+  if (formSubtitle) formSubtitle.textContent = 'Selecione uma das vagas acima ou escolha aqui qual te interessa. Nosso time entra em contato em até 5 dias úteis.';
+}
+
+// Impedir mudança da vaga quando travada
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('vaga');
+  if (select) {
+    select.addEventListener('mousedown', (e) => {
+      if (select.getAttribute('data-locked') === 'true') {
+        e.preventDefault();
+      }
+    });
+    select.addEventListener('keydown', (e) => {
+      if (select.getAttribute('data-locked') === 'true') {
+        e.preventDefault();
+      }
+    });
+  }
+});
 
 // Form
 async function handleSubmit(e) {
