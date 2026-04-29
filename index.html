@@ -1007,11 +1007,12 @@ h1.hero-title em {
   -webkit-backdrop-filter: blur(8px);
   z-index: 100;
   display: none;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 20px;
+  padding: 40px 20px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  overflow-y: auto;
 }
 .modal-backdrop.active {
   display: flex;
@@ -1021,17 +1022,16 @@ h1.hero-title em {
   background: var(--cream);
   color: #0F1B2D;
   border-radius: 24px;
-  padding: 48px;
-  max-width: 540px;
+  padding: 44px 44px 36px;
+  max-width: 620px;
   width: 100%;
   position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
   transform: translateY(20px) scale(0.96);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   border-top: 4px solid var(--orange);
+  margin: auto 0;
 }
 .modal-backdrop.active .modal {
   transform: translateY(0) scale(1);
@@ -1091,6 +1091,136 @@ h1.hero-title em {
   font-size: 15px;
   color: #5C6B82;
   line-height: 1.55;
+}
+
+/* Meta row (vagas, salário, home office) */
+.modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.modal-meta-item {
+  font-size: 13px;
+  color: #5C6B82;
+  font-weight: 500;
+}
+.modal-meta-item strong {
+  color: var(--orange-deep);
+  font-weight: 700;
+}
+.modal-meta-salary {
+  font-weight: 600 !important;
+  color: #0F1B2D !important;
+}
+.modal-meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(15, 27, 45, 0.25);
+}
+
+/* Detalhes da vaga */
+.modal-details {
+  margin: 28px 0 8px;
+}
+.modal-section {
+  margin-bottom: 22px;
+}
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: #0F1B2D;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.modal-section-text {
+  font-size: 14.5px;
+  color: #5C6B82;
+  line-height: 1.6;
+}
+.modal-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.modal-list li {
+  font-size: 14.5px;
+  color: #5C6B82;
+  line-height: 1.55;
+  padding-left: 22px;
+  position: relative;
+}
+.modal-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.modal-list li strong {
+  color: var(--orange-deep);
+  font-weight: 600;
+}
+.modal-benefits {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+}
+.modal-benefits li {
+  font-size: 13.5px;
+  color: #0F1B2D;
+  font-weight: 500;
+  padding: 9px 12px 9px 32px;
+  position: relative;
+  background: rgba(255, 107, 26, 0.06);
+  border-radius: 10px;
+  line-height: 1.3;
+}
+.modal-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--orange);
+  font-weight: bold;
+  font-size: 13px;
+}
+@media (max-width: 540px) {
+  .modal-benefits { grid-template-columns: 1fr; }
+}
+
+/* Divisor entre detalhes e form */
+.modal-form-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 32px 0 24px;
+}
+.modal-form-divider::before,
+.modal-form-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(15, 27, 45, 0.10);
+}
+.modal-form-divider span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
 }
 
 .modal-form {
@@ -1500,10 +1630,50 @@ body.modal-open {
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 
+    <!-- Cabeçalho -->
     <div class="modal-header">
-      <span class="modal-eyebrow" id="modal-eyebrow">Candidatura</span>
-      <h2 class="modal-title" id="modal-title">Candidatura</h2>
-      <p class="modal-sub" id="modal-sub">Preencha seus dados e nosso time entra em contato em até 5 dias úteis.</p>
+      <span class="modal-eyebrow" id="modal-eyebrow">Vaga</span>
+      <h2 class="modal-title" id="modal-title">Vaga</h2>
+      <div class="modal-meta" id="modal-meta">
+        <span class="modal-meta-item"><strong id="modal-meta-vagas">1</strong> vaga(s)</span>
+        <span class="modal-meta-dot"></span>
+        <span class="modal-meta-item">100% Home Office</span>
+        <span class="modal-meta-dot"></span>
+        <span class="modal-meta-item modal-meta-salary" id="modal-meta-salary">R$ —</span>
+      </div>
+    </div>
+
+    <!-- Detalhes da vaga (preenchidos via JS) -->
+    <div class="modal-details" id="modal-details">
+      <div class="modal-section">
+        <h3 class="modal-section-title">Sobre a vaga</h3>
+        <p class="modal-section-text" id="modal-about">—</p>
+      </div>
+
+      <div class="modal-section">
+        <h3 class="modal-section-title">O que você vai fazer</h3>
+        <ul class="modal-list" id="modal-responsibilities"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h3 class="modal-section-title">O que esperamos de você</h3>
+        <ul class="modal-list" id="modal-requirements"></ul>
+      </div>
+
+      <div class="modal-section" id="modal-extras-section" style="display:none;">
+        <h3 class="modal-section-title">Diferenciais (não obrigatórios)</h3>
+        <ul class="modal-list" id="modal-extras"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h3 class="modal-section-title">Benefícios</h3>
+        <ul class="modal-benefits" id="modal-benefits"></ul>
+      </div>
+    </div>
+
+    <!-- Divisor + Form -->
+    <div class="modal-form-divider">
+      <span>Candidatar-se</span>
     </div>
 
     <form class="modal-form" id="modal-form" onsubmit="handleModalSubmit(event)">
@@ -1556,36 +1726,184 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
+// ====== DADOS DAS VAGAS ======
+const VAGAS = {
+  'SDR': {
+    title: 'SDR — Sales Development',
+    eyebrow: 'Vaga · SDR',
+    vagasCount: '3',
+    salary: 'R$ 2.500 – 3.500 + comissão',
+    about: 'Você vai ser a primeira voz da Yep com novos parceiros (anunciantes e publishers). Sua missão é abrir conversas, qualificar interesse e marcar reuniões qualificadas pro time comercial fechar.',
+    responsibilities: [
+      'Prospectar ativamente novos anunciantes e publishers via LinkedIn, email e WhatsApp',
+      'Qualificar leads conforme critérios do time comercial',
+      'Marcar reuniões com leads qualificados pro time de vendas',
+      'Manter o CRM atualizado com todas as interações',
+      'Reportar métricas semanais de prospecção e conversão'
+    ],
+    requirements: [
+      'Experiência prévia em prospecção, vendas ou atendimento (mínimo 6 meses)',
+      'Boa comunicação escrita e verbal — você vai escrever muito',
+      'Organização e disciplina pra trabalhar 100% remoto',
+      'Conhecimento básico de CRM (HubSpot, Pipedrive, Salesforce ou similar)'
+    ],
+    extras: [
+      'Inglês intermediário (vai te ajudar muito com nosso time global)',
+      'Experiência com marketing digital ou afiliados',
+      'Já ter trabalhado com SaaS ou publicidade'
+    ]
+  },
+  'Atendimento ao Cliente': {
+    title: 'Atendimento ao Cliente',
+    eyebrow: 'Vaga · Atendimento',
+    vagasCount: '2',
+    salary: 'R$ 2.800 – 3.800',
+    about: 'A vaga mais simples do nosso processo — perfeita pra quem quer entrar numa agência global mesmo sem experiência prévia. Você vai ser o ponto de apoio dos clientes no dia a dia: tirar dúvidas, enviar relatórios pedidos e responder no WhatsApp e em grupos. <strong>Você NÃO vai mexer com campanhas ou estratégia</strong> — é só suporte e atendimento.',
+    responsibilities: [
+      'Responder dúvidas dos clientes via WhatsApp (individual e em grupos)',
+      'Enviar relatórios e materiais que os clientes pedem por email',
+      'Manter o atendimento sempre cordial, rápido e organizado',
+      'Encaminhar dúvidas técnicas mais complexas pro time interno responsável',
+      'Acompanhar pedidos em aberto até a resolução final'
+    ],
+    requirements: [
+      '<strong>Não precisa de experiência prévia</strong> em campanhas ou marketing — você não vai mexer com isso',
+      'Boa escrita em português (atendimento é majoritariamente por mensagem)',
+      'Organização pra acompanhar várias conversas em paralelo',
+      'Disponibilidade pra responder em horário comercial'
+    ],
+    extras: [
+      'Experiência prévia com atendimento ao cliente, SAC ou suporte',
+      'Familiaridade com WhatsApp Business e ferramentas de email'
+    ]
+  },
+  'Designer Júnior': {
+    title: 'Designer Júnior',
+    eyebrow: 'Vaga · Design',
+    vagasCount: '1',
+    salary: 'R$ 3.000 – 4.500',
+    about: 'Você vai criar peças pra campanhas digitais, redes sociais e materiais internos da Yep Brasil. Trabalha junto com o time de marketing, transformando briefings em peças que performam.',
+    responsibilities: [
+      'Criar artes pra campanhas digitais (banners, criativos para redes sociais)',
+      'Desenvolver materiais pro time de social media (posts, stories, carrosséis)',
+      'Produzir apresentações e materiais internos quando solicitado',
+      'Adaptar peças pra diferentes formatos e plataformas',
+      'Manter consistência visual com a identidade da Yep'
+    ],
+    requirements: [
+      'Domínio em Figma (essencial)',
+      'Conhecimento em Adobe Photoshop e Illustrator',
+      'Portfólio com peças digitais (mesmo que projetos pessoais ou freelas)',
+      'Senso estético apurado e atenção a detalhes',
+      'Capacidade de receber feedback e iterar rápido'
+    ],
+    extras: [
+      'Experiência com motion (After Effects ou similar)',
+      'Conhecimento de UI/UX',
+      'Ter trabalhado com marcas de tech ou marketing antes'
+    ]
+  },
+  'Social Media': {
+    title: 'Social Media',
+    eyebrow: 'Vaga · Social Media',
+    vagasCount: '2',
+    salary: 'R$ 3.500 – 5.000',
+    about: 'Você vai construir a presença digital da Yep no Brasil — basicamente do zero. Planejamento de conteúdo, copywriting, gestão das redes e relacionamento com a audiência. Espaço enorme pra mostrar serviço.',
+    responsibilities: [
+      'Planejar e executar o calendário editorial das redes sociais (LinkedIn, Instagram, TikTok)',
+      'Escrever copys que engajam pra cada plataforma',
+      'Gerenciar postagens, comentários e DMs',
+      'Acompanhar métricas e reportar performance semanalmente',
+      'Trabalhar junto com o designer pra alinhar visual e mensagem'
+    ],
+    requirements: [
+      'Experiência prévia gerenciando redes sociais (mínimo 1 ano)',
+      'Boa escrita e domínio de copywriting pra redes',
+      'Conhecimento das particularidades de cada plataforma',
+      'Familiaridade com ferramentas de agendamento (Meta Business, Buffer, Later)',
+      'Capacidade analítica pra ler métricas e ajustar estratégia'
+    ],
+    extras: [
+      'Já ter construído a presença de uma marca do zero',
+      'Experiência com B2B ou marketing digital',
+      'Conhecimento de SEO pra LinkedIn'
+    ]
+  }
+};
+
+const BENEFICIOS = [
+  'Trabalho 100% home office',
+  'Horário flexível',
+  'Ajuda de custo pra home office',
+  'Day-off no aniversário',
+  'Equipamento (notebook) fornecido',
+  'Acesso a mentoria do time global',
+  'Bônus por performance',
+  'Oportunidade de carreira internacional'
+];
+
 // Pré-preencher vaga ao clicar no card e abrir modal
 function prefillRole(role) {
   openModal(role);
 }
 
 // === MODAL ===
-function openModal(vaga) {
+function openModal(vagaKey) {
   const backdrop = document.getElementById('modal-backdrop');
-  const title = document.getElementById('modal-title');
-  const eyebrow = document.getElementById('modal-eyebrow');
-  const sub = document.getElementById('modal-sub');
+  const detailsBlock = document.getElementById('modal-details');
+  const dividerBlock = document.querySelector('.modal-form-divider');
   const vagaInput = document.getElementById('modal-vaga');
 
-  if (vaga) {
-    title.innerHTML = `Candidatura para <em>${vaga}</em>`;
-    eyebrow.textContent = `Vaga: ${vaga}`;
-    sub.textContent = 'Preencha seus dados e nosso time entra em contato em até 5 dias úteis sobre essa vaga.';
-    vagaInput.value = vaga;
+  if (vagaKey && VAGAS[vagaKey]) {
+    populateVagaDetails(vagaKey);
+    detailsBlock.style.display = 'block';
+    dividerBlock.style.display = 'flex';
+    vagaInput.value = vagaKey;
   } else {
-    title.innerHTML = 'Candidatura';
-    eyebrow.textContent = 'Candidatura';
-    sub.textContent = 'Preencha seus dados e selecione a vaga de interesse.';
+    // Candidatura espontânea: esconde detalhes e mostra só o form
+    document.getElementById('modal-eyebrow').textContent = 'Candidatura espontânea';
+    document.getElementById('modal-title').innerHTML = 'Manda seu perfil';
+    document.getElementById('modal-meta').style.display = 'none';
+    detailsBlock.style.display = 'none';
+    dividerBlock.style.display = 'none';
     vagaInput.value = '';
   }
 
   backdrop.classList.add('active');
   backdrop.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
+  // Scroll do backdrop pro topo
+  setTimeout(() => { backdrop.scrollTop = 0; }, 50);
+}
 
-  setTimeout(() => document.getElementById('modal-nome')?.focus(), 200);
+function populateVagaDetails(vagaKey) {
+  const vaga = VAGAS[vagaKey];
+  if (!vaga) return;
+
+  document.getElementById('modal-eyebrow').textContent = vaga.eyebrow;
+  document.getElementById('modal-title').innerHTML = vaga.title;
+  document.getElementById('modal-meta').style.display = 'flex';
+  document.getElementById('modal-meta-vagas').textContent = vaga.vagasCount;
+  document.getElementById('modal-meta-salary').textContent = vaga.salary;
+  document.getElementById('modal-about').innerHTML = vaga.about;
+
+  document.getElementById('modal-responsibilities').innerHTML =
+    vaga.responsibilities.map(r => `<li>${r}</li>`).join('');
+
+  document.getElementById('modal-requirements').innerHTML =
+    vaga.requirements.map(r => `<li>${r}</li>`).join('');
+
+  const extrasSection = document.getElementById('modal-extras-section');
+  if (vaga.extras && vaga.extras.length > 0) {
+    document.getElementById('modal-extras').innerHTML =
+      vaga.extras.map(e => `<li>${e}</li>`).join('');
+    extrasSection.style.display = 'block';
+  } else {
+    extrasSection.style.display = 'none';
+  }
+
+  document.getElementById('modal-benefits').innerHTML =
+    BENEFICIOS.map(b => `<li>${b}</li>`).join('');
 }
 
 function closeModal() {
