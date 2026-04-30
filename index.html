@@ -1324,6 +1324,64 @@ h1.hero-title em {
   line-height: 1.6;
   margin-bottom: 24px;
 }
+.modal-success p strong { color: #0F1B2D; font-weight: 600; }
+
+/* Box de CTA pro WhatsApp na tela de sucesso */
+.modal-cta-whats {
+  margin-top: 32px;
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.08) 0%, rgba(37, 211, 102, 0.02) 100%);
+  border: 1.5px solid rgba(37, 211, 102, 0.25);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.modal-cta-whats-title {
+  font-family: var(--font-display);
+  font-size: 19px !important;
+  font-weight: 600;
+  color: #0F1B2D !important;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px !important;
+  line-height: 1.2;
+}
+.modal-cta-whats-text {
+  font-size: 14px !important;
+  color: #5C6B82 !important;
+  line-height: 1.55;
+  margin-bottom: 20px !important;
+}
+.modal-cta-whats-text strong { color: #0F1B2D; font-weight: 600; }
+.modal-whats-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.32);
+  width: 100%;
+  max-width: 320px;
+}
+.modal-whats-btn:hover {
+  background: #1ea952;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+}
+.modal-whats-btn svg { flex-shrink: 0; }
+.modal-cta-whats-note {
+  font-size: 11.5px !important;
+  color: rgba(92, 107, 130, 0.7) !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+  font-style: italic;
+}
 
 @media (max-width: 600px) {
   .modal { padding: 32px 24px; border-radius: 20px; }
@@ -1675,7 +1733,7 @@ body.modal-open {
       </div>
     </div>
 
-    <!-- Divisor + Form -->
+    <!-- CTA pra cadastro completo -->
     <div class="modal-form-divider">
       <span>Candidatar-se</span>
     </div>
@@ -1729,6 +1787,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+// ====== CONFIGURAÇÃO ======
+// Número do WhatsApp do time de recrutamento (formato: 55+DDD+número)
+const WHATSAPP_NUMERO = '5512982560862';
 
 // ====== DADOS DAS VAGAS ======
 const VAGAS = {
@@ -1864,7 +1926,7 @@ function openModal(vagaKey) {
     dividerBlock.style.display = 'flex';
     vagaInput.value = vagaKey;
   } else {
-    // Candidatura espontânea: esconde detalhes e mostra só o form
+    // Candidatura espontânea: esconde detalhes, mostra só o form
     document.getElementById('modal-eyebrow').textContent = 'Candidatura espontânea';
     document.getElementById('modal-title').innerHTML = 'Manda seu perfil';
     document.getElementById('modal-meta').style.display = 'none';
@@ -1876,7 +1938,6 @@ function openModal(vagaKey) {
   backdrop.classList.add('active');
   backdrop.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
-  // Scroll do backdrop pro topo
   setTimeout(() => { backdrop.scrollTop = 0; }, 50);
 }
 
@@ -1916,11 +1977,10 @@ function closeModal() {
   backdrop.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
 
-  // Reset form depois da animação
+  // Se mostrou sucesso, recarrega a página pra resetar o form
   setTimeout(() => {
     const form = document.getElementById('modal-form');
     if (form && form.querySelector('.modal-success')) {
-      // Se mostrou sucesso, recriar o form
       location.reload();
     } else if (form) {
       form.reset();
@@ -1944,7 +2004,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Submit do modal
+// Submit do modal: envia candidatura curta + mostra tela de sucesso com botão WhatsApp
 async function handleModalSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -1958,7 +2018,7 @@ async function handleModalSubmit(e) {
     nome: form.nome.value,
     email: form.email.value,
     whatsapp: form.whats.value,
-    vaga: form.vaga.value || 'Não especificada',
+    vaga: form.vaga.value || 'Candidatura espontânea',
     link: form.link.value || null
   };
 
@@ -1974,16 +2034,34 @@ async function handleModalSubmit(e) {
       throw new Error(err.error || 'Falha no envio');
     }
 
-    // Tela de sucesso dentro do modal
     const firstName = data.nome.split(' ')[0];
+    const vagaSelecionada = data.vaga || 'Vagas Yep Brasil';
+
+    // Mensagem pré-formatada que vai abrir no WhatsApp
+    const mensagemWhats = encodeURIComponent(
+      `Olá! Sou ${data.nome}, acabei de me candidatar pra vaga de ${vagaSelecionada} na Yep Ads. Posso ter mais informações sobre as próximas etapas?`
+    );
+    const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
+
     form.innerHTML = `
       <div class="modal-success">
         <div class="modal-success-icon">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h3>Recebemos sua candidatura, ${firstName}!</h3>
-        <p>Em até 5 dias úteis nosso time entra em contato sobre a vaga de <strong>${data.vaga}</strong>.</p>
-        <button type="button" onclick="closeModal()" class="modal-submit" style="max-width:200px; margin: 0 auto;">Fechar</button>
+        <p>Em breve nosso time entra em contato sobre a vaga de <strong>${vagaSelecionada}</strong>.</p>
+
+        <div class="modal-cta-whats">
+          <p class="modal-cta-whats-title">Quer agilizar sua entrevista? 🚀</p>
+          <p class="modal-cta-whats-text">
+            Chama o nosso time no WhatsApp agora. <strong>Quem entra em contato é priorizado</strong> nas próximas etapas.
+          </p>
+          <a href="${linkWhats}" target="_blank" rel="noopener" class="modal-whats-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Falar com nosso time no WhatsApp
+          </a>
+          <p class="modal-cta-whats-note">Mensagem pré-pronta, é só apertar enviar.</p>
+        </div>
       </div>
     `;
   } catch (error) {
