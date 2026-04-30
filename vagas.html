@@ -1166,9 +1166,55 @@ h1.hero-title em {
   background: rgba(15, 27, 45, 0.25);
 }
 
+/* Resumo curto + botão expandir */
+.modal-summary {
+  margin: 24px 0 4px;
+  padding: 18px 20px;
+  background: var(--cream-warm);
+  border-radius: 14px;
+  border: 1px solid rgba(15, 27, 45, 0.08);
+}
+.modal-summary-text {
+  font-size: 14.5px;
+  color: #2A3848;
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+.modal-summary-text strong { color: var(--navy); font-weight: 600; }
+
+.modal-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  color: var(--orange-deep);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: gap 0.2s, color 0.2s;
+}
+.modal-expand-btn:hover {
+  color: var(--orange);
+  gap: 10px;
+}
+.modal-expand-icon {
+  transition: transform 0.3s;
+}
+.modal-expand-btn.expanded .modal-expand-icon {
+  transform: rotate(180deg);
+}
+
 /* Detalhes da vaga */
 .modal-details {
-  margin: 28px 0 8px;
+  margin: 24px 0 8px;
+  animation: slideDown 0.4s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .modal-section {
   margin-bottom: 22px;
@@ -1747,8 +1793,17 @@ body.modal-open {
       </div>
     </div>
 
-    <!-- Detalhes da vaga (preenchidos via JS) -->
-    <div class="modal-details" id="modal-details">
+    <!-- Resumo curto + botão expandir -->
+    <div class="modal-summary">
+      <p class="modal-summary-text" id="modal-summary-text">—</p>
+      <button type="button" class="modal-expand-btn" onclick="toggleModalDetails()" id="modal-expand-btn">
+        <span class="modal-expand-label">Saiba mais sobre a vaga</span>
+        <svg class="modal-expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+
+    <!-- Detalhes da vaga (escondidos por padrão, expandem ao clicar) -->
+    <div class="modal-details" id="modal-details" style="display:none;">
       <div class="modal-section">
         <h3 class="modal-section-title">Sobre a vaga</h3>
         <p class="modal-section-text" id="modal-about">—</p>
@@ -1960,18 +2015,21 @@ function openModal(vagaKey) {
   const backdrop = document.getElementById('modal-backdrop');
   const detailsBlock = document.getElementById('modal-details');
   const dividerBlock = document.querySelector('.modal-form-divider');
+  const summaryBlock = document.querySelector('.modal-summary');
   const vagaInput = document.getElementById('modal-vaga');
 
   if (vagaKey && VAGAS[vagaKey]) {
     populateVagaDetails(vagaKey);
-    detailsBlock.style.display = 'block';
+    // detalhes começam ocultos (populateVagaDetails já cuida disso)
+    if (summaryBlock) summaryBlock.style.display = 'block';
     dividerBlock.style.display = 'flex';
     vagaInput.value = vagaKey;
   } else {
-    // Candidatura espontânea: esconde detalhes, mostra só o form
+    // Candidatura espontânea: esconde tudo, mostra só o form
     document.getElementById('modal-eyebrow').textContent = 'Candidatura espontânea';
     document.getElementById('modal-title').innerHTML = 'Manda seu perfil';
     document.getElementById('modal-meta').style.display = 'none';
+    if (summaryBlock) summaryBlock.style.display = 'none';
     detailsBlock.style.display = 'none';
     dividerBlock.style.display = 'none';
     vagaInput.value = '';
@@ -1994,6 +2052,18 @@ function populateVagaDetails(vagaKey) {
   document.getElementById('modal-meta-salary').textContent = vaga.salary;
   document.getElementById('modal-about').innerHTML = vaga.about;
 
+  // Resumo curto: 2 primeiras frases do "about", removendo HTML
+  const aboutPlain = vaga.about.replace(/<[^>]+>/g, '');
+  const sentences = aboutPlain.match(/[^.!?]+[.!?]+/g) || [aboutPlain];
+  const shortSummary = sentences.slice(0, 2).join(' ').trim();
+  document.getElementById('modal-summary-text').textContent = shortSummary;
+
+  // Reset estado do expand (sempre começa colapsado)
+  document.getElementById('modal-details').style.display = 'none';
+  const expandBtn = document.getElementById('modal-expand-btn');
+  expandBtn.classList.remove('expanded');
+  expandBtn.querySelector('.modal-expand-label').textContent = 'Saiba mais sobre a vaga';
+
   document.getElementById('modal-responsibilities').innerHTML =
     vaga.responsibilities.map(r => `<li>${r}</li>`).join('');
 
@@ -2011,6 +2081,24 @@ function populateVagaDetails(vagaKey) {
 
   document.getElementById('modal-benefits').innerHTML =
     BENEFICIOS.map(b => `<li>${b}</li>`).join('');
+}
+
+// Expandir/colapsar detalhes da vaga
+function toggleModalDetails() {
+  const details = document.getElementById('modal-details');
+  const btn = document.getElementById('modal-expand-btn');
+  const label = btn.querySelector('.modal-expand-label');
+  const isOpen = details.style.display !== 'none';
+
+  if (isOpen) {
+    details.style.display = 'none';
+    btn.classList.remove('expanded');
+    label.textContent = 'Saiba mais sobre a vaga';
+  } else {
+    details.style.display = 'block';
+    btn.classList.add('expanded');
+    label.textContent = 'Ocultar detalhes';
+  }
 }
 
 function closeModal() {
@@ -2081,7 +2169,7 @@ async function handleModalSubmit(e) {
 
     // Mensagem pré-formatada que vai abrir no WhatsApp
     const mensagemWhats = encodeURIComponent(
-      `Olá! Sou ${data.nome}, acabei de me candidatar pra vaga de ${vagaSelecionada} na Yep Ads. Posso ter mais informações sobre as próximas etapas?`
+      `Olá! Me interessei na vaga de ${vagaSelecionada}. Sou ${data.nome}, acabei de fazer minha candidatura no site e gostaria de saber como posso agendar uma entrevista.`
     );
     const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
 
@@ -2093,7 +2181,7 @@ async function handleModalSubmit(e) {
         <h3>Recebemos sua candidatura, ${firstName}!</h3>
         <p>Em breve nosso time entra em contato sobre a vaga de <strong>${vagaSelecionada}</strong>.</p>
 
-        <div class="modal-cta-whats">
+        <div class="modal-cta-whats" id="modal-cta-whats">
           <p class="modal-cta-whats-title">Quer agilizar sua entrevista? 🚀</p>
           <p class="modal-cta-whats-text">
             Chama o nosso time no WhatsApp agora. <strong>Quem entra em contato é priorizado</strong> nas próximas etapas.
@@ -2106,6 +2194,22 @@ async function handleModalSubmit(e) {
         </div>
       </div>
     `;
+
+    // Esconde os detalhes da vaga e o resumo se estiverem visíveis
+    document.getElementById('modal-details').style.display = 'none';
+    const summary = document.querySelector('.modal-summary');
+    if (summary) summary.style.display = 'none';
+    const divider = document.querySelector('.modal-form-divider');
+    if (divider) divider.style.display = 'none';
+
+    // Scroll suave pro botão verde do WhatsApp dentro do modal
+    setTimeout(() => {
+      const ctaWhats = document.getElementById('modal-cta-whats');
+      const backdrop = document.getElementById('modal-backdrop');
+      if (ctaWhats && backdrop) {
+        ctaWhats.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 300);
   } catch (error) {
     submitBtn.disabled = false;
     submitBtn.textContent = originalText;
