@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Cadastro de Candidatura — Yep Ads Brasil</title>
+<meta name="description" content="Formulário de cadastro completo para candidatos pré-selecionados nas vagas da Yep Ads Brasil." />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange: #FF6B1A;
+  --orange-deep: #E55600;
+  --orange-soft: rgba(255, 107, 26, 0.10);
+  --navy: #0F1B2D;
+  --navy-deep: #08111E;
+  --navy-soft: #1A2A44;
+  --cream: #FAF6F0;
+  --cream-warm: #F4EEE3;
+  --ink: #0F1B2D;
+  --muted: #5C6B82;
+  --line: rgba(15, 27, 45, 0.10);
+  --line-strong: rgba(15, 27, 45, 0.20);
+  --error: #DC2626;
+  --success: #16a34a;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+/* HEADER */
+.page-header { text-align: center; margin-bottom: 40px; }
+.logo-mark { display: inline-block; margin-bottom: 24px; }
+.logo-mark img { height: 36px; width: auto; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange-deep);
+  background: var(--orange-soft);
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 107, 26, 0.20);
+}
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.page-title em { font-style: italic; font-weight: 500; color: var(--orange-deep); }
+.page-sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.page-sub strong { color: var(--navy); font-weight: 600; }
+
+/* STEPPER */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.stepper-item { display: flex; align-items: center; gap: 10px; }
+.stepper-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  border: 1.5px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  transition: all 0.3s;
+}
+.stepper-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.stepper-line {
+  width: 32px;
+  height: 1px;
+  background: var(--line-strong);
+  transition: background 0.3s;
+}
+.stepper-item.active .stepper-circle {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.3);
+}
+.stepper-item.active .stepper-label { color: var(--navy); font-weight: 600; }
+.stepper-item.completed .stepper-circle {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+.stepper-line.completed { background: var(--orange); }
+
+@media (max-width: 600px) {
+  .stepper-label { display: none; }
+  .stepper-line { width: 20px; }
+}
+
+/* CARD */
+.form-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 24px 60px rgba(15, 27, 45, 0.06);
+  border-top: 4px solid var(--orange);
+  position: relative;
+  min-height: 400px;
+}
+
+.step-content { display: none; animation: fadeIn 0.4s ease; }
+.step-content.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-head {
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px dashed var(--line);
+}
+.step-head-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--orange-deep);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.step-head h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.step-head p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+.subsection { margin-bottom: 28px; }
+.subsection:last-child { margin-bottom: 0; }
+.subsection-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.subsection-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.form-grid { display: grid; gap: 16px; }
+.form-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 600px) {
+  .form-grid.cols-2,
+  .form-grid.cols-3 { grid-template-columns: 1fr; }
+}
+.form-field { display: flex; flex-direction: column; }
+
+.form-field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.form-field label .req { color: var(--orange); margin-left: 2px; }
+.form-field label .opt {
+  color: rgba(92, 107, 130, 0.6);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  margin-left: 6px;
+  font-style: italic;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 13px 16px;
+  background: var(--cream);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--navy);
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.2s;
+  width: 100%;
+}
+.form-field textarea { min-height: 100px; resize: vertical; line-height: 1.55; }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.12);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: rgba(92, 107, 130, 0.5); }
+.form-field-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+.form-field input.invalid,
+.form-field select.invalid,
+.form-field textarea.invalid {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.10);
+}
+
+.choice-grid { display: grid; gap: 10px; }
+.choice-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.choice-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 600px) {
+  .choice-grid.cols-2,
+  .choice-grid.cols-3 { grid-template-columns: 1fr; }
+}
+.choice { position: relative; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  background: var(--cream);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  transition: all 0.2s;
+  line-height: 1.3;
+}
+.choice-label::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.choice input[type="checkbox"] + .choice-label::before { border-radius: 4px; }
+.choice:hover .choice-label { border-color: var(--orange); background: white; }
+.choice input:checked + .choice-label {
+  border-color: var(--orange);
+  background: rgba(255, 107, 26, 0.06);
+}
+.choice input:checked + .choice-label::before {
+  background: var(--orange);
+  border-color: var(--orange);
+  box-shadow: inset 0 0 0 3px white;
+}
+.choice input[type="checkbox"]:checked + .choice-label::before {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.exp-item {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+.exp-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.exp-item-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-deep);
+  font-weight: 600;
+}
+.exp-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.exp-remove:hover { color: var(--error); background: rgba(220, 38, 38, 0.08); }
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 10px;
+  color: var(--orange-deep);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.add-btn:hover { border-color: var(--orange); background: var(--orange-soft); }
+
+/* Navegação */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  gap: 16px;
+}
+.step-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 12px 22px;
+  color: var(--navy);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.step-nav-back:hover:not(:disabled) { background: var(--cream); border-color: var(--navy); }
+.step-nav-back:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.step-nav-next,
+.step-nav-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(255, 107, 26, 0.3);
+  margin-left: auto;
+}
+.step-nav-next:hover,
+.step-nav-submit:hover:not(:disabled) {
+  background: var(--orange-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(255, 107, 26, 0.4);
+}
+.step-nav-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.step-nav-next svg,
+.step-nav-submit svg { transition: transform 0.3s; }
+.step-nav-next:hover svg,
+.step-nav-submit:hover svg { transform: translateX(4px); }
+
+.success-state { text-align: center; padding: 40px 20px; }
+.success-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+.success-state h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+.success-state p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.page-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: rgba(92, 107, 130, 0.6);
+}
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 32px 16px 60px; }
+  .form-card { padding: 28px 22px; border-radius: 18px; }
+  .step-nav-back, .step-nav-next, .step-nav-submit {
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <div class="logo-mark">
+      <img
+        src="https://yepads.com/wp-content/uploads/2020/08/LogoBig_DarkText.png"
+        alt="Yep Ads"
+        onerror="this.onerror=null; this.outerHTML='<svg viewBox=&quot;0 0 200 80&quot; style=&quot;height:36px;width:auto&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><rect x=&quot;2&quot; y=&quot;2&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23FF6B1A&quot;/><rect x=&quot;36&quot; y=&quot;2&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%230F1B2D&quot;/><rect x=&quot;2&quot; y=&quot;36&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23FF6B1A&quot;/><rect x=&quot;36&quot; y=&quot;36&quot; width=&quot;30&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;%23FF6B1A&quot;/><text x=&quot;80&quot; y=&quot;55&quot; font-family=&quot;Plus Jakarta Sans, sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;56&quot; fill=&quot;%230F1B2D&quot;>yep</text></svg>'"
+      />
+    </div>
+    <span class="eyebrow">Cadastro de candidatura</span>
+    <h1 class="page-title">Vamos conhecer <em>seu perfil</em> a fundo.</h1>
+    <p class="page-sub">
+      Você foi <strong>pré-selecionado</strong> pra continuar no processo. Preencha em 3 etapas — leva uns 8 minutos.
+    </p>
+  </div>
+
+  <div class="stepper" id="stepper">
+    <div class="stepper-item active" data-step="1">
+      <div class="stepper-circle">1</div>
+      <span class="stepper-label">Pessoal</span>
+    </div>
+    <div class="stepper-line" data-line="1"></div>
+    <div class="stepper-item" data-step="2">
+      <div class="stepper-circle">2</div>
+      <span class="stepper-label">Profissional</span>
+    </div>
+    <div class="stepper-line" data-line="2"></div>
+    <div class="stepper-item" data-step="3">
+      <div class="stepper-circle">3</div>
+      <span class="stepper-label">Disponibilidade</span>
+    </div>
+  </div>
+
+  <div class="form-card" id="form-container">
+    <form id="cadastro-form" onsubmit="handleCadastroSubmit(event)" novalidate>
+
+      <!-- ETAPA 1 -->
+      <div class="step-content active" data-step-content="1">
+        <div class="step-head">
+          <div class="step-head-eyebrow">Etapa 1 de 3</div>
+          <h2>Dados pessoais & vaga</h2>
+          <p>Vamos começar pelo básico: seus dados de contato e qual vaga te interessa.</p>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Identificação</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nome completo<span class="req">*</span></label>
+              <input type="text" name="nome_completo" placeholder="Seu nome completo" required />
+            </div>
+            <div class="form-grid cols-2">
+              <div class="form-field">
+                <label>Data de nascimento<span class="req">*</span></label>
+                <input type="date" name="data_nascimento" required />
+              </div>
+              <div class="form-field">
+                <label>CPF<span class="req">*</span></label>
+                <input type="text" name="cpf" placeholder="000.000.000-00" required />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Contato</h3>
+          <div class="form-grid cols-2">
+            <div class="form-field">
+              <label>Email<span class="req">*</span></label>
+              <input type="email" name="email" placeholder="seu@email.com" required />
+            </div>
+            <div class="form-field">
+              <label>WhatsApp<span class="req">*</span></label>
+              <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Localização</h3>
+          <div class="form-grid cols-2">
+            <div class="form-field">
+              <label>Cidade<span class="req">*</span></label>
+              <input type="text" name="cidade" placeholder="Sua cidade" required />
+            </div>
+            <div class="form-field">
+              <label>Estado<span class="req">*</span></label>
+              <select name="estado" required>
+                <option value="">Selecione...</option>
+                <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                <option>SP</option><option>SE</option><option>TO</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Vaga de interesse</h3>
+          <div class="choice-grid cols-2">
+            <label class="choice">
+              <input type="radio" name="vaga" value="SDR" required>
+              <span class="choice-label">SDR — Sales Development</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="vaga" value="Atendimento ao Cliente" required>
+              <span class="choice-label">Atendimento ao Cliente</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="vaga" value="Designer Júnior" required>
+              <span class="choice-label">Designer Júnior</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="vaga" value="Social Media" required>
+              <span class="choice-label">Social Media</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="step-nav-back" disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Voltar
+          </button>
+          <button type="button" class="step-nav-next" onclick="nextStep(1)">
+            Próximo: Profissional
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ETAPA 2 -->
+      <div class="step-content" data-step-content="2">
+        <div class="step-head">
+          <div class="step-head-eyebrow">Etapa 2 de 3</div>
+          <h2>Trajetória profissional</h2>
+          <p>Suas experiências, formação e perfil online.</p>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Perfil online</h3>
+          <div class="form-field">
+            <label>LinkedIn <span class="opt">opcional, mas ajuda muito</span></label>
+            <input type="url" name="linkedin" placeholder="https://linkedin.com/in/seuperfil" />
+            <p class="form-field-hint">Se não tiver LinkedIn, deixa em branco.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Experiências profissionais</h3>
+          <div id="exp-container"></div>
+          <button type="button" class="add-btn" onclick="addExperiencia()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Adicionar experiência
+          </button>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Formação acadêmica</h3>
+          <div class="form-grid">
+            <div class="form-grid cols-2">
+              <div class="form-field">
+                <label>Nível<span class="req">*</span></label>
+                <select name="formacao_nivel" required>
+                  <option value="">Selecione...</option>
+                  <option>Ensino médio</option>
+                  <option>Técnico</option>
+                  <option>Cursando ensino superior</option>
+                  <option>Ensino superior completo</option>
+                  <option>Pós-graduação</option>
+                  <option>Mestrado/Doutorado</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>Status<span class="req">*</span></label>
+                <select name="formacao_status" required>
+                  <option value="">Selecione...</option>
+                  <option>Concluído</option>
+                  <option>Cursando</option>
+                  <option>Trancado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label>Curso e instituição <span class="opt">se aplicável</span></label>
+              <input type="text" name="formacao_detalhe" placeholder="Ex: Marketing — USP" />
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="step-nav-back" onclick="prevStep(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Voltar
+          </button>
+          <button type="button" class="step-nav-next" onclick="nextStep(2)">
+            Próximo: Disponibilidade
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ETAPA 3 -->
+      <div class="step-content" data-step-content="3">
+        <div class="step-head">
+          <div class="step-head-eyebrow">Etapa 3 de 3</div>
+          <h2>Disponibilidade & sobre você</h2>
+          <p>Última etapa. Quando você pode começar e algumas perguntas pra entender seu perfil.</p>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Quando começar</h3>
+          <div class="form-field">
+            <label>Disponibilidade de início<span class="req">*</span></label>
+            <div class="choice-grid cols-3">
+              <label class="choice">
+                <input type="radio" name="disponibilidade_inicio" value="Imediata" required>
+                <span class="choice-label">Imediata</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="disponibilidade_inicio" value="15 dias">
+                <span class="choice-label">Em 15 dias</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="disponibilidade_inicio" value="30 dias">
+                <span class="choice-label">Em 30 dias</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Carga horária</h3>
+          <div class="form-field">
+            <label>Disponibilidade de horas<span class="req">*</span></label>
+            <div class="choice-grid cols-3">
+              <label class="choice">
+                <input type="radio" name="carga_horaria" value="Integral (40h+)" required>
+                <span class="choice-label">Integral (40h+)</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="carga_horaria" value="Meio período">
+                <span class="choice-label">Meio período</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="carga_horaria" value="Flexível">
+                <span class="choice-label">Flexível</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Estrutura pra home office</h3>
+          <div class="form-field">
+            <label>O que você tem disponível? <span class="opt">marque tudo que se aplica</span></label>
+            <div class="choice-grid cols-2">
+              <label class="choice">
+                <input type="checkbox" name="estrutura" value="Notebook/computador próprio">
+                <span class="choice-label">Notebook/computador próprio</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="estrutura" value="Internet estável">
+                <span class="choice-label">Internet estável</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="estrutura" value="Local silencioso">
+                <span class="choice-label">Local silencioso pra trabalhar</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="estrutura" value="Headset/fone com microfone">
+                <span class="choice-label">Headset/fone com microfone</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Pretensão salarial</h3>
+          <div class="form-field">
+            <label>Quanto você espera ganhar?<span class="req">*</span></label>
+            <input type="text" name="pretensao_salarial" placeholder="Ex: R$ 3.500" required />
+            <p class="form-field-hint">Pode ser uma faixa (Ex: R$ 3.000 – 3.800).</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Sobre você</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Por que essa vaga te interessa?<span class="req">*</span></label>
+              <textarea name="motivacao" placeholder="Conta um pouco do que te chamou atenção..." required></textarea>
+            </div>
+            <div class="form-field">
+              <label>Conta uma situação difícil que você superou no trabalho<span class="req">*</span></label>
+              <textarea name="experiencia_dificil" placeholder="Algo concreto: o problema, sua ação e o resultado." required></textarea>
+            </div>
+            <div class="form-field">
+              <label>Algo mais que a gente deveria saber? <span class="opt">opcional</span></label>
+              <textarea name="observacoes" placeholder="Curiosidades, contexto, links de portfólio..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="step-nav-back" onclick="prevStep(3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Voltar
+          </button>
+          <button type="submit" class="step-nav-submit" id="submit-btn">
+            Enviar candidatura
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <p class="page-footer">© 2026 Yep Ads · Carreiras Brasil · Seus dados estão seguros</p>
+</div>
+
+<script>
+let currentStep = 1;
+const TOTAL_STEPS = 3;
+
+function showStep(step) {
+  document.querySelectorAll('[data-step-content]').forEach((el) => {
+    el.classList.toggle('active', parseInt(el.dataset.stepContent) === step);
+  });
+  document.querySelectorAll('.stepper-item').forEach((el) => {
+    const s = parseInt(el.dataset.step);
+    el.classList.remove('active', 'completed');
+    if (s < step) el.classList.add('completed');
+    else if (s === step) el.classList.add('active');
+  });
+  document.querySelectorAll('.stepper-line').forEach((el) => {
+    const idx = parseInt(el.dataset.line);
+    el.classList.toggle('completed', idx < step);
+  });
+  currentStep = step;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep(from) {
+  if (!validateStep(from)) return;
+  if (from < TOTAL_STEPS) showStep(from + 1);
+}
+
+function prevStep(from) {
+  if (from > 1) showStep(from - 1);
+}
+
+function validateStep(step) {
+  const stepEl = document.querySelector(`[data-step-content="${step}"]`);
+  const fields = stepEl.querySelectorAll('input[required], select[required], textarea[required]');
+  let firstInvalid = null;
+  stepEl.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+  fields.forEach(f => {
+    let valid = true;
+    if (f.type === 'radio') {
+      const checked = stepEl.querySelector(`input[type="radio"][name="${f.name}"]:checked`);
+      if (!checked) valid = false;
+    } else {
+      if (!f.value || f.value.trim() === '') valid = false;
+      if (f.type === 'email' && f.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value)) valid = false;
+    }
+    if (!valid) {
+      f.classList.add('invalid');
+      if (!firstInvalid) firstInvalid = f;
+    }
+  });
+
+  if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => firstInvalid.focus(), 400);
+    return false;
+  }
+  return true;
+}
+
+let expCount = 0;
+const MAX_EXP = 3;
+
+function addExperiencia() {
+  if (expCount >= MAX_EXP) return;
+  expCount++;
+  const container = document.getElementById('exp-container');
+  const item = document.createElement('div');
+  item.className = 'exp-item';
+  item.dataset.expIdx = expCount;
+  item.innerHTML = `
+    <div class="exp-item-head">
+      <span class="exp-item-num">Experiência ${expCount}</span>
+      <button type="button" class="exp-remove" onclick="removeExperiencia(this)">Remover</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-grid cols-2">
+        <div class="form-field">
+          <label>Empresa</label>
+          <input type="text" name="exp_${expCount}_empresa" placeholder="Nome da empresa" />
+        </div>
+        <div class="form-field">
+          <label>Cargo</label>
+          <input type="text" name="exp_${expCount}_cargo" placeholder="Seu cargo" />
+        </div>
+      </div>
+      <div class="form-grid cols-2">
+        <div class="form-field">
+          <label>Início</label>
+          <input type="month" name="exp_${expCount}_inicio" />
+        </div>
+        <div class="form-field">
+          <label>Fim <span class="opt">deixe em branco se atual</span></label>
+          <input type="month" name="exp_${expCount}_fim" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Principais atividades e conquistas</label>
+        <textarea name="exp_${expCount}_atividades" placeholder="O que você fez de mais relevante? Use números/resultados quando possível."></textarea>
+      </div>
+    </div>
+  `;
+  container.appendChild(item);
+  if (expCount >= MAX_EXP) document.querySelector('.add-btn').style.display = 'none';
+}
+
+function removeExperiencia(btn) {
+  btn.closest('.exp-item').remove();
+  expCount--;
+  document.querySelectorAll('.exp-item').forEach((el, i) => {
+    el.querySelector('.exp-item-num').textContent = `Experiência ${i + 1}`;
+  });
+  document.querySelector('.add-btn').style.display = '';
+}
+
+addExperiencia();
+
+async function handleCadastroSubmit(e) {
+  e.preventDefault();
+  if (!validateStep(3)) return;
+
+  const form = e.target;
+  const submitBtn = document.getElementById('submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  const formData = new FormData(form);
+  const data = {};
+  data.estrutura = formData.getAll('estrutura');
+  data.experiencias = [];
+  document.querySelectorAll('.exp-item').forEach((el) => {
+    const idx = el.dataset.expIdx;
+    data.experiencias.push({
+      empresa: formData.get(`exp_${idx}_empresa`) || null,
+      cargo: formData.get(`exp_${idx}_cargo`) || null,
+      inicio: formData.get(`exp_${idx}_inicio`) || null,
+      fim: formData.get(`exp_${idx}_fim`) || null,
+      atividades: formData.get(`exp_${idx}_atividades`) || null,
+    });
+  });
+  for (const [key, value] of formData.entries()) {
+    if (key === 'estrutura') continue;
+    if (key.startsWith('exp_')) continue;
+    data[key] = value;
+  }
+
+  try {
+    const response = await fetch('/api/cadastro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error || 'Falha no envio');
+    }
+
+    const firstName = (data.nome_completo || '').split(' ')[0];
+    document.getElementById('form-container').innerHTML = `
+      <div class="success-state">
+        <div class="success-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Cadastro recebido, ${firstName}!</h2>
+        <p>Recebemos seus dados completos. Nosso time de RH vai analisar e entrar em contato em até 5 dias úteis pelos próximos passos.</p>
+      </div>
+    `;
+    document.querySelectorAll('.stepper-item').forEach(el => {
+      el.classList.remove('active');
+      el.classList.add('completed');
+    });
+    document.querySelectorAll('.stepper-line').forEach(el => el.classList.add('completed'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (error) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Enviar candidatura <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+    alert('Ops, deu um erro: ' + error.message + '\n\nTenta de novo em alguns segundos.');
+  }
+}
+
+document.addEventListener('input', (e) => {
+  if (e.target.matches('.invalid')) e.target.classList.remove('invalid');
+});
+document.addEventListener('change', (e) => {
+  if (e.target.matches('.invalid')) e.target.classList.remove('invalid');
+  if (e.target.type === 'radio') {
+    document.querySelectorAll(`input[name="${e.target.name}"]`).forEach(r => r.classList.remove('invalid'));
+  }
+});
+</script>
+
+</body>
+</html>
