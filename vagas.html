@@ -341,6 +341,47 @@ h1.hero-title em {
   border-radius: 999px;
   font-weight: 500;
 }
+
+/* Tag de vaga emergencial */
+.vaga-urgent-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b91c1c;
+  background: rgba(220, 38, 38, 0.10);
+  border: 1px solid rgba(220, 38, 38, 0.22);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  align-self: flex-start;
+  animation: pulse-urgent 2s ease-in-out infinite;
+}
+@keyframes pulse-urgent {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.20); }
+  50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+}
+
+/* Borda destacada pra card emergencial */
+.vaga-card-urgent {
+  position: relative;
+  border-color: rgba(220, 38, 38, 0.25) !important;
+}
+.vaga-card-urgent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #DC2626, #FF6B1A);
+  border-radius: 18px 18px 0 0;
+}
+
 .vaga-title {
   font-family: var(--font-display);
   font-size: 19px;
@@ -1455,7 +1496,7 @@ body.modal-open {
     <div class="hero-jobs">
       <div class="hero-jobs-head">
         <span class="hero-jobs-label">As vagas abertas</span>
-        <span class="hero-jobs-count">8 posições</span>
+        <span class="hero-jobs-count">13 posições</span>
       </div>
       <div class="hero-jobs-grid">
 
@@ -1481,19 +1522,20 @@ body.modal-open {
         </button>
 
         <!-- Atendimento -->
-        <button class="vaga-card reveal" onclick="prefillRole('Atendimento ao Cliente')">
+        <button class="vaga-card vaga-card-urgent reveal" onclick="prefillRole('Atendimento ao Cliente')">
           <div class="vaga-card-head">
             <div class="vaga-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <span class="vaga-tag">2 vagas</span>
+            <span class="vaga-tag">7 vagas</span>
           </div>
+          <span class="vaga-urgent-tag">⚡ Vagas emergenciais</span>
           <h3 class="vaga-title">Atendimento ao Cliente</h3>
-          <p class="vaga-desc">Suporte aos parceiros, acompanhamento de campanhas e escalada técnica.</p>
+          <p class="vaga-desc">Suporte aos clientes via WhatsApp e email — tirar dúvidas, enviar materiais e acompanhar pedidos.</p>
           <div class="vaga-foot">
             <div class="vaga-salary">
               <span class="vaga-salary-label">Base</span>
-              <span class="vaga-salary-value">R$ 2.800 – 3.800</span>
+              <span class="vaga-salary-value">R$ 2.400 – 3.200 <small>+ benefícios</small></span>
             </div>
             <span class="vaga-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1822,21 +1864,21 @@ const VAGAS = {
   'Atendimento ao Cliente': {
     title: 'Atendimento ao Cliente',
     eyebrow: 'Vaga · Atendimento',
-    vagasCount: '2',
-    salary: 'R$ 2.800 – 3.800',
-    about: 'A vaga mais simples do nosso processo — perfeita pra quem quer entrar numa agência global mesmo sem experiência prévia. Você vai ser o ponto de apoio dos clientes no dia a dia: tirar dúvidas, enviar relatórios pedidos e responder no WhatsApp e em grupos. <strong>Você NÃO vai mexer com campanhas ou estratégia</strong> — é só suporte e atendimento.',
+    vagasCount: '7',
+    salary: 'R$ 2.400 – 3.200 + benefícios',
+    about: 'Você vai ser o ponto de contato dos clientes da Yep no dia a dia: tirar dúvidas, enviar relatórios pedidos e responder mensagens via WhatsApp e email. É uma posição de <strong>suporte ao cliente</strong>, focada em manter um atendimento rápido, cordial e organizado.',
     responsibilities: [
-      'Responder dúvidas dos clientes via WhatsApp (individual e em grupos)',
-      'Enviar relatórios e materiais que os clientes pedem por email',
+      'Atender clientes via WhatsApp (individual e em grupos) e email',
+      'Enviar relatórios e materiais que os clientes solicitam',
       'Manter o atendimento sempre cordial, rápido e organizado',
       'Encaminhar dúvidas técnicas mais complexas pro time interno responsável',
       'Acompanhar pedidos em aberto até a resolução final'
     ],
     requirements: [
-      '<strong>Não precisa de experiência prévia</strong> em campanhas ou marketing — você não vai mexer com isso',
       'Boa escrita em português (atendimento é majoritariamente por mensagem)',
       'Organização pra acompanhar várias conversas em paralelo',
-      'Disponibilidade pra responder em horário comercial'
+      'Disponibilidade pra responder em horário comercial',
+      'Postura cordial e proativa no contato com clientes'
     ],
     extras: [
       'Experiência prévia com atendimento ao cliente, SAC ou suporte',
