@@ -753,6 +753,52 @@ body {
   outline: none;
   border-color: var(--orange);
 }
+
+/* Checkboxes de horário (etapa 3) */
+.etapa-horarios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.hor-help {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.hor-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.hor-check:hover {
+  border-color: var(--text-faint);
+}
+.hor-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--orange);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.hor-check input[type="checkbox"]:checked + span {
+  color: var(--text);
+  font-weight: 500;
+}
+.hor-check span {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.hor-check:has(input:checked) {
+  background: var(--orange-soft);
+  border-color: rgba(255, 107, 26, 0.3);
+}
 .etapa-actions {
   display: flex;
   gap: 6px;
@@ -1704,11 +1750,10 @@ Fico no aguardo!`
     titulo: 'Mandar horários de entrevista',
     desc: 'Oferece os horários disponíveis pra entrevista',
     pedeHorarios: true,
-    template: ({nome, horario1, horario2}) =>
+    template: ({nome, horarios}) =>
 `${nome.split(' ')[0]}, temos disponibilidade para um bate-papo por vídeo nos seguintes horários:
 
-${horario1}
-${horario2}
+${horarios.map(h => '• ' + h).join('\n')}
 
 Algum desses horários funciona para você?
 
@@ -1737,13 +1782,44 @@ Obrigado por enquanto ${nome.split(' ')[0]}.`,
 https://yepadsbra.com/documentos
 
 Você vai precisar de:
-• Foto do RG (frente e verso)
-• Foto do CPF ou CNH
+• Foto do RG ou CNH (frente e verso)
 • Comprovante de residência (atualizado, até 3 meses)
 
-É rápido — não leva nem 5 minutos. Quando finalizar, me avisa por aqui.`
+É rápido — não leva nem 3 minutos. Quando finalizar, me avisa por aqui.`
   }
 ];
+
+// Gera as 3 opções de horário padrão da Yep:
+// Hoje (próximo dia útil): 15h, 20h | Amanhã (dia seguinte): 11h
+// Sempre escolhe o próximo dia útil. Se hoje é sexta, "dia A" vira segunda e "dia B" vira terça.
+function gerarHorariosPadrao() {
+  const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
+  // Função pra avançar pro próximo dia útil
+  function proximoDiaUtil(dataBase) {
+    let d = new Date(dataBase);
+    do {
+      d = new Date(d.getTime() + 24 * 3600 * 1000);
+    } while (d.getDay() === 0 || d.getDay() === 6);
+    return d;
+  }
+
+  function formatarDia(d) {
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    return `${dias[d.getDay()]} (${dd}/${mm})`;
+  }
+
+  // Dia A = próximo dia útil; Dia B = dia útil depois do A
+  const diaA = proximoDiaUtil(new Date());
+  const diaB = proximoDiaUtil(diaA);
+
+  return [
+    { id: 'opt1', label: `${formatarDia(diaA)} às 15h`, valor: `${formatarDia(diaA)} às 15h` },
+    { id: 'opt2', label: `${formatarDia(diaA)} às 20h`, valor: `${formatarDia(diaA)} às 20h` },
+    { id: 'opt3', label: `${formatarDia(diaB)} às 11h`, valor: `${formatarDia(diaB)} às 11h` }
+  ];
+}
 
 function renderEtapas(c) {
   // Pega todas as inscrições da pessoa pra checar timestamps das etapas
@@ -1793,9 +1869,14 @@ function renderEtapas(c) {
           ${bloqueada ? `<div class="etapa-locked">🔒 Aguardando candidato preencher /cadastro</div>` : ''}
 
           ${et.pedeHorarios && !concluida ? `
-            <div class="etapa-inputs">
-              <input type="text" id="hor1-${et.num}" placeholder="Ex: Segunda-feira (04/05) às 19h" value="${escapeHtml(c.entrevista_horario || '')}" />
-              <input type="text" id="hor2-${et.num}" placeholder="Ex: Terça-feira (05/05) às 15h" />
+            <div class="etapa-horarios">
+              <div class="hor-help">Marque os horários que vai oferecer (mín. 2):</div>
+              ${gerarHorariosPadrao().map(h => `
+                <label class="hor-check">
+                  <input type="checkbox" class="hor-${et.num}" value="${h.valor}" checked />
+                  <span>${h.label}</span>
+                </label>
+              `).join('')}
             </div>
           ` : ''}
 
@@ -1826,12 +1907,13 @@ function enviarEtapa(numEtapa) {
   if (!etapa) return;
 
   // Coleta variáveis específicas da etapa
-  let horario1 = '', horario2 = '', quem = '';
+  let horariosSelecionados = [], quem = '';
   if (etapa.pedeHorarios) {
-    horario1 = (document.getElementById(`hor1-${numEtapa}`)?.value || '').trim();
-    horario2 = (document.getElementById(`hor2-${numEtapa}`)?.value || '').trim();
-    if (!horario1 || !horario2) {
-      alert('Preencha os 2 horários antes de enviar.');
+    document.querySelectorAll(`.hor-${numEtapa}:checked`).forEach(cb => {
+      horariosSelecionados.push(cb.value);
+    });
+    if (horariosSelecionados.length < 2) {
+      alert('Marque pelo menos 2 horários.');
       return;
     }
   }
@@ -1847,7 +1929,7 @@ function enviarEtapa(numEtapa) {
   const mensagem = etapa.template({
     nome: c.nome || '',
     vaga: c.vaga || '',
-    horario1, horario2, quem
+    horarios: horariosSelecionados, quem
   });
 
   // Monta link WhatsApp
@@ -1864,7 +1946,7 @@ function enviarEtapa(numEtapa) {
   window.open(link, '_blank');
 
   // Marca como enviada (após 1.5s pra dar tempo do WhatsApp abrir)
-  setTimeout(() => marcarEtapa(numEtapa, { horario1, horario2, quem }), 1500);
+  setTimeout(() => marcarEtapa(numEtapa, { horarios: horariosSelecionados, quem }), 1500);
 }
 
 async function marcarEtapa(numEtapa, dados = {}) {
@@ -1878,8 +1960,8 @@ async function marcarEtapa(numEtapa, dados = {}) {
     const body = { id: i.id, tabela, etapa: numEtapa };
 
     // Se tem horários e for etapa 3, salva
-    if (numEtapa === 3 && dados.horario1) {
-      body.entrevista_horario = `${dados.horario1} ou ${dados.horario2}`;
+    if (numEtapa === 3 && dados.horarios && dados.horarios.length) {
+      body.entrevista_horario = dados.horarios.join(' | ');
     }
     // Se for etapa 4, salva quem
     if (numEtapa === 4 && dados.quem) {
@@ -1899,7 +1981,7 @@ async function marcarEtapa(numEtapa, dados = {}) {
     const agora = new Date().toISOString();
     todasInscricoes.forEach(i => {
       i[`etapa${numEtapa}_em`] = agora;
-      if (numEtapa === 3 && dados.horario1) i.entrevista_horario = `${dados.horario1} ou ${dados.horario2}`;
+      if (numEtapa === 3 && dados.horarios && dados.horarios.length) i.entrevista_horario = dados.horarios.join(' | ');
       if (numEtapa === 4 && dados.quem) i.entrevista_quem = dados.quem;
     });
     // Re-renderiza o detalhe

@@ -16,8 +16,8 @@ export default async function handler(req, res) {
 
   const {
     nome, email, whatsapp,
-    rg_base64, cpf_cnh_base64, comprovante_base64,
-    rg_filename, cpf_cnh_filename, comprovante_filename,
+    rg_base64, comprovante_base64,
+    rg_filename, comprovante_filename,
     dados_verdadeiros, autorizacao_consulta, observacoes
   } = req.body || {};
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   if (!nome || !email || !whatsapp) {
     return res.status(400).json({ error: 'Nome, email e WhatsApp são obrigatórios' });
   }
-  if (!rg_base64 || !cpf_cnh_base64 || !comprovante_base64) {
+  if (!rg_base64 || !comprovante_base64) {
     return res.status(400).json({ error: 'Todos os documentos são obrigatórios' });
   }
   if (!dados_verdadeiros || !autorizacao_consulta) {
@@ -96,9 +96,8 @@ export default async function handler(req, res) {
       return path;
     }
 
-    const [rgPath, cpfCnhPath, comprovantePath] = await Promise.all([
+    const [rgPath, comprovantePath] = await Promise.all([
       uploadFile(rg_base64, rg_filename, 'rg'),
-      uploadFile(cpf_cnh_base64, cpf_cnh_filename, 'cpf-cnh'),
       uploadFile(comprovante_base64, comprovante_filename, 'comprovante')
     ]);
 
@@ -116,7 +115,6 @@ export default async function handler(req, res) {
         candidato_email: email,
         candidato_whatsapp: whatsapp,
         rg_url: rgPath,
-        cpf_cnh_url: cpfCnhPath,
         comprovante_residencia_url: comprovantePath,
         dados_verdadeiros: !!dados_verdadeiros,
         autorizacao_consulta: !!autorizacao_consulta,

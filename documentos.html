@@ -23,7 +23,6 @@
   --orange-deep: #E55400;
   --orange-soft: rgba(255, 107, 26, 0.12);
   --cream: #FAF6F0;
-  --cream-warm: #F4EDE2;
   --text: #E8EDF5;
   --text-dim: #8A98AE;
   --text-faint: #5A6A82;
@@ -48,19 +47,9 @@ body {
     var(--navy-deep);
 }
 
-.wrap {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
+.wrap { max-width: 720px; margin: 0 auto; padding: 36px 24px 60px; }
 
-/* Header */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 36px;
-}
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .logo-mark {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -68,22 +57,12 @@ body {
   width: 32px;
   height: 32px;
 }
-.logo-mark span {
-  background: var(--orange);
-  border-radius: 5px;
-}
+.logo-mark span { background: var(--orange); border-radius: 5px; }
 .logo-mark span:nth-child(2) { background: var(--cream); }
-.logo-text {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
+.logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.header a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
 
-/* Hero */
-.hero {
-  margin-bottom: 32px;
-}
+.hero { margin-bottom: 28px; }
 .hero-tag {
   display: inline-block;
   font-family: var(--font-mono);
@@ -94,69 +73,84 @@ body {
   background: var(--orange-soft);
   padding: 5px 11px;
   border-radius: 999px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(28px, 4vw, 38px);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.hero h1 em {
-  font-style: italic;
-  color: var(--orange);
-}
-.hero p {
-  color: var(--text-dim);
-  font-size: 16px;
-  max-width: 580px;
-}
+.hero h1 em { font-style: italic; color: var(--orange); }
+.hero p { color: var(--text-dim); font-size: 15px; max-width: 560px; }
 
-/* Form */
+/* Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy-line);
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.step-dot.active { background: var(--orange); color: white; box-shadow: 0 0 0 4px rgba(255, 107, 26, 0.18); }
+.step-dot.done { background: var(--green); color: white; }
+.step-line { width: 50px; height: 2px; background: var(--navy-line); }
+.step-line.done { background: var(--green); }
+
 .form {
   background: var(--navy-elev);
   border: 1px solid var(--navy-line);
   border-radius: 18px;
   padding: 32px;
 }
+@media (max-width: 600px) { .form { padding: 24px 20px; } }
 
-@media (max-width: 600px) {
-  .form { padding: 24px 20px; }
-}
+.step-section { display: none; }
+.step-section.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-.section {
-  margin-bottom: 28px;
-}
-.section:last-child { margin-bottom: 0; }
-.section-title {
+.section-head { margin-bottom: 22px; }
+.section-tag {
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--orange);
-  margin-bottom: 14px;
+  color: var(--text-dim);
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 8px;
 }
-.section-title::before {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: var(--orange);
+.section-tag::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
 }
+.section-subtitle { color: var(--text-dim); font-size: 14px; }
 
 .field { margin-bottom: 14px; }
-.field-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 600px) {
-  .field-row { grid-template-columns: 1fr; }
-}
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
 
 label {
   display: block;
@@ -167,10 +161,7 @@ label {
 }
 label .required { color: var(--orange); }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
+input[type="text"], input[type="email"], input[type="tel"], textarea {
   width: 100%;
   background: var(--navy-deep);
   border: 1px solid var(--navy-line);
@@ -186,75 +177,30 @@ input:focus, textarea:focus {
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.15);
 }
-textarea {
-  min-height: 80px;
-  resize: vertical;
-  line-height: 1.5;
-}
+textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 
-/* Upload de arquivo */
-.upload-field {
-  position: relative;
-  margin-bottom: 16px;
-}
+.upload-field { margin-bottom: 16px; }
 .upload-area {
   background: var(--navy-deep);
   border: 2px dashed var(--navy-line);
   border-radius: 12px;
-  padding: 28px 20px;
+  padding: 26px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
 }
-.upload-area:hover {
-  border-color: var(--orange);
-  background: rgba(255, 107, 26, 0.04);
-}
-.upload-area.has-file {
-  border-style: solid;
-  border-color: var(--green);
-  background: rgba(16, 185, 129, 0.06);
-}
-.upload-icon {
-  width: 38px;
-  height: 38px;
-  margin: 0 auto 10px;
-  color: var(--text-dim);
-}
+.upload-area:hover { border-color: var(--orange); background: rgba(255, 107, 26, 0.04); }
+.upload-area.has-file { border-style: solid; border-color: var(--green); background: rgba(16, 185, 129, 0.06); }
+.upload-icon { width: 36px; height: 36px; margin: 0 auto 10px; color: var(--text-dim); }
 .upload-area.has-file .upload-icon { color: var(--green); }
-.upload-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-.upload-hint {
-  font-size: 12.5px;
-  color: var(--text-dim);
-}
+.upload-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.upload-hint { font-size: 12.5px; color: var(--text-dim); }
 .upload-area.has-file .upload-hint { color: var(--green); }
-.upload-area input[type="file"] {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-.upload-preview {
-  margin-top: 10px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-dim);
-  word-break: break-all;
-}
+.upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-preview { margin-top: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); word-break: break-all; }
 
-/* Checkbox */
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
-}
+.checkbox-group { display: flex; flex-direction: column; gap: 12px; }
 .checkbox-item {
   display: flex;
   align-items: flex-start;
@@ -275,43 +221,37 @@ textarea {
   cursor: pointer;
   flex-shrink: 0;
 }
-.checkbox-item span {
-  font-size: 13.5px;
-  color: var(--text);
-  line-height: 1.45;
-}
+.checkbox-item span { font-size: 13.5px; color: var(--text); line-height: 1.45; }
 
-/* Submit */
-.submit-btn {
-  width: 100%;
-  background: var(--orange);
-  color: white;
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 10px;
+}
+.btn {
   border: none;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 13px 24px;
+  border-radius: 10px;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 20px;
   transition: background 0.15s, transform 0.1s;
 }
-.submit-btn:hover:not(:disabled) { background: var(--orange-deep); }
-.submit-btn:active:not(:disabled) { transform: translateY(1px); }
-.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.note {
-  font-size: 12.5px;
-  color: var(--text-faint);
-  text-align: center;
-  margin-top: 12px;
+.btn-primary { background: var(--orange); color: white; }
+.btn-primary:hover:not(:disabled) { background: var(--orange-deep); }
+.btn-primary:active:not(:disabled) { transform: translateY(1px); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--navy-line);
 }
+.btn-secondary:hover { color: var(--text); border-color: var(--text-faint); }
 
-/* Sucesso */
-.success {
-  text-align: center;
-  padding: 30px 20px;
-}
+.success { text-align: center; padding: 30px 20px; }
 .success-icon {
   width: 72px;
   height: 72px;
@@ -330,12 +270,7 @@ textarea {
   margin-bottom: 12px;
   letter-spacing: -0.01em;
 }
-.success p {
-  color: var(--text-dim);
-  font-size: 15px;
-  max-width: 460px;
-  margin: 0 auto 8px;
-}
+.success p { color: var(--text-dim); font-size: 15px; max-width: 460px; margin: 0 auto 8px; }
 
 .error {
   background: rgba(220, 38, 38, 0.1);
@@ -347,17 +282,15 @@ textarea {
   margin-bottom: 16px;
 }
 
-/* Footer */
 .footer {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 26px;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-faint);
   letter-spacing: 0.05em;
 }
 
-/* Loader */
 .spinner {
   display: inline-block;
   width: 14px;
@@ -375,9 +308,8 @@ textarea {
 <body>
 
 <div class="wrap">
-
   <header class="header">
-    <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+    <a href="/">
       <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
       <span class="logo-text">yep</span>
     </a>
@@ -386,57 +318,65 @@ textarea {
   <section class="hero">
     <span class="hero-tag">⚡ Etapa final · Documentos</span>
     <h1>Quase lá, <em>vamos finalizar</em>.</h1>
-    <p>Pra concluir o processo de contratação, precisamos confirmar sua identidade e residência. <strong>Leva uns 3 minutinhos</strong> — só uma foto de cada documento.</p>
+    <p>Pra concluir o processo, precisamos confirmar sua identidade e residência. <strong>Leva uns 2 minutinhos</strong> — vamos por etapas.</p>
   </section>
 
-  <form id="docs-form" class="form" onsubmit="enviarDocs(event)">
+  <div class="stepper" id="stepper">
+    <div class="step-dot active" data-step="1">1</div>
+    <div class="step-line"></div>
+    <div class="step-dot" data-step="2">2</div>
+    <div class="step-line"></div>
+    <div class="step-dot" data-step="3">3</div>
+  </div>
 
-    <div class="section">
-      <div class="section-title">Quem é você</div>
+  <form id="docs-form" class="form" onsubmit="return false;">
+
+    <!-- ETAPA 1 — Identificação -->
+    <div class="step-section active" data-step="1">
+      <div class="section-head">
+        <div class="section-tag">Etapa 1 de 3</div>
+        <h2 class="section-title">Identificação</h2>
+        <p class="section-subtitle">Pra encontrarmos seu cadastro no nosso sistema.</p>
+      </div>
       <div class="field">
         <label for="nome">Nome completo <span class="required">*</span></label>
-        <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Seu nome completo" />
+        <input type="text" id="nome" required autocomplete="name" placeholder="Seu nome completo" />
       </div>
       <div class="field-row">
         <div class="field">
           <label for="email">Email <span class="required">*</span></label>
-          <input type="email" id="email" name="email" required autocomplete="email" placeholder="seu@email.com" />
+          <input type="email" id="email" required autocomplete="email" placeholder="seu@email.com" />
         </div>
         <div class="field">
           <label for="whatsapp">WhatsApp <span class="required">*</span></label>
-          <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(00) 00000-0000" />
+          <input type="tel" id="whatsapp" required placeholder="(00) 00000-0000" />
         </div>
+      </div>
+      <div id="error-1" class="error" style="display:none;"></div>
+      <div class="actions" style="justify-content: flex-end;">
+        <button type="button" class="btn btn-primary" onclick="proximaEtapa(1)">Continuar →</button>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">Seus documentos</div>
+    <!-- ETAPA 2 — Documentos -->
+    <div class="step-section" data-step="2">
+      <div class="section-head">
+        <div class="section-tag">Etapa 2 de 3</div>
+        <h2 class="section-title">Seus documentos</h2>
+        <p class="section-subtitle">JPG, PNG ou PDF · até 10 MB cada</p>
+      </div>
 
       <div class="upload-field">
-        <label>RG (frente e verso) <span class="required">*</span></label>
+        <label>RG ou CNH (frente e verso) <span class="required">*</span></label>
         <div class="upload-area" id="upload-rg">
           <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="18" height="18" rx="2"/>
             <path d="M3 9h18M9 21V9"/>
           </svg>
-          <div class="upload-title">Clica ou arrasta a foto do seu RG</div>
-          <div class="upload-hint">JPG, PNG ou PDF · até 10 MB</div>
-          <input type="file" id="file-rg" accept="image/jpeg,image/png,image/webp,application/pdf" required />
+          <div class="upload-title">Clica ou arrasta a foto do seu documento</div>
+          <div class="upload-hint">RG ou CNH · Frente e verso (pode juntar tudo numa imagem só)</div>
+          <input type="file" id="file-rg" accept="image/jpeg,image/png,image/webp,application/pdf" />
           <div class="upload-preview" id="preview-rg"></div>
-        </div>
-      </div>
-
-      <div class="upload-field">
-        <label>CPF ou CNH <span class="required">*</span></label>
-        <div class="upload-area" id="upload-cpfcnh">
-          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <path d="M3 9h18M9 21V9"/>
-          </svg>
-          <div class="upload-title">Foto do CPF ou CNH</div>
-          <div class="upload-hint">JPG, PNG ou PDF · até 10 MB</div>
-          <input type="file" id="file-cpfcnh" accept="image/jpeg,image/png,image/webp,application/pdf" required />
-          <div class="upload-preview" id="preview-cpfcnh"></div>
         </div>
       </div>
 
@@ -450,51 +390,59 @@ textarea {
             <line x1="9" y1="17" x2="15" y2="17"/>
           </svg>
           <div class="upload-title">Conta de luz, água, internet, etc</div>
-          <div class="upload-hint">Atualizado · até 3 meses · JPG, PNG ou PDF</div>
-          <input type="file" id="file-comprovante" accept="image/jpeg,image/png,image/webp,application/pdf" required />
+          <div class="upload-hint">Atualizado · até 3 meses</div>
+          <input type="file" id="file-comprovante" accept="image/jpeg,image/png,image/webp,application/pdf" />
           <div class="upload-preview" id="preview-comprovante"></div>
         </div>
       </div>
+
+      <div id="error-2" class="error" style="display:none;"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(2)">← Voltar</button>
+        <button type="button" class="btn btn-primary" onclick="proximaEtapa(2)">Continuar →</button>
+      </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">Confirmações</div>
-      <div class="checkbox-group">
+    <!-- ETAPA 3 — Confirmações -->
+    <div class="step-section" data-step="3">
+      <div class="section-head">
+        <div class="section-tag">Etapa 3 de 3</div>
+        <h2 class="section-title">Confirmações finais</h2>
+        <p class="section-subtitle">Pra finalizar, precisamos das suas autorizações.</p>
+      </div>
+
+      <div class="checkbox-group" style="margin-bottom: 18px;">
         <label class="checkbox-item">
-          <input type="checkbox" id="dados_verdadeiros" required />
+          <input type="checkbox" id="dados_verdadeiros" />
           <span>Confirmo que <strong>todos os dados e documentos enviados são verdadeiros</strong> e estão atualizados.</span>
         </label>
         <label class="checkbox-item">
-          <input type="checkbox" id="autorizacao_consulta" required />
+          <input type="checkbox" id="autorizacao_consulta" />
           <span><strong>Autorizo a Yep Ads</strong> a consultar meus dados em bases públicas e privadas, conforme a LGPD, exclusivamente para fins de validação e contratação.</span>
         </label>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="section-title">Observações (opcional)</div>
       <div class="field">
+        <label for="observacoes">Observações <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
         <textarea id="observacoes" placeholder="Algo que a gente precise saber? Pode escrever aqui."></textarea>
+      </div>
+
+      <div id="error-3" class="error" style="display:none;"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(3)">← Voltar</button>
+        <button type="button" class="btn btn-primary" id="submit-btn" onclick="enviarDocs()">Enviar documentos</button>
       </div>
     </div>
 
-    <div id="error-box" class="error" style="display:none;"></div>
-
-    <button type="submit" class="submit-btn" id="submit-btn">Enviar documentos</button>
-    <p class="note">Seus documentos ficam protegidos. Acesso restrito ao time de RH.</p>
-
   </form>
 
-  <footer class="footer">
-    YEP ADS BRASIL · Uma agência global de performance marketing
-  </footer>
-
+  <footer class="footer">YEP ADS BRASIL · Acesso restrito ao time de RH</footer>
 </div>
 
 <script>
-const FILES = { rg: null, cpfcnh: null, comprovante: null };
+const FILES = { rg: null, comprovante: null };
+let etapaAtual = 1;
 
-// Setup uploads
 function setupUpload(id, key) {
   const area = document.getElementById('upload-' + id);
   const input = document.getElementById('file-' + id);
@@ -515,22 +463,13 @@ function setupUpload(id, key) {
   }
 
   input.addEventListener('change', e => handleFile(e.target.files[0]));
-
-  // Drag and drop
-  area.addEventListener('dragover', e => {
-    e.preventDefault();
-    area.style.borderColor = 'var(--orange)';
-  });
-  area.addEventListener('dragleave', e => {
-    e.preventDefault();
-    area.style.borderColor = '';
-  });
+  area.addEventListener('dragover', e => { e.preventDefault(); area.style.borderColor = 'var(--orange)'; });
+  area.addEventListener('dragleave', e => { e.preventDefault(); area.style.borderColor = ''; });
   area.addEventListener('drop', e => {
     e.preventDefault();
     area.style.borderColor = '';
     const file = e.dataTransfer.files[0];
     if (file) {
-      // Coloca o arquivo no input pra poder enviar
       const dt = new DataTransfer();
       dt.items.add(file);
       input.files = dt.files;
@@ -540,10 +479,8 @@ function setupUpload(id, key) {
 }
 
 setupUpload('rg', 'rg');
-setupUpload('cpfcnh', 'cpfcnh');
 setupUpload('comprovante', 'comprovante');
 
-// Máscara WhatsApp
 document.getElementById('whatsapp').addEventListener('input', e => {
   let v = e.target.value.replace(/\D/g, '');
   if (v.length > 11) v = v.substring(0, 11);
@@ -553,7 +490,58 @@ document.getElementById('whatsapp').addEventListener('input', e => {
   e.target.value = v;
 });
 
-// Converte arquivo pra base64
+function atualizarStepper(etapa) {
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    const n = parseInt(dot.dataset.step);
+    dot.classList.remove('active', 'done');
+    if (n < etapa) dot.classList.add('done');
+    else if (n === etapa) dot.classList.add('active');
+  });
+  document.querySelectorAll('.step-line').forEach((line, i) => {
+    line.classList.toggle('done', i + 1 < etapa);
+  });
+}
+
+function mostrarEtapa(n) {
+  document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step-section[data-step="${n}"]`).classList.add('active');
+  atualizarStepper(n);
+  etapaAtual = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showError(etapa, msg) {
+  const box = document.getElementById('error-' + etapa);
+  box.textContent = msg;
+  box.style.display = 'block';
+  setTimeout(() => box.style.display = 'none', 5000);
+}
+
+function proximaEtapa(de) {
+  if (de === 1) {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    if (!nome || !email || !whatsapp) {
+      showError(1, 'Preencha todos os campos pra continuar.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError(1, 'Email inválido.');
+      return;
+    }
+    mostrarEtapa(2);
+  } else if (de === 2) {
+    if (!FILES.rg || !FILES.comprovante) {
+      showError(2, 'Anexe os 2 documentos antes de continuar.');
+      return;
+    }
+    mostrarEtapa(3);
+  }
+}
+
+function voltarEtapa(de) { mostrarEtapa(de - 1); }
+
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -563,37 +551,27 @@ function fileToBase64(file) {
   });
 }
 
-async function enviarDocs(e) {
-  e.preventDefault();
+async function enviarDocs() {
   const btn = document.getElementById('submit-btn');
-  const errBox = document.getElementById('error-box');
-  errBox.style.display = 'none';
-
-  const nome = document.getElementById('nome').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const whatsapp = document.getElementById('whatsapp').value.trim();
   const dados_verdadeiros = document.getElementById('dados_verdadeiros').checked;
   const autorizacao_consulta = document.getElementById('autorizacao_consulta').checked;
   const observacoes = document.getElementById('observacoes').value.trim();
 
-  if (!FILES.rg || !FILES.cpfcnh || !FILES.comprovante) {
-    errBox.textContent = 'Anexe todos os 3 documentos antes de enviar.';
-    errBox.style.display = 'block';
-    return;
-  }
   if (!dados_verdadeiros || !autorizacao_consulta) {
-    errBox.textContent = 'Confirme as duas autorizações pra continuar.';
-    errBox.style.display = 'block';
+    showError(3, 'Confirme as duas autorizações pra continuar.');
     return;
   }
+
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Enviando...';
 
   try {
-    const [rgB64, cpfCnhB64, comprovanteB64] = await Promise.all([
+    const [rgB64, comprovanteB64] = await Promise.all([
       fileToBase64(FILES.rg),
-      fileToBase64(FILES.cpfcnh),
       fileToBase64(FILES.comprovante)
     ]);
 
@@ -603,10 +581,8 @@ async function enviarDocs(e) {
       body: JSON.stringify({
         nome, email, whatsapp,
         rg_base64: rgB64,
-        cpf_cnh_base64: cpfCnhB64,
         comprovante_base64: comprovanteB64,
         rg_filename: FILES.rg.name,
-        cpf_cnh_filename: FILES.cpfcnh.name,
         comprovante_filename: FILES.comprovante.name,
         dados_verdadeiros, autorizacao_consulta, observacoes
       })
@@ -617,10 +593,9 @@ async function enviarDocs(e) {
       throw new Error(data.error || 'Erro ao enviar');
     }
 
-    // Sucesso — substitui o form
     document.querySelector('.wrap').innerHTML = `
       <header class="header">
-        <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+        <a href="/">
           <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
           <span class="logo-text">yep</span>
         </a>
@@ -639,8 +614,7 @@ async function enviarDocs(e) {
     `;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
-    errBox.textContent = 'Erro: ' + err.message + '. Tenta de novo daqui um minuto.';
-    errBox.style.display = 'block';
+    showError(3, 'Erro: ' + err.message + '. Tenta de novo daqui um minuto.');
     btn.disabled = false;
     btn.textContent = 'Enviar documentos';
   }
