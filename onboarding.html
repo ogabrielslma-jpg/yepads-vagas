@@ -249,6 +249,82 @@ input.prefilled {
   .welcome-banner { flex-direction: column; text-align: center; }
 }
 
+/* Hero personalizada (após login) */
+.hero-personalizado {
+  margin-bottom: 28px;
+  padding: 28px 30px;
+  background: linear-gradient(135deg, rgba(255, 107, 26, 0.10), rgba(16, 185, 129, 0.04));
+  border: 1px solid rgba(255, 107, 26, 0.25);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-personalizado::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.12), transparent 70%);
+  pointer-events: none;
+}
+.hero-tag-vaga {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--orange);
+  background: var(--orange-soft);
+  padding: 5px 11px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--text);
+  position: relative;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 600;
+}
+.hero-subheadline {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.8vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dim);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero-subheadline strong {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 600;
+  background: linear-gradient(transparent 65%, rgba(255, 107, 26, 0.25) 65%);
+  padding: 0 4px;
+}
+.hero-desc {
+  font-size: 14.5px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  max-width: 540px;
+  position: relative;
+}
+@media (max-width: 600px) {
+  .hero-personalizado { padding: 22px 20px; }
+}
+
 .confirm-notice {
   background: rgba(245, 158, 11, 0.08);
   border: 1px solid rgba(245, 158, 11, 0.2);
@@ -956,14 +1032,14 @@ function mostrarOnboarding() {
 
   // Primeiro nome pra personalizar
   const primeiroNome = (CADASTRO.nome_completo || '').split(' ')[0] || 'você';
+  const vaga = CADASTRO.vaga || 'a vaga';
 
   document.getElementById('welcome-section').innerHTML = `
-    <div class="welcome-banner">
-      <div class="welcome-banner-icon">👋</div>
-      <div class="welcome-banner-text">
-        <div class="welcome-banner-title">Oi, <em>${escapeHtml(primeiroNome)}</em>! Bem-vindo(a) ao time Yep.</div>
-        <div class="welcome-banner-desc">Encontramos seu cadastro pra ${escapeHtml(CADASTRO.vaga || 'a vaga')}. Vamos finalizar em 3 etapas — leva uns 5 minutinhos.</div>
-      </div>
+    <div class="hero-personalizado">
+      <div class="hero-tag-vaga">⚡ Onboarding · Etapa final</div>
+      <h1 class="hero-headline">Vaga de <em>${escapeHtml(vaga)}</em></h1>
+      <h2 class="hero-subheadline">pré-selecionada para <strong>${escapeHtml(primeiroNome)}</strong></h2>
+      <p class="hero-desc">Recebemos seu cadastro. Agora é só finalizar em 3 etapas — leva uns 5 minutinhos.</p>
     </div>
   `;
 
@@ -973,8 +1049,18 @@ function mostrarOnboarding() {
   document.getElementById('whatsapp').value = CADASTRO.whatsapp || '';
   document.getElementById('cpf').value = CADASTRO.cpf || '';
   document.getElementById('data_nascimento').value = CADASTRO.data_nascimento || '';
-  if (CADASTRO.cidade) document.getElementById('cidade').value = CADASTRO.cidade;
-  if (CADASTRO.estado) document.getElementById('estado').value = CADASTRO.estado;
+
+  // Cidade e Estado vêm do /cadastro (só esses 2 do endereço)
+  if (CADASTRO.cidade) {
+    const cidadeEl = document.getElementById('cidade');
+    cidadeEl.value = CADASTRO.cidade;
+    cidadeEl.classList.add('prefilled');
+  }
+  if (CADASTRO.estado) {
+    const estadoEl = document.getElementById('estado');
+    estadoEl.value = CADASTRO.estado;
+    estadoEl.classList.add('prefilled');
+  }
 
   // Inicializa máscaras nos campos editáveis
   mascaraWhats(document.getElementById('whatsapp'));
