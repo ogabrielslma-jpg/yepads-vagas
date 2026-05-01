@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Painel · Yep Ads Brasil</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<style>
+:root {
+  --navy: #0F1B2D;
+  --navy-deep: #0A1320;
+  --navy-elev: #16243B;
+  --navy-line: #1E3050;
+  --orange: #FF6B1A;
+  --orange-deep: #E55400;
+  --orange-soft: rgba(255, 107, 26, 0.12);
+  --cream: #FAF6F0;
+  --cream-warm: #F4EDE2;
+  --text: #E8EDF5;
+  --text-dim: #8A98AE;
+  --text-faint: #5A6A82;
+  --green: #10B981;
+  --red: #DC2626;
+  --yellow: #F59E0B;
+  --blue: #3B82F6;
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--navy-deep);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ LOGIN ============ */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background:
+    radial-gradient(ellipse at top right, rgba(255, 107, 26, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(255, 107, 26, 0.05), transparent 50%),
+    var(--navy-deep);
+}
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.login-logo-mark {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  width: 32px;
+  height: 32px;
+}
+.login-logo-mark span {
+  background: var(--orange);
+  border-radius: 5px;
+}
+.login-logo-mark span:nth-child(2) { background: var(--cream); }
+.login-logo-text {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.login-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.login-subtitle {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+.login-field { margin-bottom: 16px; }
+.login-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.login-field input {
+  width: 100%;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.login-field input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.15);
+}
+.login-btn {
+  width: 100%;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+.login-btn:hover { background: var(--orange-deep); }
+.login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.login-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #FCA5A5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ============ DASHBOARD ============ */
+.dash { display: none; min-height: 100vh; }
+.dash.active { display: block; }
+
+.topbar {
+  background: var(--navy);
+  border-bottom: 1px solid var(--navy-line);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar-logo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  width: 24px;
+  height: 24px;
+}
+.topbar-logo span {
+  background: var(--orange);
+  border-radius: 4px;
+}
+.topbar-logo span:nth-child(2) { background: var(--cream); }
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+}
+.topbar-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  background: var(--orange-soft);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--navy-line);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+/* Stats */
+.stats {
+  padding: 24px 28px 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+.stat-card {
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.stat-value-orange { color: var(--orange); }
+.stat-value-green { color: var(--green); }
+
+/* Filtros */
+.filters {
+  padding: 20px 28px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.filter-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--navy-line);
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-chip:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+.filter-chip.active {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange);
+}
+.filter-search {
+  flex: 1;
+  min-width: 220px;
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 8px;
+  padding: 9px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13.5px;
+}
+.filter-search:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+/* Tabela */
+.table-wrap {
+  padding: 8px 28px 40px;
+}
+.table-empty {
+  background: var(--navy-elev);
+  border: 1px dashed var(--navy-line);
+  border-radius: 14px;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-dim);
+}
+.table-empty-icon {
+  font-size: 38px;
+  opacity: 0.4;
+  margin-bottom: 12px;
+}
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cand-card {
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  transition: border-color 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+.cand-card:hover {
+  border-color: var(--text-faint);
+  transform: translateY(-1px);
+}
+.cand-main { min-width: 0; }
+.cand-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+.cand-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+}
+.cand-vaga-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+  background: var(--orange-soft);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.cand-origem-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  background: rgba(138, 152, 174, 0.08);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.cand-meta {
+  display: flex;
+  gap: 14px;
+  color: var(--text-dim);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.cand-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.cand-meta-when { color: var(--text-faint); margin-left: auto; }
+
+.cand-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.status-novo { background: rgba(59, 130, 246, 0.12); color: #93C5FD; }
+.status-contatado { background: rgba(245, 158, 11, 0.12); color: #FCD34D; }
+.status-em_processo { background: rgba(255, 107, 26, 0.14); color: var(--orange); }
+.status-aprovado { background: rgba(16, 185, 129, 0.14); color: #6EE7B7; }
+.status-rejeitado { background: rgba(220, 38, 38, 0.14); color: #FCA5A5; }
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* Modal de detalhes */
+.modal-back {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 19, 32, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  padding: 40px 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease;
+}
+.modal-back.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-detail {
+  background: var(--navy-elev);
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 1px solid var(--navy-line);
+  overflow: hidden;
+  animation: slideIn 0.25s ease;
+}
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-detail-head {
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--navy-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.modal-detail-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.modal-detail-vaga {
+  color: var(--orange);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.modal-close {
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  color: var(--text-dim);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.modal-close:hover { color: var(--text); border-color: var(--text-faint); }
+
+.modal-detail-body { padding: 22px 26px; }
+.detail-section { margin-bottom: 22px; }
+.detail-section:last-child { margin-bottom: 0; }
+.detail-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.detail-item-label {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: 3px;
+}
+.detail-item-value {
+  font-size: 14px;
+  color: var(--text);
+  word-break: break-word;
+}
+.detail-item-value a { color: var(--orange); text-decoration: none; }
+.detail-item-value a:hover { text-decoration: underline; }
+
+.status-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.status-btn {
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  color: var(--text-dim);
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.status-btn:hover { color: var(--text); border-color: var(--text-faint); }
+.status-btn.active {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+  color: var(--orange);
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 100px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.notes-textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.notes-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+.notes-saved {
+  color: var(--green);
+  font-size: 12px;
+  display: none;
+}
+.notes-saved.show { display: inline; animation: fadeOut 2s forwards; }
+@keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--orange-deep); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.modal-detail-foot {
+  background: var(--navy-deep);
+  padding: 14px 26px;
+  border-top: 1px solid var(--navy-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.whats-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.whats-link:hover { background: #1FBA59; }
+
+.timestamp-wrap {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+/* Loading */
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--navy-line);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 60px auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 720px) {
+  .topbar { padding: 12px 16px; }
+  .stats, .filters, .table-wrap { padding-left: 16px; padding-right: 16px; }
+  .topbar-tag { display: none; }
+  .cand-card { grid-template-columns: 1fr; }
+  .cand-side { justify-content: flex-start; flex-wrap: wrap; }
+  .cand-meta-when { margin-left: 0; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .modal-detail-head { flex-direction: column; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--navy-deep); }
+::-webkit-scrollbar-thumb { background: var(--navy-line); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-mark">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="login-logo-text">yep</div>
+    </div>
+    <h1 class="login-title">Painel de Recrutamento</h1>
+    <p class="login-subtitle">Yep Ads Brasil · Acesso restrito</p>
+
+    <div class="login-error" id="login-error" style="display:none;"></div>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="login-field">
+        <label for="senha">Senha de acesso</label>
+        <input type="password" id="senha" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="login-btn" id="login-btn">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span class="topbar-title">Painel · Recrutamento</span>
+      <span class="topbar-tag">Yep Brasil</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-secondary" onclick="exportCSV()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Exportar CSV
+      </button>
+      <button class="btn-secondary" onclick="loadData()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        Atualizar
+      </button>
+      <button class="btn-secondary" onclick="logout()">Sair</button>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Total candidatos</div>
+      <div class="stat-value" id="stat-total">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Novos · não contatados</div>
+      <div class="stat-value stat-value-orange" id="stat-novos">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Em processo</div>
+      <div class="stat-value" id="stat-processo">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Aprovados</div>
+      <div class="stat-value stat-value-green" id="stat-aprovados">0</div>
+    </div>
+  </section>
+
+  <section class="filters">
+    <div class="filter-group" id="filter-status">
+      <button class="filter-chip active" data-status="todos">Todos</button>
+      <button class="filter-chip" data-status="novo">Novos</button>
+      <button class="filter-chip" data-status="contatado">Contatados</button>
+      <button class="filter-chip" data-status="em_processo">Em processo</button>
+      <button class="filter-chip" data-status="aprovado">Aprovados</button>
+      <button class="filter-chip" data-status="rejeitado">Rejeitados</button>
+    </div>
+    <input type="search" class="filter-search" id="search" placeholder="Buscar por nome, email, vaga..." />
+  </section>
+
+  <section class="table-wrap">
+    <div id="cards-container">
+      <div class="loader"></div>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL DETALHES -->
+<div class="modal-back" id="modal-back" onclick="closeModalIfBack(event)">
+  <div class="modal-detail" id="modal-detail-content"></div>
+</div>
+
+<script>
+let SENHA = sessionStorage.getItem('yep_admin_senha') || '';
+let DADOS = { candidaturas: [], completos: [] };
+let FILTRO_STATUS = 'todos';
+let FILTRO_BUSCA = '';
+let CURRENT_DETAIL = null;
+
+// ========= LOGIN =========
+async function handleLogin(e) {
+  e.preventDefault();
+  const senha = document.getElementById('senha').value;
+  const btn = document.getElementById('login-btn');
+  const errBox = document.getElementById('login-error');
+  errBox.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Entrando...';
+
+  try {
+    const res = await fetch('/api/admin-list', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ senha })
+    });
+
+    if (res.status === 401) {
+      errBox.textContent = 'Senha incorreta';
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Entrar';
+      return;
+    }
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Erro de conexão');
+    }
+
+    const data = await res.json();
+    SENHA = senha;
+    sessionStorage.setItem('yep_admin_senha', senha);
+    DADOS = data;
+    showDash();
+    renderAll();
+  } catch (err) {
+    errBox.textContent = 'Erro: ' + err.message;
+    errBox.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Entrar';
+  }
+}
+
+function showDash() {
+  document.getElementById('login-wrap').style.display = 'none';
+  document.getElementById('dash').classList.add('active');
+}
+
+function logout() {
+  sessionStorage.removeItem('yep_admin_senha');
+  SENHA = '';
+  location.reload();
+}
+
+// ========= LOAD =========
+async function loadData() {
+  if (!SENHA) return;
+  const container = document.getElementById('cards-container');
+  container.innerHTML = '<div class="loader"></div>';
+  try {
+    const res = await fetch('/api/admin-list', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ senha: SENHA })
+    });
+    if (res.status === 401) { logout(); return; }
+    if (!res.ok) throw new Error('Erro ao carregar');
+    DADOS = await res.json();
+    renderAll();
+  } catch (err) {
+    container.innerHTML = `<div class="table-empty"><p>Erro: ${err.message}</p></div>`;
+  }
+}
+
+// ========= RENDER =========
+function todosCandidatos() {
+  return [
+    ...DADOS.candidaturas.map(c => ({ ...c, _origem: 'candidaturas' })),
+    ...DADOS.completos.map(c => ({ ...c, _origem: 'cadastros_completos' }))
+  ].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+}
+
+function renderAll() {
+  renderStats();
+  renderCards();
+}
+
+function renderStats() {
+  const todos = todosCandidatos();
+  const novos = todos.filter(c => (c.status || 'novo') === 'novo').length;
+  const processo = todos.filter(c => c.status === 'em_processo' || c.status === 'contatado').length;
+  const aprovados = todos.filter(c => c.status === 'aprovado').length;
+  document.getElementById('stat-total').textContent = todos.length;
+  document.getElementById('stat-novos').textContent = novos;
+  document.getElementById('stat-processo').textContent = processo;
+  document.getElementById('stat-aprovados').textContent = aprovados;
+}
+
+function renderCards() {
+  const container = document.getElementById('cards-container');
+  let lista = todosCandidatos();
+
+  if (FILTRO_STATUS !== 'todos') {
+    lista = lista.filter(c => (c.status || 'novo') === FILTRO_STATUS);
+  }
+
+  if (FILTRO_BUSCA) {
+    const q = FILTRO_BUSCA.toLowerCase();
+    lista = lista.filter(c =>
+      (c.nome || '').toLowerCase().includes(q) ||
+      (c.email || '').toLowerCase().includes(q) ||
+      (c.vaga || '').toLowerCase().includes(q) ||
+      (c.whatsapp || c.whats || '').toLowerCase().includes(q)
+    );
+  }
+
+  if (lista.length === 0) {
+    container.innerHTML = `
+      <div class="table-empty">
+        <div class="table-empty-icon">📭</div>
+        <p>Nenhum candidato encontrado.</p>
+        <p style="margin-top:6px; font-size:13px;">Quando alguém preencher o formulário, aparecerá aqui.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="cards-list">${lista.map(cardHTML).join('')}</div>`;
+}
+
+function cardHTML(c) {
+  const status = c.status || 'novo';
+  const statusLabel = labelStatus(status);
+  const created = formatDate(c.created_at);
+  const origemLabel = c._origem === 'cadastros_completos' ? 'Completo' : 'Modal';
+
+  return `
+    <article class="cand-card" onclick="abrirDetalhe('${c._origem}', ${c.id})">
+      <div class="cand-main">
+        <div class="cand-head">
+          <span class="cand-name">${escapeHtml(c.nome || 'Sem nome')}</span>
+          <span class="cand-vaga-tag">${escapeHtml(c.vaga || '—')}</span>
+          <span class="cand-origem-tag">${origemLabel}</span>
+        </div>
+        <div class="cand-meta">
+          <span>${escapeHtml(c.email || '')}</span>
+          <span>${escapeHtml(c.whatsapp || c.whats || '')}</span>
+          <span class="cand-meta-when">${created}</span>
+        </div>
+      </div>
+      <div class="cand-side">
+        <span class="status-badge status-${status}">
+          <span class="status-dot"></span>
+          ${statusLabel}
+        </span>
+      </div>
+    </article>
+  `;
+}
+
+function labelStatus(s) {
+  const map = {
+    novo: 'Novo',
+    contatado: 'Contatado',
+    em_processo: 'Em processo',
+    aprovado: 'Aprovado',
+    rejeitado: 'Rejeitado'
+  };
+  return map[s] || 'Novo';
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const now = new Date();
+  const diffMs = now - d;
+  const diffMin = Math.floor(diffMs / 60000);
+  const diffH = Math.floor(diffMin / 60);
+  const diffD = Math.floor(diffH / 24);
+
+  if (diffMin < 1) return 'agora';
+  if (diffMin < 60) return `${diffMin}m atrás`;
+  if (diffH < 24) return `${diffH}h atrás`;
+  if (diffD < 7) return `${diffD}d atrás`;
+  return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/[<>&"']/g, ch => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+// ========= FILTROS =========
+document.getElementById('filter-status').addEventListener('click', e => {
+  if (!e.target.matches('.filter-chip')) return;
+  document.querySelectorAll('#filter-status .filter-chip').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  FILTRO_STATUS = e.target.dataset.status;
+  renderCards();
+});
+
+let searchTimer;
+document.getElementById('search').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    FILTRO_BUSCA = e.target.value.trim();
+    renderCards();
+  }, 200);
+});
+
+// ========= DETALHE =========
+function abrirDetalhe(origem, id) {
+  const lista = origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
+  const c = lista.find(x => x.id === id);
+  if (!c) return;
+  CURRENT_DETAIL = { ...c, _origem: origem };
+  renderDetalhe();
+  document.getElementById('modal-back').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharDetalhe() {
+  document.getElementById('modal-back').classList.remove('active');
+  document.body.style.overflow = '';
+  CURRENT_DETAIL = null;
+}
+
+function closeModalIfBack(e) {
+  if (e.target.id === 'modal-back') fecharDetalhe();
+}
+
+function renderDetalhe() {
+  const c = CURRENT_DETAIL;
+  if (!c) return;
+  const tableLabel = c._origem === 'cadastros_completos' ? 'Cadastro completo (3 etapas)' : 'Candidatura rápida (modal)';
+  const status = c.status || 'novo';
+
+  // Monta WhatsApp link
+  const whatsRaw = c.whatsapp || c.whats || '';
+  const whatsClean = whatsRaw.replace(/\D/g, '');
+  const whatsFinal = whatsClean.length >= 10
+    ? (whatsClean.startsWith('55') ? whatsClean : '55' + whatsClean)
+    : '';
+  const whatsMsg = encodeURIComponent(`Olá ${(c.nome || '').split(' ')[0]}! Aqui é do time de recrutamento da Yep Ads. Recebemos sua candidatura pra vaga de ${c.vaga || ''} e gostaríamos de conversar. Quando seria um bom momento?`);
+  const whatsLink = whatsFinal ? `https://wa.me/${whatsFinal}?text=${whatsMsg}` : '';
+
+  // Detail grid — campos básicos
+  const camposBasicos = [
+    ['Email', c.email],
+    ['WhatsApp', whatsRaw],
+    ['Vaga', c.vaga],
+    ['Link / portfólio', c.link || c.linkedin || c.portfolio]
+  ];
+
+  // Campos extras (do cadastro completo)
+  const camposExtra = [];
+  if (c._origem === 'cadastros_completos') {
+    if (c.cidade) camposExtra.push(['Cidade', c.cidade]);
+    if (c.estado) camposExtra.push(['Estado', c.estado]);
+    if (c.formacao) camposExtra.push(['Formação', c.formacao]);
+    if (c.curso) camposExtra.push(['Curso', c.curso]);
+    if (c.instituicao) camposExtra.push(['Instituição', c.instituicao]);
+    if (c.experiencias) camposExtra.push(['Experiências', c.experiencias]);
+    if (c.disponibilidade) camposExtra.push(['Disponibilidade', c.disponibilidade]);
+    if (c.inicio) camposExtra.push(['Pode iniciar em', c.inicio]);
+    if (c.sobre) camposExtra.push(['Sobre você', c.sobre]);
+  }
+
+  const html = `
+    <div class="modal-detail-head">
+      <div>
+        <div class="modal-detail-name">${escapeHtml(c.nome || 'Sem nome')}</div>
+        <div class="modal-detail-vaga">${escapeHtml(c.vaga || '—')} · ${tableLabel}</div>
+      </div>
+      <button class="modal-close" onclick="fecharDetalhe()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="modal-detail-body">
+      <div class="detail-section">
+        <div class="detail-section-title">Status</div>
+        <div class="status-actions">
+          ${['novo', 'contatado', 'em_processo', 'aprovado', 'rejeitado'].map(s => `
+            <button class="status-btn ${s === status ? 'active' : ''}" onclick="atualizarStatus('${s}')">${labelStatus(s)}</button>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Informações de contato</div>
+        <div class="detail-grid">
+          ${camposBasicos.filter(([_, v]) => v).map(([k, v]) => `
+            <div>
+              <div class="detail-item-label">${k}</div>
+              <div class="detail-item-value">${formatValue(k, v)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      ${camposExtra.length > 0 ? `
+        <div class="detail-section">
+          <div class="detail-section-title">Dados completos</div>
+          <div class="detail-grid">
+            ${camposExtra.map(([k, v]) => `
+              <div style="${(k === 'Sobre você' || k === 'Experiências') ? 'grid-column: 1 / -1;' : ''}">
+                <div class="detail-item-label">${k}</div>
+                <div class="detail-item-value" style="white-space: pre-wrap;">${escapeHtml(String(v))}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="detail-section">
+        <div class="detail-section-title">Notas internas</div>
+        <textarea class="notes-textarea" id="notes-textarea" placeholder="Anotações sobre o candidato (só você e o time veem isso)...">${escapeHtml(c.notas || '')}</textarea>
+        <div class="notes-actions">
+          <button class="btn-primary" onclick="salvarNotas()">Salvar notas</button>
+          <span class="notes-saved" id="notes-saved">✓ Salvo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-detail-foot">
+      <span class="timestamp-wrap">Cadastrado: ${formatDate(c.created_at)}</span>
+      ${whatsLink ? `<a href="${whatsLink}" target="_blank" rel="noopener" class="whats-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Chamar no WhatsApp
+      </a>` : ''}
+    </div>
+  `;
+
+  document.getElementById('modal-detail-content').innerHTML = html;
+}
+
+function formatValue(label, val) {
+  if (!val) return '—';
+  if (label === 'Email') return `<a href="mailto:${escapeHtml(val)}">${escapeHtml(val)}</a>`;
+  if (label === 'WhatsApp') {
+    const clean = String(val).replace(/\D/g, '');
+    const wa = clean.length >= 10 ? (clean.startsWith('55') ? clean : '55' + clean) : '';
+    return wa ? `<a href="https://wa.me/${wa}" target="_blank" rel="noopener">${escapeHtml(val)}</a>` : escapeHtml(val);
+  }
+  if (label.includes('Link') || label.includes('LinkedIn')) {
+    const v = String(val);
+    if (v.startsWith('http')) return `<a href="${escapeHtml(v)}" target="_blank" rel="noopener">${escapeHtml(v)}</a>`;
+  }
+  return escapeHtml(String(val));
+}
+
+// ========= UPDATES =========
+async function atualizarStatus(novoStatus) {
+  if (!CURRENT_DETAIL) return;
+  try {
+    const res = await fetch('/api/admin-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+      body: JSON.stringify({
+        id: CURRENT_DETAIL.id,
+        tabela: CURRENT_DETAIL._origem,
+        status: novoStatus
+      })
+    });
+    if (!res.ok) throw new Error('Falha ao atualizar');
+    CURRENT_DETAIL.status = novoStatus;
+    // Atualiza no cache local
+    const lista = CURRENT_DETAIL._origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
+    const idx = lista.findIndex(x => x.id === CURRENT_DETAIL.id);
+    if (idx >= 0) lista[idx].status = novoStatus;
+    renderDetalhe();
+    renderAll();
+  } catch (err) {
+    alert('Erro: ' + err.message);
+  }
+}
+
+async function salvarNotas() {
+  if (!CURRENT_DETAIL) return;
+  const notas = document.getElementById('notes-textarea').value;
+  try {
+    const res = await fetch('/api/admin-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+      body: JSON.stringify({
+        id: CURRENT_DETAIL.id,
+        tabela: CURRENT_DETAIL._origem,
+        notas
+      })
+    });
+    if (!res.ok) throw new Error('Falha ao salvar');
+    CURRENT_DETAIL.notas = notas;
+    const lista = CURRENT_DETAIL._origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
+    const idx = lista.findIndex(x => x.id === CURRENT_DETAIL.id);
+    if (idx >= 0) lista[idx].notas = notas;
+    const saved = document.getElementById('notes-saved');
+    saved.classList.remove('show');
+    void saved.offsetWidth;
+    saved.classList.add('show');
+  } catch (err) {
+    alert('Erro: ' + err.message);
+  }
+}
+
+// ========= EXPORT CSV =========
+function exportCSV() {
+  const lista = todosCandidatos();
+  if (lista.length === 0) { alert('Nada pra exportar.'); return; }
+  const headers = ['Origem', 'Nome', 'Email', 'WhatsApp', 'Vaga', 'Link', 'Status', 'Notas', 'Data'];
+  const rows = lista.map(c => [
+    c._origem === 'cadastros_completos' ? 'Completo' : 'Modal',
+    c.nome || '',
+    c.email || '',
+    c.whatsapp || c.whats || '',
+    c.vaga || '',
+    c.link || c.linkedin || c.portfolio || '',
+    c.status || 'novo',
+    (c.notas || '').replace(/\n/g, ' '),
+    c.created_at || ''
+  ]);
+  const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dt = new Date().toISOString().split('T')[0];
+  a.href = url;
+  a.download = `candidatos-yep-${dt}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ESC fecha modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('modal-back').classList.contains('active')) {
+    fecharDetalhe();
+  }
+});
+
+// ========= AUTO-LOGIN se senha em sessionStorage =========
+if (SENHA) {
+  (async () => {
+    try {
+      const res = await fetch('/api/admin-list', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ senha: SENHA })
+      });
+      if (res.ok) {
+        DADOS = await res.json();
+        showDash();
+        renderAll();
+      } else {
+        sessionStorage.removeItem('yep_admin_senha');
+        SENHA = '';
+      }
+    } catch (e) {
+      sessionStorage.removeItem('yep_admin_senha');
+    }
+  })();
+}
+</script>
+</body>
+</html>
