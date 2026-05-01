@@ -391,6 +391,52 @@ body {
   align-items: center;
   gap: 10px;
 }
+
+/* Botão de excluir nos cards */
+.card-delete-btn {
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  color: var(--text-faint);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.card-delete-btn:hover {
+  color: #FCA5A5;
+  border-color: rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Botão de excluir no modal */
+.modal-foot-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #FCA5A5;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-delete:hover {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.5);
+}
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -877,7 +923,7 @@ function cardHTML(c) {
   const origemLabel = c._origem === 'cadastros_completos' ? 'Completo' : 'Modal';
 
   return `
-    <article class="cand-card" onclick="abrirDetalhe('${c._origem}', ${c.id})">
+    <article class="cand-card" data-origem="${c._origem}" data-id="${escapeHtml(String(c.id))}">
       <div class="cand-main">
         <div class="cand-head">
           <span class="cand-name">${escapeHtml(c.nome || 'Sem nome')}</span>
@@ -895,6 +941,9 @@ function cardHTML(c) {
           <span class="status-dot"></span>
           ${statusLabel}
         </span>
+        <button class="card-delete-btn" data-origem="${c._origem}" data-id="${escapeHtml(String(c.id))}" data-nome="${escapeHtml(c.nome || '')}" title="Excluir candidato" aria-label="Excluir">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>
+        </button>
       </div>
     </article>
   `;
@@ -950,11 +999,35 @@ document.getElementById('search').addEventListener('input', e => {
   }, 200);
 });
 
+// Event delegation pros cards: clique abre detalhe, clique no botão de excluir confirma e exclui
+document.getElementById('cards-container').addEventListener('click', e => {
+  const deleteBtn = e.target.closest('.card-delete-btn');
+  if (deleteBtn) {
+    e.stopPropagation();
+    const origem = deleteBtn.dataset.origem;
+    const id = deleteBtn.dataset.id;
+    const nome = deleteBtn.dataset.nome || 'esse candidato';
+    if (confirm(`Excluir ${nome} permanentemente?\n\nEssa ação não pode ser desfeita.`)) {
+      excluirCandidato(origem, id);
+    }
+    return;
+  }
+
+  const card = e.target.closest('.cand-card');
+  if (card) {
+    abrirDetalhe(card.dataset.origem, card.dataset.id);
+  }
+});
+
 // ========= DETALHE =========
 function abrirDetalhe(origem, id) {
   const lista = origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
-  const c = lista.find(x => x.id === id);
-  if (!c) return;
+  // Compara como string pra funcionar com IDs numéricos OU UUIDs
+  const c = lista.find(x => String(x.id) === String(id));
+  if (!c) {
+    console.warn('Candidato não encontrado:', origem, id);
+    return;
+  }
   CURRENT_DETAIL = { ...c, _origem: origem };
   renderDetalhe();
   document.getElementById('modal-back').classList.add('active');
@@ -1064,7 +1137,13 @@ function renderDetalhe() {
     </div>
 
     <div class="modal-detail-foot">
-      <span class="timestamp-wrap">Cadastrado: ${formatDate(c.created_at)}</span>
+      <div class="modal-foot-left">
+        <span class="timestamp-wrap">Cadastrado: ${formatDate(c.created_at)}</span>
+        <button class="btn-delete" onclick="confirmarExcluirAtual()" title="Excluir candidato">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>
+          Excluir
+        </button>
+      </div>
       ${whatsLink ? `<a href="${whatsLink}" target="_blank" rel="noopener" class="whats-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Chamar no WhatsApp
@@ -1107,7 +1186,7 @@ async function atualizarStatus(novoStatus) {
     CURRENT_DETAIL.status = novoStatus;
     // Atualiza no cache local
     const lista = CURRENT_DETAIL._origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
-    const idx = lista.findIndex(x => x.id === CURRENT_DETAIL.id);
+    const idx = lista.findIndex(x => String(x.id) === String(CURRENT_DETAIL.id));
     if (idx >= 0) lista[idx].status = novoStatus;
     renderDetalhe();
     renderAll();
@@ -1132,7 +1211,7 @@ async function salvarNotas() {
     if (!res.ok) throw new Error('Falha ao salvar');
     CURRENT_DETAIL.notas = notas;
     const lista = CURRENT_DETAIL._origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
-    const idx = lista.findIndex(x => x.id === CURRENT_DETAIL.id);
+    const idx = lista.findIndex(x => String(x.id) === String(CURRENT_DETAIL.id));
     if (idx >= 0) lista[idx].notas = notas;
     const saved = document.getElementById('notes-saved');
     saved.classList.remove('show');
@@ -1140,6 +1219,42 @@ async function salvarNotas() {
     saved.classList.add('show');
   } catch (err) {
     alert('Erro: ' + err.message);
+  }
+}
+
+// Excluir candidato (chamado pelo botão da lista ou do modal de detalhe)
+async function excluirCandidato(origem, id) {
+  try {
+    const res = await fetch('/api/admin-delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+      body: JSON.stringify({ id, tabela: origem })
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Falha ao excluir');
+    }
+    // Remove do cache local
+    if (origem === 'cadastros_completos') {
+      DADOS.completos = DADOS.completos.filter(x => String(x.id) !== String(id));
+    } else {
+      DADOS.candidaturas = DADOS.candidaturas.filter(x => String(x.id) !== String(id));
+    }
+    // Se o modal estava aberto pra esse candidato, fecha
+    if (CURRENT_DETAIL && String(CURRENT_DETAIL.id) === String(id)) {
+      fecharDetalhe();
+    }
+    renderAll();
+  } catch (err) {
+    alert('Erro ao excluir: ' + err.message);
+  }
+}
+
+function confirmarExcluirAtual() {
+  if (!CURRENT_DETAIL) return;
+  const nome = CURRENT_DETAIL.nome || 'esse candidato';
+  if (confirm(`Excluir ${nome} permanentemente?\n\nEssa ação não pode ser desfeita.`)) {
+    excluirCandidato(CURRENT_DETAIL._origem, CURRENT_DETAIL.id);
   }
 }
 
