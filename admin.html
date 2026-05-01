@@ -257,11 +257,25 @@ body {
 
 /* Filtros */
 .filters {
-  padding: 20px 28px 12px;
+  padding: 18px 28px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.filter-row {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
+}
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  padding-right: 4px;
+  flex-shrink: 0;
 }
 .filter-group {
   display: flex;
@@ -288,6 +302,10 @@ body {
   background: var(--orange);
   color: white;
   border-color: var(--orange);
+}
+.filter-chip-tipo.active {
+  background: var(--green);
+  border-color: var(--green);
 }
 .filter-search {
   flex: 1;
@@ -375,6 +393,35 @@ body {
   background: rgba(138, 152, 174, 0.08);
   padding: 3px 9px;
   border-radius: 999px;
+}
+
+/* Tags de origem (Vagas / Cadastro completo) */
+.origem-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.origem-vagas {
+  color: #93C5FD;
+  background: rgba(59, 130, 246, 0.12);
+}
+.origem-cadastro {
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.cand-card-ambos {
+  border-color: rgba(16, 185, 129, 0.18);
+}
+.cand-card-ambos:hover {
+  border-color: rgba(16, 185, 129, 0.4);
 }
 .cand-meta {
   display: flex;
@@ -555,6 +602,71 @@ body {
 }
 .detail-item-value a { color: var(--orange); text-decoration: none; }
 .detail-item-value a:hover { text-decoration: underline; }
+
+/* Timeline de inscrições */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+}
+.timeline-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.timeline-vagas .timeline-icon {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93C5FD;
+}
+.timeline-cadastro .timeline-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6EE7B7;
+}
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+.timeline-content > div:first-child {
+  font-size: 13.5px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.timeline-when {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.detail-warning {
+  margin-top: 12px;
+  padding: 11px 14px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  color: #FCD34D;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.detail-warning code {
+  background: rgba(245, 158, 11, 0.15);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
 
 .status-actions {
   display: flex;
@@ -756,15 +868,27 @@ body {
   </section>
 
   <section class="filters">
-    <div class="filter-group" id="filter-status">
-      <button class="filter-chip active" data-status="todos">Todos</button>
-      <button class="filter-chip" data-status="novo">Novos</button>
-      <button class="filter-chip" data-status="contatado">Contatados</button>
-      <button class="filter-chip" data-status="em_processo">Em processo</button>
-      <button class="filter-chip" data-status="aprovado">Aprovados</button>
-      <button class="filter-chip" data-status="rejeitado">Rejeitados</button>
+    <div class="filter-row">
+      <span class="filter-label">Status:</span>
+      <div class="filter-group" id="filter-status">
+        <button class="filter-chip active" data-status="todos">Todos</button>
+        <button class="filter-chip" data-status="novo">Novos</button>
+        <button class="filter-chip" data-status="contatado">Contatados</button>
+        <button class="filter-chip" data-status="em_processo">Em processo</button>
+        <button class="filter-chip" data-status="aprovado">Aprovados</button>
+        <button class="filter-chip" data-status="rejeitado">Rejeitados</button>
+      </div>
     </div>
-    <input type="search" class="filter-search" id="search" placeholder="Buscar por nome, email, vaga..." />
+    <div class="filter-row">
+      <span class="filter-label">Tipo:</span>
+      <div class="filter-group" id="filter-tipo">
+        <button class="filter-chip filter-chip-tipo active" data-tipo="todos">Todos</button>
+        <button class="filter-chip filter-chip-tipo" data-tipo="so_vagas">Só /vagas</button>
+        <button class="filter-chip filter-chip-tipo" data-tipo="so_cadastro">Só /cadastro</button>
+        <button class="filter-chip filter-chip-tipo" data-tipo="completos">Completou ambos</button>
+      </div>
+      <input type="search" class="filter-search" id="search" placeholder="Buscar nome, email, vaga..." />
+    </div>
   </section>
 
   <section class="table-wrap">
@@ -783,6 +907,7 @@ body {
 let SENHA = sessionStorage.getItem('yep_admin_senha') || '';
 let DADOS = { candidaturas: [], completos: [] };
 let FILTRO_STATUS = 'todos';
+let FILTRO_TIPO = 'todos';
 let FILTRO_BUSCA = '';
 let CURRENT_DETAIL = null;
 
@@ -862,11 +987,105 @@ async function loadData() {
 }
 
 // ========= RENDER =========
+// Normaliza WhatsApp (só dígitos) pra comparação
+function normalizeWhats(w) {
+  if (!w) return '';
+  const digits = String(w).replace(/\D/g, '');
+  // Tira o 55 inicial se tiver, e leading zeros, pra match mais flexível
+  return digits.replace(/^55/, '').replace(/^0+/, '');
+}
+
+function normalizeEmail(e) {
+  return (e || '').toLowerCase().trim();
+}
+
+// Junta candidaturas + cadastros_completos, agrupando por pessoa (email ou whatsapp).
+// Cada item retornado representa UMA pessoa, com info se preencheu /vagas, /cadastro ou ambos.
 function todosCandidatos() {
-  return [
-    ...DADOS.candidaturas.map(c => ({ ...c, _origem: 'candidaturas' })),
-    ...DADOS.completos.map(c => ({ ...c, _origem: 'cadastros_completos' }))
-  ].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  const grupos = new Map();
+  // Chave de grupo: tenta achar uma já existente que case com email ou whatsapp
+  function findOrCreateGroup(c) {
+    const email = normalizeEmail(c.email);
+    const whats = normalizeWhats(c.whatsapp || c.whats);
+    // Procura grupo existente
+    for (const [key, g] of grupos) {
+      if (email && g.emails.has(email)) return g;
+      if (whats && g.whats.has(whats)) return g;
+    }
+    // Cria novo
+    const novaKey = `g_${grupos.size}`;
+    const g = {
+      _key: novaKey,
+      emails: new Set(),
+      whats: new Set(),
+      candidaturas: [],
+      completos: []
+    };
+    grupos.set(novaKey, g);
+    if (email) g.emails.add(email);
+    if (whats) g.whats.add(whats);
+    return g;
+  }
+
+  // Agrupa
+  for (const c of DADOS.candidaturas) {
+    const g = findOrCreateGroup(c);
+    g.candidaturas.push(c);
+    const email = normalizeEmail(c.email);
+    const whats = normalizeWhats(c.whatsapp || c.whats);
+    if (email) g.emails.add(email);
+    if (whats) g.whats.add(whats);
+  }
+  for (const c of DADOS.completos) {
+    const g = findOrCreateGroup(c);
+    g.completos.push(c);
+    const email = normalizeEmail(c.email);
+    const whats = normalizeWhats(c.whatsapp || c.whats);
+    if (email) g.emails.add(email);
+    if (whats) g.whats.add(whats);
+  }
+
+  // Converte cada grupo numa entry da lista
+  const resultado = [];
+  for (const g of grupos.values()) {
+    // Pega a inscrição mais recente como "principal" (pra mostrar dados/status)
+    const todasInscricoes = [...g.candidaturas, ...g.completos];
+    if (todasInscricoes.length === 0) continue;
+    todasInscricoes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const principal = todasInscricoes[0];
+
+    // Status: se tem em qualquer das duas, prioriza o mais avançado
+    const statusOrder = { novo: 0, contatado: 1, em_processo: 2, aprovado: 3, rejeitado: 4 };
+    let statusFinal = 'novo';
+    let statusOrderMax = -1;
+    todasInscricoes.forEach(i => {
+      const s = i.status || 'novo';
+      if ((statusOrder[s] || 0) >= statusOrderMax) {
+        statusOrderMax = statusOrder[s] || 0;
+        statusFinal = s;
+      }
+    });
+
+    // Notas: junta de todas (se tiver)
+    const notasFinal = todasInscricoes.map(i => i.notas).filter(Boolean).join(' | ');
+
+    resultado.push({
+      ...principal,
+      _grupoKey: g._key,
+      _candidaturas: g.candidaturas,
+      _completos: g.completos,
+      _temVagas: g.candidaturas.length > 0,
+      _temCadastro: g.completos.length > 0,
+      _ambos: g.candidaturas.length > 0 && g.completos.length > 0,
+      // Sobrescreve status com o "mais avançado" do grupo
+      status: statusFinal,
+      notas: notasFinal,
+      // Mantém info da origem do registro principal (pra abrir o detalhe certo)
+      _origem: g.completos.includes(principal) ? 'cadastros_completos' : 'candidaturas'
+    });
+  }
+
+  return resultado.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 }
 
 function renderAll() {
@@ -879,10 +1098,14 @@ function renderStats() {
   const novos = todos.filter(c => (c.status || 'novo') === 'novo').length;
   const processo = todos.filter(c => c.status === 'em_processo' || c.status === 'contatado').length;
   const aprovados = todos.filter(c => c.status === 'aprovado').length;
+  const completos = todos.filter(c => c._ambos).length;
   document.getElementById('stat-total').textContent = todos.length;
   document.getElementById('stat-novos').textContent = novos;
   document.getElementById('stat-processo').textContent = processo;
   document.getElementById('stat-aprovados').textContent = aprovados;
+  // Stat extra: candidatos com cadastro completo
+  const elCompletos = document.getElementById('stat-completos');
+  if (elCompletos) elCompletos.textContent = completos;
 }
 
 function renderCards() {
@@ -891,6 +1114,14 @@ function renderCards() {
 
   if (FILTRO_STATUS !== 'todos') {
     lista = lista.filter(c => (c.status || 'novo') === FILTRO_STATUS);
+  }
+
+  if (FILTRO_TIPO === 'so_vagas') {
+    lista = lista.filter(c => c._temVagas && !c._temCadastro);
+  } else if (FILTRO_TIPO === 'so_cadastro') {
+    lista = lista.filter(c => c._temCadastro && !c._temVagas);
+  } else if (FILTRO_TIPO === 'completos') {
+    lista = lista.filter(c => c._ambos);
   }
 
   if (FILTRO_BUSCA) {
@@ -920,15 +1151,29 @@ function cardHTML(c) {
   const status = c.status || 'novo';
   const statusLabel = labelStatus(status);
   const created = formatDate(c.created_at);
-  const origemLabel = c._origem === 'cadastros_completos' ? 'Completo' : 'Modal';
+
+  // Tags de origem (uma pessoa pode ter as duas)
+  const tagsOrigem = [];
+  if (c._temVagas) {
+    tagsOrigem.push(`<span class="origem-tag origem-vagas" title="Preencheu o formulário em /vagas">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Vagas
+    </span>`);
+  }
+  if (c._temCadastro) {
+    tagsOrigem.push(`<span class="origem-tag origem-cadastro" title="Preencheu o cadastro completo em /cadastro">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      Cadastro completo
+    </span>`);
+  }
 
   return `
-    <article class="cand-card" data-origem="${c._origem}" data-id="${escapeHtml(String(c.id))}">
+    <article class="cand-card ${c._ambos ? 'cand-card-ambos' : ''}" data-origem="${c._origem}" data-id="${escapeHtml(String(c.id))}">
       <div class="cand-main">
         <div class="cand-head">
           <span class="cand-name">${escapeHtml(c.nome || 'Sem nome')}</span>
           <span class="cand-vaga-tag">${escapeHtml(c.vaga || '—')}</span>
-          <span class="cand-origem-tag">${origemLabel}</span>
+          ${tagsOrigem.join('')}
         </div>
         <div class="cand-meta">
           <span>${escapeHtml(c.email || '')}</span>
@@ -990,6 +1235,14 @@ document.getElementById('filter-status').addEventListener('click', e => {
   renderCards();
 });
 
+document.getElementById('filter-tipo').addEventListener('click', e => {
+  if (!e.target.matches('.filter-chip')) return;
+  document.querySelectorAll('#filter-tipo .filter-chip').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  FILTRO_TIPO = e.target.dataset.tipo;
+  renderCards();
+});
+
 let searchTimer;
 document.getElementById('search').addEventListener('input', e => {
   clearTimeout(searchTimer);
@@ -1021,14 +1274,17 @@ document.getElementById('cards-container').addEventListener('click', e => {
 
 // ========= DETALHE =========
 function abrirDetalhe(origem, id) {
-  const lista = origem === 'cadastros_completos' ? DADOS.completos : DADOS.candidaturas;
-  // Compara como string pra funcionar com IDs numéricos OU UUIDs
-  const c = lista.find(x => String(x.id) === String(id));
-  if (!c) {
+  // Encontra o grupo agrupado pelo id da inscrição
+  const todos = todosCandidatos();
+  const item = todos.find(t => {
+    const allInscricoes = [...(t._candidaturas || []), ...(t._completos || [])];
+    return allInscricoes.some(i => String(i.id) === String(id));
+  });
+  if (!item) {
     console.warn('Candidato não encontrado:', origem, id);
     return;
   }
-  CURRENT_DETAIL = { ...c, _origem: origem };
+  CURRENT_DETAIL = { ...item };
   renderDetalhe();
   document.getElementById('modal-back').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -1047,7 +1303,22 @@ function closeModalIfBack(e) {
 function renderDetalhe() {
   const c = CURRENT_DETAIL;
   if (!c) return;
-  const tableLabel = c._origem === 'cadastros_completos' ? 'Cadastro completo (3 etapas)' : 'Candidatura rápida (modal)';
+
+  // Inscrições da pessoa (pode ter 1 ou 2)
+  const insVagas = c._candidaturas && c._candidaturas[0]; // mais recente
+  const insCadastro = c._completos && c._completos[0]; // mais recente
+  const cadastroCompleto = insCadastro; // alias pra clareza
+
+  // Tipo do registro mostrado
+  let tipoLabel;
+  if (c._ambos) {
+    tipoLabel = 'Inscrito em /vagas + Cadastro completo';
+  } else if (c._temCadastro) {
+    tipoLabel = 'Cadastro completo (/cadastro)';
+  } else {
+    tipoLabel = 'Inscrição rápida (/vagas)';
+  }
+
   const status = c.status || 'novo';
 
   // Monta WhatsApp link
@@ -1059,7 +1330,7 @@ function renderDetalhe() {
   const whatsMsg = encodeURIComponent(`Olá ${(c.nome || '').split(' ')[0]}! Aqui é do time de recrutamento da Yep Ads. Recebemos sua candidatura pra vaga de ${c.vaga || ''} e gostaríamos de conversar. Quando seria um bom momento?`);
   const whatsLink = whatsFinal ? `https://wa.me/${whatsFinal}?text=${whatsMsg}` : '';
 
-  // Detail grid — campos básicos
+  // Detail grid — campos básicos (do principal)
   const camposBasicos = [
     ['Email', c.email],
     ['WhatsApp', whatsRaw],
@@ -1067,30 +1338,78 @@ function renderDetalhe() {
     ['Link / portfólio', c.link || c.linkedin || c.portfolio]
   ];
 
-  // Campos extras (do cadastro completo)
+  // Campos extras (do cadastro completo, se existir)
   const camposExtra = [];
-  if (c._origem === 'cadastros_completos') {
-    if (c.cidade) camposExtra.push(['Cidade', c.cidade]);
-    if (c.estado) camposExtra.push(['Estado', c.estado]);
-    if (c.formacao) camposExtra.push(['Formação', c.formacao]);
-    if (c.curso) camposExtra.push(['Curso', c.curso]);
-    if (c.instituicao) camposExtra.push(['Instituição', c.instituicao]);
-    if (c.experiencias) camposExtra.push(['Experiências', c.experiencias]);
-    if (c.disponibilidade) camposExtra.push(['Disponibilidade', c.disponibilidade]);
-    if (c.inicio) camposExtra.push(['Pode iniciar em', c.inicio]);
-    if (c.sobre) camposExtra.push(['Sobre você', c.sobre]);
+  if (cadastroCompleto) {
+    if (cadastroCompleto.cidade) camposExtra.push(['Cidade', cadastroCompleto.cidade]);
+    if (cadastroCompleto.estado) camposExtra.push(['Estado', cadastroCompleto.estado]);
+    if (cadastroCompleto.formacao) camposExtra.push(['Formação', cadastroCompleto.formacao]);
+    if (cadastroCompleto.curso) camposExtra.push(['Curso', cadastroCompleto.curso]);
+    if (cadastroCompleto.instituicao) camposExtra.push(['Instituição', cadastroCompleto.instituicao]);
+    if (cadastroCompleto.experiencias) camposExtra.push(['Experiências', cadastroCompleto.experiencias]);
+    if (cadastroCompleto.disponibilidade) camposExtra.push(['Disponibilidade', cadastroCompleto.disponibilidade]);
+    if (cadastroCompleto.inicio) camposExtra.push(['Pode iniciar em', cadastroCompleto.inicio]);
+    if (cadastroCompleto.sobre) camposExtra.push(['Sobre você', cadastroCompleto.sobre]);
   }
+
+  // Timeline das inscrições
+  const timeline = [];
+  if (insVagas) {
+    timeline.push({
+      data: insVagas.created_at,
+      tipo: 'vagas',
+      label: 'Preencheu o formulário em <strong>/vagas</strong>',
+      vaga: insVagas.vaga
+    });
+  }
+  if (insCadastro) {
+    timeline.push({
+      data: insCadastro.created_at,
+      tipo: 'cadastro',
+      label: 'Completou o <strong>cadastro completo</strong>',
+      vaga: insCadastro.vaga
+    });
+  }
+  timeline.sort((a, b) => new Date(a.data) - new Date(b.data));
 
   const html = `
     <div class="modal-detail-head">
       <div>
         <div class="modal-detail-name">${escapeHtml(c.nome || 'Sem nome')}</div>
-        <div class="modal-detail-vaga">${escapeHtml(c.vaga || '—')} · ${tableLabel}</div>
+        <div class="modal-detail-vaga">${escapeHtml(c.vaga || '—')} · ${tipoLabel}</div>
       </div>
       <button class="modal-close" onclick="fecharDetalhe()" aria-label="Fechar">×</button>
     </div>
 
     <div class="modal-detail-body">
+
+      ${timeline.length > 0 ? `
+        <div class="detail-section">
+          <div class="detail-section-title">Inscrições</div>
+          <div class="timeline">
+            ${timeline.map(t => `
+              <div class="timeline-item timeline-${t.tipo}">
+                <div class="timeline-icon">
+                  ${t.tipo === 'cadastro'
+                    ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'
+                    : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
+                  }
+                </div>
+                <div class="timeline-content">
+                  <div>${t.label}</div>
+                  <div class="timeline-when">${formatDate(t.data)}${t.vaga ? ` · ${escapeHtml(t.vaga)}` : ''}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          ${!c._temCadastro ? `
+            <div class="detail-warning">
+              ⏳ <strong>Aguardando cadastro completo</strong> — quando você mandar o link <code>/cadastro</code> via WhatsApp, os dados completos aparecerão aqui.
+            </div>
+          ` : ''}
+        </div>
+      ` : ''}
+
       <div class="detail-section">
         <div class="detail-section-title">Status</div>
         <div class="status-actions">
@@ -1114,7 +1433,7 @@ function renderDetalhe() {
 
       ${camposExtra.length > 0 ? `
         <div class="detail-section">
-          <div class="detail-section-title">Dados completos</div>
+          <div class="detail-section-title">Dados completos (do /cadastro)</div>
           <div class="detail-grid">
             ${camposExtra.map(([k, v]) => `
               <div style="${(k === 'Sobre você' || k === 'Experiências') ? 'grid-column: 1 / -1;' : ''}">
@@ -1250,11 +1569,54 @@ async function excluirCandidato(origem, id) {
   }
 }
 
+// Exclui TODAS as inscrições da pessoa (pode ter em ambas as tabelas)
+async function excluirGrupoCompleto(item) {
+  const promessas = [];
+  if (item._candidaturas) {
+    for (const i of item._candidaturas) {
+      promessas.push(fetch('/api/admin-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+        body: JSON.stringify({ id: i.id, tabela: 'candidaturas' })
+      }));
+    }
+  }
+  if (item._completos) {
+    for (const i of item._completos) {
+      promessas.push(fetch('/api/admin-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+        body: JSON.stringify({ id: i.id, tabela: 'cadastros_completos' })
+      }));
+    }
+  }
+  try {
+    const resultados = await Promise.all(promessas);
+    const todasOk = resultados.every(r => r.ok);
+    if (!todasOk) throw new Error('Algumas exclusões falharam');
+
+    // Limpa do cache local
+    const idsCand = (item._candidaturas || []).map(i => String(i.id));
+    const idsComp = (item._completos || []).map(i => String(i.id));
+    DADOS.candidaturas = DADOS.candidaturas.filter(x => !idsCand.includes(String(x.id)));
+    DADOS.completos = DADOS.completos.filter(x => !idsComp.includes(String(x.id)));
+
+    fecharDetalhe();
+    renderAll();
+  } catch (err) {
+    alert('Erro ao excluir: ' + err.message);
+  }
+}
+
 function confirmarExcluirAtual() {
   if (!CURRENT_DETAIL) return;
   const nome = CURRENT_DETAIL.nome || 'esse candidato';
-  if (confirm(`Excluir ${nome} permanentemente?\n\nEssa ação não pode ser desfeita.`)) {
-    excluirCandidato(CURRENT_DETAIL._origem, CURRENT_DETAIL.id);
+  const totalInscricoes = (CURRENT_DETAIL._candidaturas?.length || 0) + (CURRENT_DETAIL._completos?.length || 0);
+  const msg = totalInscricoes > 1
+    ? `Excluir ${nome} permanentemente?\n\nIsso vai apagar TODAS as ${totalInscricoes} inscrições dessa pessoa (de /vagas e /cadastro). Não pode ser desfeito.`
+    : `Excluir ${nome} permanentemente?\n\nEssa ação não pode ser desfeita.`;
+  if (confirm(msg)) {
+    excluirGrupoCompleto(CURRENT_DETAIL);
   }
 }
 
@@ -1262,18 +1624,28 @@ function confirmarExcluirAtual() {
 function exportCSV() {
   const lista = todosCandidatos();
   if (lista.length === 0) { alert('Nada pra exportar.'); return; }
-  const headers = ['Origem', 'Nome', 'Email', 'WhatsApp', 'Vaga', 'Link', 'Status', 'Notas', 'Data'];
-  const rows = lista.map(c => [
-    c._origem === 'cadastros_completos' ? 'Completo' : 'Modal',
-    c.nome || '',
-    c.email || '',
-    c.whatsapp || c.whats || '',
-    c.vaga || '',
-    c.link || c.linkedin || c.portfolio || '',
-    c.status || 'novo',
-    (c.notas || '').replace(/\n/g, ' '),
-    c.created_at || ''
-  ]);
+  const headers = ['Tipo', 'Nome', 'Email', 'WhatsApp', 'Vaga', 'Link', 'Status', 'Cidade', 'Estado', 'Formação', 'Sobre', 'Notas', 'Data 1ª inscrição'];
+  const rows = lista.map(c => {
+    let tipo = 'Só /vagas';
+    if (c._ambos) tipo = 'Vagas + Cadastro';
+    else if (c._temCadastro) tipo = 'Só /cadastro';
+    const cadastro = c._completos && c._completos[0];
+    return [
+      tipo,
+      c.nome || '',
+      c.email || '',
+      c.whatsapp || c.whats || '',
+      c.vaga || '',
+      c.link || c.linkedin || c.portfolio || '',
+      c.status || 'novo',
+      (cadastro && cadastro.cidade) || '',
+      (cadastro && cadastro.estado) || '',
+      (cadastro && cadastro.formacao) || '',
+      ((cadastro && cadastro.sobre) || '').replace(/\n/g, ' '),
+      (c.notas || '').replace(/\n/g, ' '),
+      c.created_at || ''
+    ];
+  });
   const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
