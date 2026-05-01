@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Onboarding · Yep Ads Brasil</title>
+<meta name="description" content="Onboarding final · Yep Ads Brasil" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --navy: #0F1B2D;
+  --navy-deep: #0A1320;
+  --navy-elev: #16243B;
+  --navy-line: #1E3050;
+  --orange: #FF6B1A;
+  --orange-deep: #E55400;
+  --orange-soft: rgba(255, 107, 26, 0.12);
+  --cream: #FAF6F0;
+  --text: #E8EDF5;
+  --text-dim: #8A98AE;
+  --text-faint: #5A6A82;
+  --green: #10B981;
+  --red: #DC2626;
+  --yellow: #F59E0B;
+  --blue: #3B82F6;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--navy-deep); color: var(--text); }
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(ellipse at top right, rgba(255, 107, 26, 0.06), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(255, 107, 26, 0.04), transparent 50%),
+    var(--navy-deep);
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 36px 24px 60px; }
+
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.logo-mark {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  width: 32px;
+  height: 32px;
+}
+.logo-mark span { background: var(--orange); border-radius: 5px; }
+.logo-mark span:nth-child(2) { background: var(--cream); }
+.logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; }
+.header a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+
+.hero { margin-bottom: 28px; }
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  background: var(--orange-soft);
+  padding: 5px 11px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero h1 em { font-style: italic; color: var(--orange); }
+.hero p { color: var(--text-dim); font-size: 15px; max-width: 620px; }
+
+/* Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy-line);
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.step-dot.active { background: var(--orange); color: white; box-shadow: 0 0 0 4px rgba(255, 107, 26, 0.18); }
+.step-dot.done { background: var(--green); color: white; }
+.step-line { width: 50px; height: 2px; background: var(--navy-line); }
+.step-line.done { background: var(--green); }
+
+.form {
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 18px;
+  padding: 32px;
+}
+@media (max-width: 600px) { .form { padding: 24px 20px; } }
+
+.step-section { display: none; }
+.step-section.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-head { margin-bottom: 22px; }
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.section-tag::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.section-subtitle { color: var(--text-dim); font-size: 14px; }
+
+.subsection-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin: 22px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--navy-line);
+}
+
+.field { margin-bottom: 14px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.field-row-cep { display: grid; grid-template-columns: 180px 1fr; gap: 12px; }
+@media (max-width: 600px) {
+  .field-row, .field-row-3, .field-row-cep { grid-template-columns: 1fr; }
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+label .required { color: var(--orange); }
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea, select {
+  width: 100%;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14.5px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.15);
+}
+input[disabled], input[readonly] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+
+.cep-hint {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 4px;
+}
+.cep-hint.success { color: var(--green); }
+.cep-hint.error { color: #FCA5A5; }
+
+/* Upload */
+.upload-field { margin-bottom: 16px; }
+.upload-area {
+  background: var(--navy-deep);
+  border: 2px dashed var(--navy-line);
+  border-radius: 12px;
+  padding: 26px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.upload-area:hover { border-color: var(--orange); background: rgba(255, 107, 26, 0.04); }
+.upload-area.has-file { border-style: solid; border-color: var(--green); background: rgba(16, 185, 129, 0.06); }
+.upload-icon { width: 36px; height: 36px; margin: 0 auto 10px; color: var(--text-dim); }
+.upload-area.has-file .upload-icon { color: var(--green); }
+.upload-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.upload-hint { font-size: 12.5px; color: var(--text-dim); }
+.upload-area.has-file .upload-hint { color: var(--green); }
+.upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-preview { margin-top: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); word-break: break-all; }
+
+/* Checkbox */
+.checkbox-group { display: flex; flex-direction: column; gap: 12px; }
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 14px 16px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.checkbox-item:hover { border-color: var(--text-faint); }
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--orange);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.checkbox-item span { font-size: 13.5px; color: var(--text); line-height: 1.45; }
+
+/* Radio cards (Step 3) */
+.radio-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 600px) { .radio-cards { grid-template-columns: 1fr; } }
+.radio-card {
+  position: relative;
+  padding: 18px 18px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.radio-card:hover { border-color: var(--text-faint); }
+.radio-card input[type="radio"] {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 18px; height: 18px;
+  accent-color: var(--orange);
+  cursor: pointer;
+}
+.radio-card-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+  padding-right: 32px;
+}
+.radio-card-desc {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+.radio-card:has(input:checked) {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+}
+
+/* Banco selector */
+.banco-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+@media (max-width: 600px) { .banco-options { grid-template-columns: 1fr; } }
+.banco-option {
+  position: relative;
+  padding: 14px 14px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.banco-option:hover { border-color: var(--text-faint); }
+.banco-option input[type="radio"] { position: absolute; opacity: 0; }
+.banco-option-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.banco-option-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.banco-option:has(input:checked) {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+}
+.banco-option:has(input:checked) .banco-option-name { color: var(--orange); }
+
+/* Callout (Step 3 sem conta) */
+.callout {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+.callout-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #93C5FD;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.callout p {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: #93C5FD; }
+.callout-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: background 0.15s;
+}
+.callout-cta:hover { background: #2563EB; }
+
+.info-box {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 14px 0;
+  color: #FCD34D;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.info-box strong { color: #FBBF24; }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 10px;
+}
+.btn {
+  border: none;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary { background: var(--orange); color: white; }
+.btn-primary:hover:not(:disabled) { background: var(--orange-deep); }
+.btn-primary:active:not(:disabled) { transform: translateY(1px); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--navy-line);
+}
+.btn-secondary:hover { color: var(--text); border-color: var(--text-faint); }
+
+.success { text-align: center; padding: 30px 20px; }
+.success-icon {
+  width: 72px;
+  height: 72px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.success h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.success p { color: var(--text-dim); font-size: 15px; max-width: 480px; margin: 0 auto 8px; }
+
+.error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #FCA5A5;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 26px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="header">
+    <a href="/">
+      <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
+      <span class="logo-text">yep</span>
+    </a>
+  </header>
+
+  <section class="hero">
+    <span class="hero-tag">⚡ Onboarding · Etapa final</span>
+    <h1>Bem-vindo(a) ao <em>time Yep</em>.</h1>
+    <p>Pra concluir sua entrada, precisamos de algumas informações finais. Tudo é seguro e protegido. Leva uns 5 minutos.</p>
+  </section>
+
+  <div class="stepper" id="stepper">
+    <div class="step-dot active" data-step="1">1</div>
+    <div class="step-line"></div>
+    <div class="step-dot" data-step="2">2</div>
+    <div class="step-line"></div>
+    <div class="step-dot" data-step="3">3</div>
+  </div>
+
+  <form id="onb-form" class="form" onsubmit="return false;">
+
+    <!-- ========== STEP 1: DADOS PESSOAIS + ENDEREÇO ========== -->
+    <div class="step-section active" data-step="1">
+      <div class="section-head">
+        <div class="section-tag">Etapa 1 de 3</div>
+        <h2 class="section-title">Seus dados</h2>
+        <p class="section-subtitle">Informações pessoais e endereço.</p>
+      </div>
+
+      <div class="subsection-title">Dados pessoais</div>
+
+      <div class="field">
+        <label for="nome_completo">Nome completo <span class="required">*</span></label>
+        <input type="text" id="nome_completo" required autocomplete="name" placeholder="Seu nome completo, igual no RG" />
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" required autocomplete="email" placeholder="seu@email.com" />
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp <span class="required">*</span></label>
+          <input type="tel" id="whatsapp" required placeholder="(00) 00000-0000" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cpf">CPF <span class="required">*</span></label>
+          <input type="text" id="cpf" required placeholder="000.000.000-00" />
+        </div>
+        <div class="field">
+          <label for="data_nascimento">Data de nascimento <span class="required">*</span></label>
+          <input type="date" id="data_nascimento" required />
+        </div>
+      </div>
+
+      <div class="subsection-title">Endereço</div>
+
+      <div class="field-row-cep">
+        <div class="field">
+          <label for="cep">CEP <span class="required">*</span></label>
+          <input type="text" id="cep" required placeholder="00000-000" maxlength="9" />
+          <div class="cep-hint" id="cep-hint">Digite o CEP — preenchemos o resto pra você</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="rua">Rua / Logradouro <span class="required">*</span></label>
+          <input type="text" id="rua" required placeholder="Nome da rua" />
+        </div>
+        <div class="field">
+          <label for="numero">Número <span class="required">*</span></label>
+          <input type="text" id="numero" required placeholder="Nº" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="complemento">Complemento <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
+          <input type="text" id="complemento" placeholder="Apto, casa, bloco..." />
+        </div>
+        <div class="field">
+          <label for="bairro">Bairro <span class="required">*</span></label>
+          <input type="text" id="bairro" required placeholder="Bairro" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cidade">Cidade <span class="required">*</span></label>
+          <input type="text" id="cidade" required placeholder="Cidade" />
+        </div>
+        <div class="field">
+          <label for="estado">Estado <span class="required">*</span></label>
+          <input type="text" id="estado" required maxlength="2" placeholder="UF" style="text-transform:uppercase;" />
+        </div>
+      </div>
+
+      <div id="error-1" class="error" style="display:none;"></div>
+      <div class="actions" style="justify-content: flex-end;">
+        <button type="button" class="btn btn-primary" onclick="proximaEtapa(1)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ========== STEP 2: KYC ========== -->
+    <div class="step-section" data-step="2">
+      <div class="section-head">
+        <div class="section-tag">Etapa 2 de 3</div>
+        <h2 class="section-title">Validação de identidade · KYC</h2>
+        <p class="section-subtitle">Pra confirmar quem você é, conforme exigido por lei.</p>
+      </div>
+
+      <div class="upload-field">
+        <label>RG ou CNH (frente e verso) <span class="required">*</span></label>
+        <div class="upload-area" id="upload-rg">
+          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+          <div class="upload-title">Clica ou arrasta a foto</div>
+          <div class="upload-hint">RG ou CNH · Frente e verso · JPG, PNG ou PDF · até 10 MB</div>
+          <input type="file" id="file-rg" accept="image/jpeg,image/png,image/webp,application/pdf" />
+          <div class="upload-preview" id="preview-rg"></div>
+        </div>
+      </div>
+
+      <div class="upload-field">
+        <label>Comprovante de residência <span class="required">*</span></label>
+        <div class="upload-area" id="upload-comprovante">
+          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/>
+            <line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+          <div class="upload-title">Conta de luz, água, internet, etc</div>
+          <div class="upload-hint">Atualizado · até 3 meses · JPG, PNG ou PDF</div>
+          <input type="file" id="file-comprovante" accept="image/jpeg,image/png,image/webp,application/pdf" />
+          <div class="upload-preview" id="preview-comprovante"></div>
+        </div>
+      </div>
+
+      <div class="subsection-title">Confirmações</div>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" id="dados_verdadeiros" />
+          <span>Confirmo que <strong>todos os dados e documentos enviados são verdadeiros</strong> e estão atualizados.</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="autorizacao_consulta" />
+          <span><strong>Autorizo a Yep Ads</strong> a consultar meus dados em bases públicas e privadas, conforme a LGPD, exclusivamente para fins de validação e contratação.</span>
+        </label>
+      </div>
+
+      <div id="error-2" class="error" style="display:none;"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(2)">← Voltar</button>
+        <button type="button" class="btn btn-primary" onclick="proximaEtapa(2)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ========== STEP 3: CONTA PRA RECEBIMENTO ========== -->
+    <div class="step-section" data-step="3">
+      <div class="section-head">
+        <div class="section-tag">Etapa 3 de 3</div>
+        <h2 class="section-title">Conta para recebimento</h2>
+        <p class="section-subtitle">Como vamos pagar você nos primeiros meses.</p>
+      </div>
+
+      <div class="info-box">
+        <strong>Importante:</strong> Os <strong>3 primeiros pagamentos</strong> são feitos em <strong>dólar (USD)</strong>, a cada <strong>15 dias</strong>. Por isso, você precisa ter uma conta com câmbio/conversão internacional.
+        <br><br>
+        Aceitamos: <strong>Payoneer</strong>, <strong>Nomad</strong> ou <strong>DasBank</strong>.
+      </div>
+
+      <label style="margin-top: 18px;">Você já tem uma conta com câmbio internacional? <span class="required">*</span></label>
+      <div class="radio-cards">
+        <label class="radio-card">
+          <input type="radio" name="tem_conta" value="sim" />
+          <div class="radio-card-title">Sim, tenho uma conta</div>
+          <div class="radio-card-desc">Payoneer, Nomad ou DasBank</div>
+        </label>
+        <label class="radio-card">
+          <input type="radio" name="tem_conta" value="nao" />
+          <div class="radio-card-title">Ainda não tenho</div>
+          <div class="radio-card-desc">Te ajudamos a abrir uma agora</div>
+        </label>
+      </div>
+
+      <!-- Caso SIM -->
+      <div id="conta-sim" style="display:none;">
+        <label style="margin-top: 14px;">Em qual banco está sua conta? <span class="required">*</span></label>
+        <div class="banco-options">
+          <label class="banco-option">
+            <input type="radio" name="banco" value="payoneer" />
+            <div class="banco-option-name">Payoneer</div>
+            <div class="banco-option-tag">Internacional</div>
+          </label>
+          <label class="banco-option">
+            <input type="radio" name="banco" value="nomad" />
+            <div class="banco-option-name">Nomad</div>
+            <div class="banco-option-tag">Conta nos EUA</div>
+          </label>
+          <label class="banco-option">
+            <input type="radio" name="banco" value="dasbank" />
+            <div class="banco-option-name">DasBank</div>
+            <div class="banco-option-tag">Conta internacional</div>
+          </label>
+        </div>
+
+        <div class="upload-field" style="margin-top: 18px;">
+          <label>Comprovante com os dados da conta <span class="required">*</span></label>
+          <div class="upload-area" id="upload-conta">
+            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="upload-title">PDF com os dados da sua conta</div>
+            <div class="upload-hint">Print ou PDF que mostre número da conta, banco, titular · até 10 MB</div>
+            <input type="file" id="file-conta" accept="image/jpeg,image/png,image/webp,application/pdf" />
+            <div class="upload-preview" id="preview-conta"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caso NÃO -->
+      <div id="conta-nao" style="display:none;">
+        <div class="callout">
+          <div class="callout-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Te ajudamos a abrir uma conta agora
+          </div>
+          <p>Recomendamos a <strong>DasBank</strong> — é a única que aprova a conta <strong>automaticamente em poucos minutos</strong>. Nomad e Payoneer podem levar dias.</p>
+          <p>Após criar sua conta, volta aqui e <strong>anexe o PDF com os dados</strong> pra finalizar seu onboarding.</p>
+          <a href="https://www.dasbankapp.com" target="_blank" rel="noopener" class="callout-cta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Abrir conta na DasBank
+          </a>
+        </div>
+
+        <div class="upload-field" style="margin-top: 14px;">
+          <label>Comprovante da conta criada <span class="required">*</span></label>
+          <div class="upload-area" id="upload-conta-nova">
+            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="upload-title">PDF com os dados da conta nova</div>
+            <div class="upload-hint">Após criar a conta na DasBank · até 10 MB</div>
+            <input type="file" id="file-conta-nova" accept="image/jpeg,image/png,image/webp,application/pdf" />
+            <div class="upload-preview" id="preview-conta-nova"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top: 18px;">
+        <label for="observacoes">Observações <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
+        <textarea id="observacoes" placeholder="Algo que a gente precise saber? Pode escrever aqui."></textarea>
+      </div>
+
+      <div id="error-3" class="error" style="display:none;"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(3)">← Voltar</button>
+        <button type="button" class="btn btn-primary" id="submit-btn" onclick="enviarOnboarding()">Finalizar onboarding</button>
+      </div>
+    </div>
+
+  </form>
+
+  <footer class="footer">YEP ADS BRASIL · Acesso restrito ao time de RH</footer>
+</div>
+
+<script>
+const FILES = { rg: null, comprovante: null, conta: null, contaNova: null };
+let etapaAtual = 1;
+
+// ========= UPLOADS =========
+function setupUpload(id, key) {
+  const area = document.getElementById('upload-' + id);
+  if (!area) return;
+  const input = area.querySelector('input[type="file"]');
+  const preview = area.querySelector('.upload-preview');
+
+  function handleFile(file) {
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      alert(`O arquivo "${file.name}" tem mais de 10 MB. Reduza o tamanho.`);
+      input.value = '';
+      return;
+    }
+    FILES[key] = file;
+    area.classList.add('has-file');
+    preview.textContent = `✓ ${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
+    area.querySelector('.upload-title').textContent = 'Arquivo selecionado';
+    area.querySelector('.upload-hint').textContent = 'Clica novamente pra trocar';
+  }
+
+  input.addEventListener('change', e => handleFile(e.target.files[0]));
+  area.addEventListener('dragover', e => { e.preventDefault(); area.style.borderColor = 'var(--orange)'; });
+  area.addEventListener('dragleave', e => { e.preventDefault(); area.style.borderColor = ''; });
+  area.addEventListener('drop', e => {
+    e.preventDefault();
+    area.style.borderColor = '';
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      handleFile(file);
+    }
+  });
+}
+
+setupUpload('rg', 'rg');
+setupUpload('comprovante', 'comprovante');
+setupUpload('conta', 'conta');
+setupUpload('conta-nova', 'contaNova');
+
+// ========= MÁSCARAS =========
+document.getElementById('whatsapp').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.length > 11) v = v.substring(0, 11);
+  if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+  else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
+  else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/, '($1) $2');
+  e.target.value = v;
+});
+
+document.getElementById('cpf').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g, '').substring(0, 11);
+  if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
+  else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+  else if (v.length > 3) v = v.replace(/(\d{3})(\d+)/, '$1.$2');
+  e.target.value = v;
+});
+
+// ========= CEP =========
+const cepInput = document.getElementById('cep');
+const cepHint = document.getElementById('cep-hint');
+
+cepInput.addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g, '').substring(0, 8);
+  if (v.length > 5) v = v.replace(/^(\d{5})(\d+)/, '$1-$2');
+  e.target.value = v;
+});
+
+cepInput.addEventListener('blur', async () => {
+  const cep = cepInput.value.replace(/\D/g, '');
+  if (cep.length !== 8) return;
+
+  cepHint.textContent = 'Buscando endereço...';
+  cepHint.className = 'cep-hint';
+
+  try {
+    const r = await fetch(`/api/cep?cep=${cep}`);
+    if (!r.ok) {
+      const data = await r.json().catch(() => ({}));
+      cepHint.textContent = data.error || 'CEP não encontrado';
+      cepHint.className = 'cep-hint error';
+      return;
+    }
+    const data = await r.json();
+    document.getElementById('rua').value = data.rua || '';
+    document.getElementById('bairro').value = data.bairro || '';
+    document.getElementById('cidade').value = data.cidade || '';
+    document.getElementById('estado').value = data.estado || '';
+    cepHint.textContent = '✓ Endereço encontrado — confira e preencha o número';
+    cepHint.className = 'cep-hint success';
+    document.getElementById('numero').focus();
+  } catch (err) {
+    cepHint.textContent = 'Erro ao buscar CEP. Preenche manualmente.';
+    cepHint.className = 'cep-hint error';
+  }
+});
+
+// ========= STEP 3 — TOGGLE SIM/NÃO =========
+document.querySelectorAll('input[name="tem_conta"]').forEach(r => {
+  r.addEventListener('change', e => {
+    const sim = document.getElementById('conta-sim');
+    const nao = document.getElementById('conta-nao');
+    if (e.target.value === 'sim') {
+      sim.style.display = 'block';
+      nao.style.display = 'none';
+    } else {
+      sim.style.display = 'none';
+      nao.style.display = 'block';
+    }
+  });
+});
+
+// ========= STEPPER =========
+function atualizarStepper(etapa) {
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    const n = parseInt(dot.dataset.step);
+    dot.classList.remove('active', 'done');
+    if (n < etapa) dot.classList.add('done');
+    else if (n === etapa) dot.classList.add('active');
+  });
+  document.querySelectorAll('.step-line').forEach((line, i) => {
+    line.classList.toggle('done', i + 1 < etapa);
+  });
+}
+
+function mostrarEtapa(n) {
+  document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step-section[data-step="${n}"]`).classList.add('active');
+  atualizarStepper(n);
+  etapaAtual = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showError(etapa, msg) {
+  const box = document.getElementById('error-' + etapa);
+  box.textContent = msg;
+  box.style.display = 'block';
+  setTimeout(() => box.style.display = 'none', 6000);
+  box.scrollIntoView({block:'center', behavior:'smooth'});
+}
+
+// ========= VALIDAÇÃO E NAVEGAÇÃO =========
+function proximaEtapa(de) {
+  if (de === 1) {
+    const obrigatorios = ['nome_completo', 'email', 'whatsapp', 'cpf', 'data_nascimento', 'cep', 'rua', 'numero', 'bairro', 'cidade', 'estado'];
+    for (const id of obrigatorios) {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        showError(1, 'Preencha todos os campos obrigatórios.');
+        el.focus();
+        return;
+      }
+    }
+    const email = document.getElementById('email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError(1, 'Email inválido.');
+      return;
+    }
+    const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+    if (cpf.length !== 11) {
+      showError(1, 'CPF deve ter 11 dígitos.');
+      return;
+    }
+    mostrarEtapa(2);
+  } else if (de === 2) {
+    if (!FILES.rg || !FILES.comprovante) {
+      showError(2, 'Anexe RG/CNH e comprovante de residência.');
+      return;
+    }
+    const dv = document.getElementById('dados_verdadeiros').checked;
+    const ac = document.getElementById('autorizacao_consulta').checked;
+    if (!dv || !ac) {
+      showError(2, 'Confirme as duas autorizações.');
+      return;
+    }
+    mostrarEtapa(3);
+  }
+}
+
+function voltarEtapa(de) { mostrarEtapa(de - 1); }
+
+// ========= ENVIO =========
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function enviarOnboarding() {
+  const btn = document.getElementById('submit-btn');
+
+  // Coleta tudo
+  const dados = {
+    nome_completo: document.getElementById('nome_completo').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    cpf: document.getElementById('cpf').value.trim(),
+    data_nascimento: document.getElementById('data_nascimento').value,
+    cep: document.getElementById('cep').value.trim(),
+    rua: document.getElementById('rua').value.trim(),
+    numero: document.getElementById('numero').value.trim(),
+    complemento: document.getElementById('complemento').value.trim(),
+    bairro: document.getElementById('bairro').value.trim(),
+    cidade: document.getElementById('cidade').value.trim(),
+    estado: document.getElementById('estado').value.trim().toUpperCase(),
+    dados_verdadeiros: document.getElementById('dados_verdadeiros').checked,
+    autorizacao_consulta: document.getElementById('autorizacao_consulta').checked,
+    observacoes: document.getElementById('observacoes').value.trim()
+  };
+
+  // Valida step 3
+  const temContaInput = document.querySelector('input[name="tem_conta"]:checked');
+  if (!temContaInput) {
+    showError(3, 'Informe se você já tem uma conta com câmbio internacional.');
+    return;
+  }
+  const temConta = temContaInput.value === 'sim';
+  dados.tem_conta_internacional = temConta;
+
+  if (temConta) {
+    const banco = document.querySelector('input[name="banco"]:checked');
+    if (!banco) {
+      showError(3, 'Selecione o banco da sua conta.');
+      return;
+    }
+    dados.banco = banco.value;
+    if (!FILES.conta) {
+      showError(3, 'Anexe o comprovante com os dados da sua conta.');
+      return;
+    }
+  } else {
+    dados.banco = 'sem_conta_dasbank_indicado';
+    if (!FILES.contaNova) {
+      showError(3, 'Anexe o comprovante da conta criada (após abrir na DasBank).');
+      return;
+    }
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Enviando onboarding...';
+
+  try {
+    // Converte arquivos
+    const fileConta = temConta ? FILES.conta : FILES.contaNova;
+    const [rgB64, comprovanteB64, contaB64] = await Promise.all([
+      fileToBase64(FILES.rg),
+      fileToBase64(FILES.comprovante),
+      fileToBase64(fileConta)
+    ]);
+
+    const res = await fetch('/api/onboarding', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...dados,
+        rg_base64: rgB64,
+        rg_filename: FILES.rg.name,
+        comprovante_residencia_base64: comprovanteB64,
+        comprovante_residencia_filename: FILES.comprovante.name,
+        comprovante_conta_base64: contaB64,
+        comprovante_conta_filename: fileConta.name
+      })
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Erro ao enviar');
+    }
+
+    const nome = dados.nome_completo;
+    document.querySelector('.wrap').innerHTML = `
+      <header class="header">
+        <a href="/">
+          <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
+          <span class="logo-text">yep</span>
+        </a>
+      </header>
+      <div class="form">
+        <div class="success">
+          <div class="success-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>Onboarding finalizado, ${nome.split(' ')[0]}!</h2>
+          <p>Recebemos todas as suas informações. Nosso time vai validar tudo e te confirma a entrada por WhatsApp em breve.</p>
+          <p style="margin-top:14px; font-weight:500; color:var(--text);">Bem-vindo(a) ao time Yep 🧡</p>
+        </div>
+      </div>
+      <footer class="footer">YEP ADS BRASIL</footer>
+    `;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    showError(3, 'Erro: ' + err.message + '. Tenta de novo daqui um minuto.');
+    btn.disabled = false;
+    btn.textContent = 'Finalizar onboarding';
+  }
+}
+</script>
+
+</body>
+</html>
