@@ -163,10 +163,9 @@ body {
 
 .field { margin-bottom: 14px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 .field-row-cep { display: grid; grid-template-columns: 180px 1fr; gap: 12px; }
 @media (max-width: 600px) {
-  .field-row, .field-row-3, .field-row-cep { grid-template-columns: 1fr; }
+  .field-row, .field-row-cep { grid-template-columns: 1fr; }
 }
 
 label {
@@ -194,19 +193,74 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.15);
 }
-input[disabled], input[readonly] {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
+input[disabled], input[readonly] { opacity: 0.7; cursor: not-allowed; }
 textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 
-.cep-hint {
+input.prefilled {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+.cep-hint, .login-hint {
   font-size: 12px;
   color: var(--text-faint);
   margin-top: 4px;
 }
-.cep-hint.success { color: var(--green); }
-.cep-hint.error { color: #FCA5A5; }
+.cep-hint.success, .login-hint.success { color: var(--green); }
+.cep-hint.error, .login-hint.error { color: #FCA5A5; }
+
+/* Welcome banner (após login) */
+.welcome-banner {
+  background: linear-gradient(135deg, rgba(255, 107, 26, 0.12), rgba(16, 185, 129, 0.08));
+  border: 1px solid rgba(255, 107, 26, 0.3);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.welcome-banner-icon {
+  width: 44px; height: 44px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.welcome-banner-text { flex: 1; }
+.welcome-banner-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.welcome-banner-title em { color: var(--orange); font-style: normal; }
+.welcome-banner-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+@media (max-width: 600px) {
+  .welcome-banner { flex-direction: column; text-align: center; }
+}
+
+.confirm-notice {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  padding: 11px 14px;
+  margin-bottom: 14px;
+  color: #FCD34D;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 /* Upload */
 .upload-field { margin-bottom: 16px; }
@@ -317,11 +371,7 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 }
 .banco-option:hover { border-color: var(--text-faint); }
 .banco-option input[type="radio"] { position: absolute; opacity: 0; }
-.banco-option-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
+.banco-option-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .banco-option-tag {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -336,7 +386,7 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 }
 .banco-option:has(input:checked) .banco-option-name { color: var(--orange); }
 
-/* Callout (Step 3 sem conta) */
+/* Callout */
 .callout {
   background: rgba(59, 130, 246, 0.08);
   border: 1px solid rgba(59, 130, 246, 0.25);
@@ -353,12 +403,7 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
   align-items: center;
   gap: 8px;
 }
-.callout p {
-  font-size: 13.5px;
-  color: var(--text);
-  line-height: 1.55;
-  margin-bottom: 10px;
-}
+.callout p { font-size: 13.5px; color: var(--text); line-height: 1.55; margin-bottom: 10px; }
 .callout p:last-child { margin-bottom: 0; }
 .callout strong { color: #93C5FD; }
 .callout-cta {
@@ -417,6 +462,21 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 }
 .btn-secondary:hover { color: var(--text); border-color: var(--text-faint); }
 
+/* Login screen */
+.login-screen {
+  text-align: left;
+}
+.login-screen .section-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.login-screen .section-subtitle {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+
 .success { text-align: center; padding: 30px 20px; }
 .success-icon {
   width: 72px;
@@ -447,6 +507,16 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
   margin-bottom: 16px;
 }
 
+.error-cadastro-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13.5px;
+}
+.error-cadastro-link:hover { text-decoration: underline; }
+
 .footer {
   text-align: center;
   margin-top: 26px;
@@ -471,7 +541,7 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap" id="root">
   <header class="header">
     <a href="/">
       <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
@@ -479,277 +549,460 @@ textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
     </a>
   </header>
 
-  <section class="hero">
-    <span class="hero-tag">⚡ Onboarding · Etapa final</span>
-    <h1>Bem-vindo(a) ao <em>time Yep</em>.</h1>
-    <p>Pra concluir sua entrada, precisamos de algumas informações finais. Tudo é seguro e protegido. Leva uns 5 minutos.</p>
-  </section>
+  <!-- ========================================================== -->
+  <!-- TELA DE LOGIN (CPF + Data nascimento)                       -->
+  <!-- ========================================================== -->
+  <section id="screen-login">
+    <section class="hero">
+      <span class="hero-tag">⚡ Onboarding · Etapa final</span>
+      <h1>Bem-vindo(a) de volta.</h1>
+      <p>Pra continuar, confirma sua identidade abaixo. Vamos buscar seu cadastro pra você não precisar preencher tudo de novo.</p>
+    </section>
 
-  <div class="stepper" id="stepper">
-    <div class="step-dot active" data-step="1">1</div>
-    <div class="step-line"></div>
-    <div class="step-dot" data-step="2">2</div>
-    <div class="step-line"></div>
-    <div class="step-dot" data-step="3">3</div>
-  </div>
-
-  <form id="onb-form" class="form" onsubmit="return false;">
-
-    <!-- ========== STEP 1: DADOS PESSOAIS + ENDEREÇO ========== -->
-    <div class="step-section active" data-step="1">
+    <div class="form login-screen">
       <div class="section-head">
-        <div class="section-tag">Etapa 1 de 3</div>
-        <h2 class="section-title">Seus dados</h2>
-        <p class="section-subtitle">Informações pessoais e endereço.</p>
+        <h2 class="section-title">Confirme quem você é</h2>
+        <p class="section-subtitle">Os mesmos dados que você colocou no cadastro inicial.</p>
       </div>
-
-      <div class="subsection-title">Dados pessoais</div>
 
       <div class="field">
-        <label for="nome_completo">Nome completo <span class="required">*</span></label>
-        <input type="text" id="nome_completo" required autocomplete="name" placeholder="Seu nome completo, igual no RG" />
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="email">Email <span class="required">*</span></label>
-          <input type="email" id="email" required autocomplete="email" placeholder="seu@email.com" />
-        </div>
-        <div class="field">
-          <label for="whatsapp">WhatsApp <span class="required">*</span></label>
-          <input type="tel" id="whatsapp" required placeholder="(00) 00000-0000" />
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="cpf">CPF <span class="required">*</span></label>
-          <input type="text" id="cpf" required placeholder="000.000.000-00" />
-        </div>
-        <div class="field">
-          <label for="data_nascimento">Data de nascimento <span class="required">*</span></label>
-          <input type="date" id="data_nascimento" required />
-        </div>
+        <label for="login-cpf">CPF <span class="required">*</span></label>
+        <input type="text" id="login-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autofocus />
       </div>
 
-      <div class="subsection-title">Endereço</div>
+      <div id="error-login" class="error" style="display:none;"></div>
 
-      <div class="field-row-cep">
-        <div class="field">
-          <label for="cep">CEP <span class="required">*</span></label>
-          <input type="text" id="cep" required placeholder="00000-000" maxlength="9" />
-          <div class="cep-hint" id="cep-hint">Digite o CEP — preenchemos o resto pra você</div>
-        </div>
-      </div>
+      <button type="button" class="btn btn-primary" id="login-btn" onclick="fazerLogin()" style="width: 100%; margin-top: 10px;">Continuar →</button>
+    </div>
+  </section>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="rua">Rua / Logradouro <span class="required">*</span></label>
-          <input type="text" id="rua" required placeholder="Nome da rua" />
-        </div>
-        <div class="field">
-          <label for="numero">Número <span class="required">*</span></label>
-          <input type="text" id="numero" required placeholder="Nº" />
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="complemento">Complemento <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
-          <input type="text" id="complemento" placeholder="Apto, casa, bloco..." />
-        </div>
-        <div class="field">
-          <label for="bairro">Bairro <span class="required">*</span></label>
-          <input type="text" id="bairro" required placeholder="Bairro" />
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="cidade">Cidade <span class="required">*</span></label>
-          <input type="text" id="cidade" required placeholder="Cidade" />
-        </div>
-        <div class="field">
-          <label for="estado">Estado <span class="required">*</span></label>
-          <input type="text" id="estado" required maxlength="2" placeholder="UF" style="text-transform:uppercase;" />
-        </div>
-      </div>
+  <!-- ========================================================== -->
+  <!-- WIZARD ONBOARDING (após login)                             -->
+  <!-- ========================================================== -->
+  <section id="screen-onboarding" style="display:none;">
+    <section class="hero" id="welcome-section">
+      <!-- Preenchido via JS -->
+    </section>
 
-      <div id="error-1" class="error" style="display:none;"></div>
-      <div class="actions" style="justify-content: flex-end;">
-        <button type="button" class="btn btn-primary" onclick="proximaEtapa(1)">Continuar →</button>
-      </div>
+    <div class="stepper" id="stepper">
+      <div class="step-dot active" data-step="1">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot" data-step="2">2</div>
+      <div class="step-line"></div>
+      <div class="step-dot" data-step="3">3</div>
     </div>
 
-    <!-- ========== STEP 2: KYC ========== -->
-    <div class="step-section" data-step="2">
-      <div class="section-head">
-        <div class="section-tag">Etapa 2 de 3</div>
-        <h2 class="section-title">Validação de identidade · KYC</h2>
-        <p class="section-subtitle">Pra confirmar quem você é, conforme exigido por lei.</p>
-      </div>
+    <form id="onb-form" class="form" onsubmit="return false;">
 
-      <div class="upload-field">
-        <label>RG ou CNH (frente e verso) <span class="required">*</span></label>
-        <div class="upload-area" id="upload-rg">
-          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <path d="M3 9h18M9 21V9"/>
-          </svg>
-          <div class="upload-title">Clica ou arrasta a foto</div>
-          <div class="upload-hint">RG ou CNH · Frente e verso · JPG, PNG ou PDF · até 10 MB</div>
-          <input type="file" id="file-rg" accept="image/jpeg,image/png,image/webp,application/pdf" />
-          <div class="upload-preview" id="preview-rg"></div>
+      <!-- ========== STEP 1: ENDEREÇO + CONFIRMAÇÃO ========== -->
+      <div class="step-section active" data-step="1">
+        <div class="section-head">
+          <div class="section-tag">Etapa 1 de 3</div>
+          <h2 class="section-title">Confirme seus dados e endereço</h2>
+          <p class="section-subtitle">Já preenchemos o que recebemos do cadastro. Confere se está tudo certo.</p>
+        </div>
+
+        <div class="confirm-notice">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Confira antes de prosseguir.</strong> Se algo estiver errado, é só corrigir.</span>
+        </div>
+
+        <div class="subsection-title">Seus dados</div>
+
+        <div class="field">
+          <label for="nome_completo">Nome completo <span class="required">*</span></label>
+          <input type="text" id="nome_completo" required class="prefilled" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" required class="prefilled" />
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp <span class="required">*</span></label>
+            <input type="tel" id="whatsapp" required class="prefilled" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="cpf">CPF <span class="required">*</span></label>
+            <input type="text" id="cpf" required readonly class="prefilled" />
+          </div>
+          <div class="field">
+            <label for="data_nascimento">Data de nascimento <span class="required">*</span></label>
+            <input type="date" id="data_nascimento" required readonly class="prefilled" />
+          </div>
+        </div>
+
+        <div class="subsection-title">Endereço</div>
+
+        <div class="field-row-cep">
+          <div class="field">
+            <label for="cep">CEP <span class="required">*</span></label>
+            <input type="text" id="cep" required placeholder="00000-000" maxlength="9" />
+            <div class="cep-hint" id="cep-hint">Digite o CEP — preenchemos o resto pra você</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="rua">Rua / Logradouro <span class="required">*</span></label>
+            <input type="text" id="rua" required placeholder="Nome da rua" />
+          </div>
+          <div class="field">
+            <label for="numero">Número <span class="required">*</span></label>
+            <input type="text" id="numero" required placeholder="Nº" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="complemento">Complemento <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
+            <input type="text" id="complemento" placeholder="Apto, casa, bloco..." />
+          </div>
+          <div class="field">
+            <label for="bairro">Bairro <span class="required">*</span></label>
+            <input type="text" id="bairro" required placeholder="Bairro" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="cidade">Cidade <span class="required">*</span></label>
+            <input type="text" id="cidade" required />
+          </div>
+          <div class="field">
+            <label for="estado">Estado <span class="required">*</span></label>
+            <input type="text" id="estado" required maxlength="2" style="text-transform:uppercase;" />
+          </div>
+        </div>
+
+        <div id="error-1" class="error" style="display:none;"></div>
+        <div class="actions" style="justify-content: flex-end;">
+          <button type="button" class="btn btn-primary" onclick="proximaEtapa(1)">Continuar →</button>
         </div>
       </div>
 
-      <div class="upload-field">
-        <label>Comprovante de residência <span class="required">*</span></label>
-        <div class="upload-area" id="upload-comprovante">
-          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="9" y1="13" x2="15" y2="13"/>
-            <line x1="9" y1="17" x2="15" y2="17"/>
-          </svg>
-          <div class="upload-title">Conta de luz, água, internet, etc</div>
-          <div class="upload-hint">Atualizado · até 3 meses · JPG, PNG ou PDF</div>
-          <input type="file" id="file-comprovante" accept="image/jpeg,image/png,image/webp,application/pdf" />
-          <div class="upload-preview" id="preview-comprovante"></div>
-        </div>
-      </div>
-
-      <div class="subsection-title">Confirmações</div>
-      <div class="checkbox-group">
-        <label class="checkbox-item">
-          <input type="checkbox" id="dados_verdadeiros" />
-          <span>Confirmo que <strong>todos os dados e documentos enviados são verdadeiros</strong> e estão atualizados.</span>
-        </label>
-        <label class="checkbox-item">
-          <input type="checkbox" id="autorizacao_consulta" />
-          <span><strong>Autorizo a Yep Ads</strong> a consultar meus dados em bases públicas e privadas, conforme a LGPD, exclusivamente para fins de validação e contratação.</span>
-        </label>
-      </div>
-
-      <div id="error-2" class="error" style="display:none;"></div>
-      <div class="actions">
-        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(2)">← Voltar</button>
-        <button type="button" class="btn btn-primary" onclick="proximaEtapa(2)">Continuar →</button>
-      </div>
-    </div>
-
-    <!-- ========== STEP 3: CONTA PRA RECEBIMENTO ========== -->
-    <div class="step-section" data-step="3">
-      <div class="section-head">
-        <div class="section-tag">Etapa 3 de 3</div>
-        <h2 class="section-title">Conta para recebimento</h2>
-        <p class="section-subtitle">Como vamos pagar você nos primeiros meses.</p>
-      </div>
-
-      <div class="info-box">
-        <strong>Importante:</strong> Os <strong>3 primeiros pagamentos</strong> são feitos em <strong>dólar (USD)</strong>, a cada <strong>15 dias</strong>. Por isso, você precisa ter uma conta com câmbio/conversão internacional.
-        <br><br>
-        Aceitamos: <strong>Payoneer</strong>, <strong>Nomad</strong> ou <strong>DasBank</strong>.
-      </div>
-
-      <label style="margin-top: 18px;">Você já tem uma conta com câmbio internacional? <span class="required">*</span></label>
-      <div class="radio-cards">
-        <label class="radio-card">
-          <input type="radio" name="tem_conta" value="sim" />
-          <div class="radio-card-title">Sim, tenho uma conta</div>
-          <div class="radio-card-desc">Payoneer, Nomad ou DasBank</div>
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="tem_conta" value="nao" />
-          <div class="radio-card-title">Ainda não tenho</div>
-          <div class="radio-card-desc">Te ajudamos a abrir uma agora</div>
-        </label>
-      </div>
-
-      <!-- Caso SIM -->
-      <div id="conta-sim" style="display:none;">
-        <label style="margin-top: 14px;">Em qual banco está sua conta? <span class="required">*</span></label>
-        <div class="banco-options">
-          <label class="banco-option">
-            <input type="radio" name="banco" value="payoneer" />
-            <div class="banco-option-name">Payoneer</div>
-            <div class="banco-option-tag">Internacional</div>
-          </label>
-          <label class="banco-option">
-            <input type="radio" name="banco" value="nomad" />
-            <div class="banco-option-name">Nomad</div>
-            <div class="banco-option-tag">Conta nos EUA</div>
-          </label>
-          <label class="banco-option">
-            <input type="radio" name="banco" value="dasbank" />
-            <div class="banco-option-name">DasBank</div>
-            <div class="banco-option-tag">Conta internacional</div>
-          </label>
+      <!-- ========== STEP 2: KYC ========== -->
+      <div class="step-section" data-step="2">
+        <div class="section-head">
+          <div class="section-tag">Etapa 2 de 3</div>
+          <h2 class="section-title">Validação de identidade · KYC</h2>
+          <p class="section-subtitle">Pra confirmar quem você é, conforme exigido por lei.</p>
         </div>
 
-        <div class="upload-field" style="margin-top: 18px;">
-          <label>Comprovante com os dados da conta <span class="required">*</span></label>
-          <div class="upload-area" id="upload-conta">
+        <div class="upload-field">
+          <label>RG ou CNH (frente e verso) <span class="required">*</span></label>
+          <div class="upload-area" id="upload-rg">
+            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+            <div class="upload-title">Clica ou arrasta a foto</div>
+            <div class="upload-hint">RG ou CNH · Frente e verso · JPG, PNG ou PDF · até 10 MB</div>
+            <input type="file" id="file-rg" accept="image/jpeg,image/png,image/webp,application/pdf" />
+            <div class="upload-preview" id="preview-rg"></div>
+          </div>
+        </div>
+
+        <div class="upload-field">
+          <label>Comprovante de residência <span class="required">*</span></label>
+          <div class="upload-area" id="upload-comprovante">
             <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
               <polyline points="14 2 14 8 20 8"/>
             </svg>
-            <div class="upload-title">PDF com os dados da sua conta</div>
-            <div class="upload-hint">Print ou PDF que mostre número da conta, banco, titular · até 10 MB</div>
-            <input type="file" id="file-conta" accept="image/jpeg,image/png,image/webp,application/pdf" />
-            <div class="upload-preview" id="preview-conta"></div>
+            <div class="upload-title">Conta de luz, água, internet, etc</div>
+            <div class="upload-hint">Atualizado · até 3 meses · JPG, PNG ou PDF</div>
+            <input type="file" id="file-comprovante" accept="image/jpeg,image/png,image/webp,application/pdf" />
+            <div class="upload-preview" id="preview-comprovante"></div>
           </div>
+        </div>
+
+        <div class="subsection-title">Confirmações</div>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="dados_verdadeiros" />
+            <span>Confirmo que <strong>todos os dados e documentos enviados são verdadeiros</strong> e estão atualizados.</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="autorizacao_consulta" />
+            <span><strong>Autorizo a Yep Ads</strong> a consultar meus dados em bases públicas e privadas, conforme a LGPD, exclusivamente para fins de validação e contratação.</span>
+          </label>
+        </div>
+
+        <div id="error-2" class="error" style="display:none;"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" onclick="voltarEtapa(2)">← Voltar</button>
+          <button type="button" class="btn btn-primary" onclick="proximaEtapa(2)">Continuar →</button>
         </div>
       </div>
 
-      <!-- Caso NÃO -->
-      <div id="conta-nao" style="display:none;">
-        <div class="callout">
-          <div class="callout-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            Te ajudamos a abrir uma conta agora
-          </div>
-          <p>Recomendamos a <strong>DasBank</strong> — é a única que aprova a conta <strong>automaticamente em poucos minutos</strong>. Nomad e Payoneer podem levar dias.</p>
-          <p>Após criar sua conta, volta aqui e <strong>anexe o PDF com os dados</strong> pra finalizar seu onboarding.</p>
-          <a href="https://www.dasbankapp.com" target="_blank" rel="noopener" class="callout-cta">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Abrir conta na DasBank
-          </a>
+      <!-- ========== STEP 3: CONTA PRA RECEBIMENTO ========== -->
+      <div class="step-section" data-step="3">
+        <div class="section-head">
+          <div class="section-tag">Etapa 3 de 3</div>
+          <h2 class="section-title">Conta para recebimento</h2>
+          <p class="section-subtitle">Como vamos pagar você nos primeiros meses.</p>
         </div>
 
-        <div class="upload-field" style="margin-top: 14px;">
-          <label>Comprovante da conta criada <span class="required">*</span></label>
-          <div class="upload-area" id="upload-conta-nova">
-            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-            </svg>
-            <div class="upload-title">PDF com os dados da conta nova</div>
-            <div class="upload-hint">Após criar a conta na DasBank · até 10 MB</div>
-            <input type="file" id="file-conta-nova" accept="image/jpeg,image/png,image/webp,application/pdf" />
-            <div class="upload-preview" id="preview-conta-nova"></div>
+        <div class="info-box">
+          <strong>Importante:</strong> Os <strong>3 primeiros pagamentos</strong> são feitos em <strong>dólar (USD)</strong>, a cada <strong>15 dias</strong>. Por isso, você precisa ter uma conta com câmbio/conversão internacional.
+          <br><br>
+          Aceitamos: <strong>Payoneer</strong>, <strong>Nomad</strong> ou <strong>DasBank</strong>.
+        </div>
+
+        <label style="margin-top: 18px;">Você já tem uma conta com câmbio internacional? <span class="required">*</span></label>
+        <div class="radio-cards">
+          <label class="radio-card">
+            <input type="radio" name="tem_conta" value="sim" />
+            <div class="radio-card-title">Sim, tenho uma conta</div>
+            <div class="radio-card-desc">Payoneer, Nomad ou DasBank</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="tem_conta" value="nao" />
+            <div class="radio-card-title">Ainda não tenho</div>
+            <div class="radio-card-desc">Te ajudamos a abrir uma agora</div>
+          </label>
+        </div>
+
+        <div id="conta-sim" style="display:none;">
+          <label style="margin-top: 14px;">Em qual banco está sua conta? <span class="required">*</span></label>
+          <div class="banco-options">
+            <label class="banco-option">
+              <input type="radio" name="banco" value="payoneer" />
+              <div class="banco-option-name">Payoneer</div>
+              <div class="banco-option-tag">Internacional</div>
+            </label>
+            <label class="banco-option">
+              <input type="radio" name="banco" value="nomad" />
+              <div class="banco-option-name">Nomad</div>
+              <div class="banco-option-tag">Conta nos EUA</div>
+            </label>
+            <label class="banco-option">
+              <input type="radio" name="banco" value="dasbank" />
+              <div class="banco-option-name">DasBank</div>
+              <div class="banco-option-tag">Conta internacional</div>
+            </label>
           </div>
+
+          <div class="upload-field" style="margin-top: 18px;">
+            <label>Comprovante com os dados da conta <span class="required">*</span></label>
+            <div class="upload-area" id="upload-conta">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <div class="upload-title">PDF com os dados da sua conta</div>
+              <div class="upload-hint">Print ou PDF que mostre número da conta, banco, titular · até 10 MB</div>
+              <input type="file" id="file-conta" accept="image/jpeg,image/png,image/webp,application/pdf" />
+              <div class="upload-preview" id="preview-conta"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="conta-nao" style="display:none;">
+          <div class="callout">
+            <div class="callout-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Te ajudamos a abrir uma conta agora
+            </div>
+            <p>Recomendamos a <strong>DasBank</strong> — é a única que aprova a conta <strong>automaticamente em poucos minutos</strong>. Nomad e Payoneer podem levar dias.</p>
+            <p>Após criar sua conta, volta aqui e <strong>anexe o PDF com os dados</strong> pra finalizar seu onboarding.</p>
+            <a href="https://www.dasbankapp.com" target="_blank" rel="noopener" class="callout-cta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Abrir conta na DasBank
+            </a>
+          </div>
+
+          <div class="upload-field" style="margin-top: 14px;">
+            <label>Comprovante da conta criada <span class="required">*</span></label>
+            <div class="upload-area" id="upload-conta-nova">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <div class="upload-title">PDF com os dados da conta nova</div>
+              <div class="upload-hint">Após criar a conta na DasBank · até 10 MB</div>
+              <input type="file" id="file-conta-nova" accept="image/jpeg,image/png,image/webp,application/pdf" />
+              <div class="upload-preview" id="preview-conta-nova"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top: 18px;">
+          <label for="observacoes">Observações <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
+          <textarea id="observacoes" placeholder="Algo que a gente precise saber? Pode escrever aqui."></textarea>
+        </div>
+
+        <div id="error-3" class="error" style="display:none;"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" onclick="voltarEtapa(3)">← Voltar</button>
+          <button type="button" class="btn btn-primary" id="submit-btn" onclick="enviarOnboarding()">Finalizar onboarding</button>
         </div>
       </div>
 
-      <div class="field" style="margin-top: 18px;">
-        <label for="observacoes">Observações <span style="color:var(--text-faint); font-weight:400;">(opcional)</span></label>
-        <textarea id="observacoes" placeholder="Algo que a gente precise saber? Pode escrever aqui."></textarea>
-      </div>
-
-      <div id="error-3" class="error" style="display:none;"></div>
-      <div class="actions">
-        <button type="button" class="btn btn-secondary" onclick="voltarEtapa(3)">← Voltar</button>
-        <button type="button" class="btn btn-primary" id="submit-btn" onclick="enviarOnboarding()">Finalizar onboarding</button>
-      </div>
-    </div>
-
-  </form>
+    </form>
+  </section>
 
   <footer class="footer">YEP ADS BRASIL · Acesso restrito ao time de RH</footer>
 </div>
 
 <script>
+// =============================================================
+// ESTADO GLOBAL
+// =============================================================
 const FILES = { rg: null, comprovante: null, conta: null, contaNova: null };
 let etapaAtual = 1;
+let CADASTRO = null; // Dados vindos da API após login
 
-// ========= UPLOADS =========
+// =============================================================
+// MÁSCARAS
+// =============================================================
+function mascaraCPF(input) {
+  input.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').substring(0, 11);
+    if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
+    else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+    else if (v.length > 3) v = v.replace(/(\d{3})(\d+)/, '$1.$2');
+    e.target.value = v;
+  });
+}
+
+function mascaraWhats(input) {
+  input.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.substring(0, 11);
+    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/, '($1) $2');
+    e.target.value = v;
+  });
+}
+
+function mascaraCEP(input) {
+  input.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').substring(0, 8);
+    if (v.length > 5) v = v.replace(/^(\d{5})(\d+)/, '$1-$2');
+    e.target.value = v;
+  });
+}
+
+mascaraCPF(document.getElementById('login-cpf'));
+
+// =============================================================
+// LOGIN — buscar cadastro pelo CPF
+// =============================================================
+async function fazerLogin() {
+  const cpf = document.getElementById('login-cpf').value.trim();
+  const btn = document.getElementById('login-btn');
+  const errBox = document.getElementById('error-login');
+
+  errBox.style.display = 'none';
+
+  // Validação
+  const cpfLimpo = cpf.replace(/\D/g, '');
+  if (cpfLimpo.length !== 11) {
+    showLoginError('CPF deve ter 11 dígitos.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Buscando seu cadastro...';
+
+  try {
+    const res = await fetch('/api/onboarding-buscar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cpf: cpfLimpo })
+    });
+
+    if (res.status === 404) {
+      errBox.innerHTML = `
+        <strong>CPF não encontrado.</strong><br>
+        O onboarding é só pra candidatos que já passaram pelas etapas anteriores. Verifica com o time de RH se você está no momento certo.
+      `;
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Continuar →';
+      return;
+    }
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Erro ao buscar cadastro');
+    }
+
+    const json = await res.json();
+    CADASTRO = json.cadastro;
+    mostrarOnboarding();
+  } catch (err) {
+    showLoginError('Erro: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Continuar →';
+  }
+}
+
+function showLoginError(msg) {
+  const errBox = document.getElementById('error-login');
+  errBox.textContent = msg;
+  errBox.style.display = 'block';
+}
+
+// =============================================================
+// MOSTRAR ONBOARDING APÓS LOGIN
+// =============================================================
+function mostrarOnboarding() {
+  document.getElementById('screen-login').style.display = 'none';
+  document.getElementById('screen-onboarding').style.display = 'block';
+
+  // Primeiro nome pra personalizar
+  const primeiroNome = (CADASTRO.nome_completo || '').split(' ')[0] || 'você';
+
+  document.getElementById('welcome-section').innerHTML = `
+    <div class="welcome-banner">
+      <div class="welcome-banner-icon">👋</div>
+      <div class="welcome-banner-text">
+        <div class="welcome-banner-title">Oi, <em>${escapeHtml(primeiroNome)}</em>! Bem-vindo(a) ao time Yep.</div>
+        <div class="welcome-banner-desc">Encontramos seu cadastro pra ${escapeHtml(CADASTRO.vaga || 'a vaga')}. Vamos finalizar em 3 etapas — leva uns 5 minutinhos.</div>
+      </div>
+    </div>
+  `;
+
+  // Pré-preenche campos
+  document.getElementById('nome_completo').value = CADASTRO.nome_completo || '';
+  document.getElementById('email').value = CADASTRO.email || '';
+  document.getElementById('whatsapp').value = CADASTRO.whatsapp || '';
+  document.getElementById('cpf').value = CADASTRO.cpf || '';
+  document.getElementById('data_nascimento').value = CADASTRO.data_nascimento || '';
+  if (CADASTRO.cidade) document.getElementById('cidade').value = CADASTRO.cidade;
+  if (CADASTRO.estado) document.getElementById('estado').value = CADASTRO.estado;
+
+  // Inicializa máscaras nos campos editáveis
+  mascaraWhats(document.getElementById('whatsapp'));
+  mascaraCEP(document.getElementById('cep'));
+
+  // Setup uploads
+  setupUpload('rg', 'rg');
+  setupUpload('comprovante', 'comprovante');
+  setupUpload('conta', 'conta');
+  setupUpload('conta-nova', 'contaNova');
+
+  // Setup CEP
+  setupCEP();
+
+  // Setup radio sim/nao
+  setupContaToggle();
+
+  window.scrollTo({ top: 0 });
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/[<>&"']/g, ch => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+// =============================================================
+// UPLOADS
+// =============================================================
 function setupUpload(id, key) {
   const area = document.getElementById('upload-' + id);
   if (!area) return;
@@ -786,84 +1039,69 @@ function setupUpload(id, key) {
   });
 }
 
-setupUpload('rg', 'rg');
-setupUpload('comprovante', 'comprovante');
-setupUpload('conta', 'conta');
-setupUpload('conta-nova', 'contaNova');
+// =============================================================
+// CEP
+// =============================================================
+function setupCEP() {
+  const cepInput = document.getElementById('cep');
+  const cepHint = document.getElementById('cep-hint');
 
-// ========= MÁSCARAS =========
-document.getElementById('whatsapp').addEventListener('input', e => {
-  let v = e.target.value.replace(/\D/g, '');
-  if (v.length > 11) v = v.substring(0, 11);
-  if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
-  else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
-  else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/, '($1) $2');
-  e.target.value = v;
-});
+  cepInput.addEventListener('blur', async () => {
+    const cep = cepInput.value.replace(/\D/g, '');
+    if (cep.length !== 8) return;
 
-document.getElementById('cpf').addEventListener('input', e => {
-  let v = e.target.value.replace(/\D/g, '').substring(0, 11);
-  if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
-  else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
-  else if (v.length > 3) v = v.replace(/(\d{3})(\d+)/, '$1.$2');
-  e.target.value = v;
-});
+    cepHint.textContent = 'Buscando endereço...';
+    cepHint.className = 'cep-hint';
 
-// ========= CEP =========
-const cepInput = document.getElementById('cep');
-const cepHint = document.getElementById('cep-hint');
-
-cepInput.addEventListener('input', e => {
-  let v = e.target.value.replace(/\D/g, '').substring(0, 8);
-  if (v.length > 5) v = v.replace(/^(\d{5})(\d+)/, '$1-$2');
-  e.target.value = v;
-});
-
-cepInput.addEventListener('blur', async () => {
-  const cep = cepInput.value.replace(/\D/g, '');
-  if (cep.length !== 8) return;
-
-  cepHint.textContent = 'Buscando endereço...';
-  cepHint.className = 'cep-hint';
-
-  try {
-    const r = await fetch(`/api/cep?cep=${cep}`);
-    if (!r.ok) {
-      const data = await r.json().catch(() => ({}));
-      cepHint.textContent = data.error || 'CEP não encontrado';
+    try {
+      const r = await fetch(`/api/cep?cep=${cep}`);
+      if (!r.ok) {
+        const data = await r.json().catch(() => ({}));
+        cepHint.textContent = data.error || 'CEP não encontrado';
+        cepHint.className = 'cep-hint error';
+        return;
+      }
+      const data = await r.json();
+      document.getElementById('rua').value = data.rua || '';
+      document.getElementById('bairro').value = data.bairro || '';
+      if (!document.getElementById('cidade').value) {
+        document.getElementById('cidade').value = data.cidade || '';
+      }
+      if (!document.getElementById('estado').value) {
+        document.getElementById('estado').value = data.estado || '';
+      }
+      cepHint.textContent = '✓ Endereço encontrado — confira e preencha o número';
+      cepHint.className = 'cep-hint success';
+      document.getElementById('numero').focus();
+    } catch (err) {
+      cepHint.textContent = 'Erro ao buscar CEP. Preenche manualmente.';
       cepHint.className = 'cep-hint error';
-      return;
-    }
-    const data = await r.json();
-    document.getElementById('rua').value = data.rua || '';
-    document.getElementById('bairro').value = data.bairro || '';
-    document.getElementById('cidade').value = data.cidade || '';
-    document.getElementById('estado').value = data.estado || '';
-    cepHint.textContent = '✓ Endereço encontrado — confira e preencha o número';
-    cepHint.className = 'cep-hint success';
-    document.getElementById('numero').focus();
-  } catch (err) {
-    cepHint.textContent = 'Erro ao buscar CEP. Preenche manualmente.';
-    cepHint.className = 'cep-hint error';
-  }
-});
-
-// ========= STEP 3 — TOGGLE SIM/NÃO =========
-document.querySelectorAll('input[name="tem_conta"]').forEach(r => {
-  r.addEventListener('change', e => {
-    const sim = document.getElementById('conta-sim');
-    const nao = document.getElementById('conta-nao');
-    if (e.target.value === 'sim') {
-      sim.style.display = 'block';
-      nao.style.display = 'none';
-    } else {
-      sim.style.display = 'none';
-      nao.style.display = 'block';
     }
   });
-});
+}
 
-// ========= STEPPER =========
+// =============================================================
+// STEP 3 — TOGGLE SIM/NÃO
+// =============================================================
+function setupContaToggle() {
+  document.querySelectorAll('input[name="tem_conta"]').forEach(r => {
+    r.addEventListener('change', e => {
+      const sim = document.getElementById('conta-sim');
+      const nao = document.getElementById('conta-nao');
+      if (e.target.value === 'sim') {
+        sim.style.display = 'block';
+        nao.style.display = 'none';
+      } else {
+        sim.style.display = 'none';
+        nao.style.display = 'block';
+      }
+    });
+  });
+}
+
+// =============================================================
+// STEPPER E NAVEGAÇÃO
+// =============================================================
 function atualizarStepper(etapa) {
   document.querySelectorAll('.step-dot').forEach(dot => {
     const n = parseInt(dot.dataset.step);
@@ -892,10 +1130,9 @@ function showError(etapa, msg) {
   box.scrollIntoView({block:'center', behavior:'smooth'});
 }
 
-// ========= VALIDAÇÃO E NAVEGAÇÃO =========
 function proximaEtapa(de) {
   if (de === 1) {
-    const obrigatorios = ['nome_completo', 'email', 'whatsapp', 'cpf', 'data_nascimento', 'cep', 'rua', 'numero', 'bairro', 'cidade', 'estado'];
+    const obrigatorios = ['nome_completo', 'email', 'whatsapp', 'cep', 'rua', 'numero', 'bairro', 'cidade', 'estado'];
     for (const id of obrigatorios) {
       const el = document.getElementById(id);
       if (!el.value.trim()) {
@@ -907,11 +1144,6 @@ function proximaEtapa(de) {
     const email = document.getElementById('email').value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showError(1, 'Email inválido.');
-      return;
-    }
-    const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
-    if (cpf.length !== 11) {
-      showError(1, 'CPF deve ter 11 dígitos.');
       return;
     }
     mostrarEtapa(2);
@@ -932,7 +1164,9 @@ function proximaEtapa(de) {
 
 function voltarEtapa(de) { mostrarEtapa(de - 1); }
 
-// ========= ENVIO =========
+// =============================================================
+// ENVIO
+// =============================================================
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -945,7 +1179,6 @@ function fileToBase64(file) {
 async function enviarOnboarding() {
   const btn = document.getElementById('submit-btn');
 
-  // Coleta tudo
   const dados = {
     nome_completo: document.getElementById('nome_completo').value.trim(),
     email: document.getElementById('email').value.trim(),
@@ -964,7 +1197,6 @@ async function enviarOnboarding() {
     observacoes: document.getElementById('observacoes').value.trim()
   };
 
-  // Valida step 3
   const temContaInput = document.querySelector('input[name="tem_conta"]:checked');
   if (!temContaInput) {
     showError(3, 'Informe se você já tem uma conta com câmbio internacional.');
@@ -996,7 +1228,6 @@ async function enviarOnboarding() {
   btn.innerHTML = '<span class="spinner"></span>Enviando onboarding...';
 
   try {
-    // Converte arquivos
     const fileConta = temConta ? FILES.conta : FILES.contaNova;
     const [rgB64, comprovanteB64, contaB64] = await Promise.all([
       fileToBase64(FILES.rg),
@@ -1024,7 +1255,7 @@ async function enviarOnboarding() {
     }
 
     const nome = dados.nome_completo;
-    document.querySelector('.wrap').innerHTML = `
+    document.getElementById('root').innerHTML = `
       <header class="header">
         <a href="/">
           <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
@@ -1036,7 +1267,7 @@ async function enviarOnboarding() {
           <div class="success-icon">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <h2>Onboarding finalizado, ${nome.split(' ')[0]}!</h2>
+          <h2>Onboarding finalizado, ${escapeHtml(nome.split(' ')[0])}!</h2>
           <p>Recebemos todas as suas informações. Nosso time vai validar tudo e te confirma a entrada por WhatsApp em breve.</p>
           <p style="margin-top:14px; font-weight:500; color:var(--text);">Bem-vindo(a) ao time Yep 🧡</p>
         </div>
