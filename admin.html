@@ -668,6 +668,170 @@ body {
   font-size: 12px;
 }
 
+/* Etapas do recrutamento */
+.etapas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.etapa-item {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  transition: border-color 0.15s;
+}
+.etapa-item.concluida {
+  background: rgba(16, 185, 129, 0.04);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+.etapa-item.bloqueada {
+  opacity: 0.55;
+}
+.etapa-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--navy-line);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.etapa-item.concluida .etapa-check {
+  background: var(--green);
+  color: white;
+}
+.etapa-content { min-width: 0; }
+.etapa-titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.etapa-desc {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+.etapa-when {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  margin-top: 6px;
+}
+.etapa-locked {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 6px;
+  font-style: italic;
+}
+.etapa-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.etapa-inputs input {
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+}
+.etapa-inputs input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.etapa-actions {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.btn-etapa-whats {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.btn-etapa-whats:hover { background: #1FBA59; }
+.btn-etapa-whats[data-reenviar="1"] {
+  background: var(--navy-line);
+  color: var(--text-dim);
+}
+.btn-etapa-whats[data-reenviar="1"]:hover {
+  background: #25D366;
+  color: white;
+}
+.btn-etapa-undo {
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.btn-etapa-undo:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+.etapa-lembrete {
+  margin-top: 10px;
+  padding: 11px 14px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 10px;
+  color: #93C5FD;
+  font-size: 12.5px;
+}
+.etapa-lembrete.urgent {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #FCA5A5;
+  animation: pulse-urgent 2s ease-in-out infinite;
+}
+@keyframes pulse-urgent {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.2); }
+  50% { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0); }
+}
+
+@media (max-width: 600px) {
+  .etapa-item {
+    grid-template-columns: 28px 1fr;
+  }
+  .etapa-actions {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    justify-content: flex-end;
+  }
+}
+
 .status-actions {
   display: flex;
   gap: 6px;
@@ -1411,6 +1575,13 @@ function renderDetalhe() {
       ` : ''}
 
       <div class="detail-section">
+        <div class="detail-section-title">Etapas do recrutamento</div>
+        <div class="etapas-list">
+          ${renderEtapas(c)}
+        </div>
+      </div>
+
+      <div class="detail-section">
         <div class="detail-section-title">Status</div>
         <div class="status-actions">
           ${['novo', 'contatado', 'em_processo', 'aprovado', 'rejeitado'].map(s => `
@@ -1486,6 +1657,290 @@ function formatValue(label, val) {
     if (v.startsWith('http')) return `<a href="${escapeHtml(v)}" target="_blank" rel="noopener">${escapeHtml(v)}</a>`;
   }
   return escapeHtml(String(val));
+}
+
+// ========= ETAPAS DO RECRUTAMENTO =========
+const ETAPAS = [
+  {
+    num: 1,
+    titulo: 'Mensagem inicial · urgência da vaga',
+    desc: 'Manda a primeira mensagem pedindo pra preencher /cadastro hoje',
+    template: ({nome, vaga}) =>
+`${nome.split(' ')[0]}, a vaga de ${vaga} vai encerrar hoje, então se puder, peço que preencha ainda hoje esse formulário aqui:
+
+https://yepadsbra.com/cadastro
+
+É bem importante preencher o campo "disponibilidade & você" direitinho e colocar seu número de WhatsApp (mesmo esse que estamos conversando).
+
+Se conseguir finalizar o quanto antes, me avisa aqui, daremos uma resposta positiva ou negativa no máximo até amanhã antes das 12:00.
+
+Obrigado!`
+  },
+  {
+    num: 2,
+    titulo: 'Pedido de áudio de apresentação',
+    desc: 'Após a pessoa preencher /cadastro, pede um áudio curto se apresentando',
+    requer: 'cadastro',
+    template: ({nome}) =>
+`Por gentileza ${nome.split(' ')[0]}, você pode nos enviar um áudio bem simples de 30 seg a 1 min se apresentando?
+
+No áudio, pedimos que informe:
+• Seu nome (pode ser só o primeiro)
+• Idade
+• Cidade/Estado
+• E um sonho que você tem
+
+Exemplos:
+"Oi, meu nome é Júlia, tenho 22 anos, moro em Campinas/SP e meu sonho é ter minha casa própria."
+ou
+"Oi, meu nome é Carlos, tenho 30 anos, moro em Porto Alegre/RS e meu sonho é viajar o mundo e conhecer vários países."
+
+Esse áudio nos ajuda a te conhecer melhor 🙂
+
+Fico no aguardo!`
+  },
+  {
+    num: 3,
+    titulo: 'Mandar horários de entrevista',
+    desc: 'Oferece os horários disponíveis pra entrevista',
+    pedeHorarios: true,
+    template: ({nome, horario1, horario2}) =>
+`${nome.split(' ')[0]}, temos disponibilidade para um bate-papo por vídeo nos seguintes horários:
+
+${horario1}
+${horario2}
+
+Algum desses horários funciona para você?
+
+Como se trata de uma vaga com caráter emergencial, estamos conduzindo o processo com agilidade e, por isso, não conseguimos estender essas datas.
+
+A entrevista será breve e realizada com um de nossos assessores. Nela, você receberá mais detalhes sobre a rotina, funcionamento da função — que é simples, mas bastante importante para a empresa — além de informações sobre o treinamento que você vai ter, liderança direta e os principais pontos da posição.`
+  },
+  {
+    num: 4,
+    titulo: 'Confirmação da entrevista',
+    desc: 'Após candidato escolher um horário, confirma e diz quem entrevista',
+    pedeQuem: true,
+    template: ({nome, quem}) =>
+`Perfeito, sua entrevista será com o ${quem}. Eu vou confirmar na agenda dele e lhe retorno aqui com mais informações e confirmação ainda hoje.
+
+Obrigado por enquanto ${nome.split(' ')[0]}.`,
+    aposEnviar: 'lembrete40min'
+  },
+  {
+    num: 5,
+    titulo: 'Link de envio de documentos',
+    desc: 'Envia o link /documentos pra coleta de RG, CPF e comprovante',
+    template: ({nome}) =>
+`${nome.split(' ')[0]}, conforme combinado, segue o link pra você nos enviar seus documentos:
+
+https://yepadsbra.com/documentos
+
+Você vai precisar de:
+• Foto do RG (frente e verso)
+• Foto do CPF ou CNH
+• Comprovante de residência (atualizado, até 3 meses)
+
+É rápido — não leva nem 5 minutos. Quando finalizar, me avisa por aqui.`
+  }
+];
+
+function renderEtapas(c) {
+  // Pega todas as inscrições da pessoa pra checar timestamps das etapas
+  const todasInscricoes = [...(c._candidaturas || []), ...(c._completos || [])];
+  // Pega os timestamps "max" entre todas inscrições da pessoa
+  function getEtapaEm(num) {
+    let max = null;
+    for (const i of todasInscricoes) {
+      const t = i[`etapa${num}_em`];
+      if (t && (!max || new Date(t) > new Date(max))) max = t;
+    }
+    return max;
+  }
+
+  const temCadastro = c._temCadastro;
+
+  // Lembrete de 40 min
+  const etapa4Em = getEtapaEm(4);
+  const etapa5Em = getEtapaEm(5);
+  let lembreteHTML = '';
+  if (etapa4Em && !etapa5Em) {
+    const minPassados = (Date.now() - new Date(etapa4Em).getTime()) / 60000;
+    if (minPassados >= 40) {
+      lembreteHTML = `<div class="etapa-lembrete urgent">⏰ Já passaram ${Math.floor(minPassados)} min desde a confirmação da entrevista. <strong>Hora de mandar o link de documentos!</strong></div>`;
+    } else {
+      const restam = Math.ceil(40 - minPassados);
+      lembreteHTML = `<div class="etapa-lembrete">⏱️ Mandar link de documentos em ${restam} min (40min após confirmação da entrevista)</div>`;
+    }
+  }
+
+  return ETAPAS.map(et => {
+    const etapaEm = getEtapaEm(et.num);
+    const concluida = !!etapaEm;
+    const bloqueada = et.requer === 'cadastro' && !temCadastro;
+
+    return `
+      <div class="etapa-item ${concluida ? 'concluida' : ''} ${bloqueada ? 'bloqueada' : ''}">
+        <div class="etapa-check">
+          ${concluida
+            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'
+            : `<span>${et.num}</span>`}
+        </div>
+        <div class="etapa-content">
+          <div class="etapa-titulo">${et.titulo}</div>
+          <div class="etapa-desc">${et.desc}</div>
+          ${concluida ? `<div class="etapa-when">✓ Enviado ${formatDate(etapaEm)}</div>` : ''}
+          ${bloqueada ? `<div class="etapa-locked">🔒 Aguardando candidato preencher /cadastro</div>` : ''}
+
+          ${et.pedeHorarios && !concluida ? `
+            <div class="etapa-inputs">
+              <input type="text" id="hor1-${et.num}" placeholder="Ex: Segunda-feira (04/05) às 19h" value="${escapeHtml(c.entrevista_horario || '')}" />
+              <input type="text" id="hor2-${et.num}" placeholder="Ex: Terça-feira (05/05) às 15h" />
+            </div>
+          ` : ''}
+
+          ${et.pedeQuem && !concluida ? `
+            <div class="etapa-inputs">
+              <input type="text" id="quem-${et.num}" placeholder="Nome do entrevistador (ex: Wallace)" value="${escapeHtml(c.entrevista_quem || 'Wallace')}" />
+            </div>
+          ` : ''}
+        </div>
+        <div class="etapa-actions">
+          ${!bloqueada ? `
+            <button class="btn-etapa-whats" onclick="enviarEtapa(${et.num})" ${concluida ? 'data-reenviar="1"' : ''}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+              ${concluida ? 'Reenviar' : 'Enviar'}
+            </button>
+            ${concluida ? `<button class="btn-etapa-undo" onclick="desfazerEtapa(${et.num})" title="Desmarcar como enviada">↺</button>` : ''}
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('') + lembreteHTML;
+}
+
+function enviarEtapa(numEtapa) {
+  if (!CURRENT_DETAIL) return;
+  const c = CURRENT_DETAIL;
+  const etapa = ETAPAS.find(e => e.num === numEtapa);
+  if (!etapa) return;
+
+  // Coleta variáveis específicas da etapa
+  let horario1 = '', horario2 = '', quem = '';
+  if (etapa.pedeHorarios) {
+    horario1 = (document.getElementById(`hor1-${numEtapa}`)?.value || '').trim();
+    horario2 = (document.getElementById(`hor2-${numEtapa}`)?.value || '').trim();
+    if (!horario1 || !horario2) {
+      alert('Preencha os 2 horários antes de enviar.');
+      return;
+    }
+  }
+  if (etapa.pedeQuem) {
+    quem = (document.getElementById(`quem-${numEtapa}`)?.value || '').trim();
+    if (!quem) {
+      alert('Informe o nome do entrevistador.');
+      return;
+    }
+  }
+
+  // Gera mensagem
+  const mensagem = etapa.template({
+    nome: c.nome || '',
+    vaga: c.vaga || '',
+    horario1, horario2, quem
+  });
+
+  // Monta link WhatsApp
+  const whatsRaw = c.whatsapp || c.whats || '';
+  const clean = String(whatsRaw).replace(/\D/g, '');
+  const whatsFinal = clean.length >= 10
+    ? (clean.startsWith('55') ? clean : '55' + clean)
+    : '';
+  if (!whatsFinal) {
+    alert('Esse candidato não tem WhatsApp válido cadastrado.');
+    return;
+  }
+  const link = `https://wa.me/${whatsFinal}?text=${encodeURIComponent(mensagem)}`;
+  window.open(link, '_blank');
+
+  // Marca como enviada (após 1.5s pra dar tempo do WhatsApp abrir)
+  setTimeout(() => marcarEtapa(numEtapa, { horario1, horario2, quem }), 1500);
+}
+
+async function marcarEtapa(numEtapa, dados = {}) {
+  if (!CURRENT_DETAIL) return;
+  const c = CURRENT_DETAIL;
+
+  // Marca em TODAS as inscrições da pessoa (vagas + cadastro se tiver)
+  const todasInscricoes = [...(c._candidaturas || []), ...(c._completos || [])];
+  const updates = todasInscricoes.map(i => {
+    const tabela = c._candidaturas.includes(i) ? 'candidaturas' : 'cadastros_completos';
+    const body = { id: i.id, tabela, etapa: numEtapa };
+
+    // Se tem horários e for etapa 3, salva
+    if (numEtapa === 3 && dados.horario1) {
+      body.entrevista_horario = `${dados.horario1} ou ${dados.horario2}`;
+    }
+    // Se for etapa 4, salva quem
+    if (numEtapa === 4 && dados.quem) {
+      body.entrevista_quem = dados.quem;
+    }
+
+    return fetch('/api/admin-etapa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+      body: JSON.stringify(body)
+    });
+  });
+
+  try {
+    await Promise.all(updates);
+    // Atualiza cache local
+    const agora = new Date().toISOString();
+    todasInscricoes.forEach(i => {
+      i[`etapa${numEtapa}_em`] = agora;
+      if (numEtapa === 3 && dados.horario1) i.entrevista_horario = `${dados.horario1} ou ${dados.horario2}`;
+      if (numEtapa === 4 && dados.quem) i.entrevista_quem = dados.quem;
+    });
+    // Re-renderiza o detalhe
+    CURRENT_DETAIL = todosCandidatos().find(t => {
+      const ins = [...(t._candidaturas || []), ...(t._completos || [])];
+      return ins.some(i => String(i.id) === String(c.id));
+    }) || c;
+    renderDetalhe();
+    renderAll();
+  } catch (err) {
+    alert('Erro ao marcar etapa: ' + err.message);
+  }
+}
+
+async function desfazerEtapa(numEtapa) {
+  if (!CURRENT_DETAIL) return;
+  if (!confirm(`Desmarcar a etapa ${numEtapa} como enviada?`)) return;
+  const c = CURRENT_DETAIL;
+  const todasInscricoes = [...(c._candidaturas || []), ...(c._completos || [])];
+
+  const updates = todasInscricoes.map(i => {
+    const tabela = c._candidaturas.includes(i) ? 'candidaturas' : 'cadastros_completos';
+    return fetch('/api/admin-etapa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': SENHA },
+      body: JSON.stringify({ id: i.id, tabela, etapa: numEtapa, desfazer: true })
+    });
+  });
+
+  try {
+    await Promise.all(updates);
+    todasInscricoes.forEach(i => { i[`etapa${numEtapa}_em`] = null; });
+    CURRENT_DETAIL = todosCandidatos().find(t => {
+      const ins = [...(t._candidaturas || []), ...(t._completos || [])];
+      return ins.some(i => String(i.id) === String(c.id));
+    }) || c;
+    renderDetalhe();
+    renderAll();
+  } catch (err) {
+    alert('Erro ao desfazer: ' + err.message);
+  }
 }
 
 // ========= UPDATES =========
