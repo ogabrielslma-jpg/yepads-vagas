@@ -33,8 +33,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Busca as duas tabelas em paralelo
-    const [resCandidaturas, resCompletos] = await Promise.all([
+    // Busca as duas tabelas + documentos em paralelo
+    const [resCandidaturas, resCompletos, resDocs] = await Promise.all([
       fetch(`${SUPABASE_URL}/rest/v1/candidaturas?select=*&order=created_at.desc`, {
         headers: {
           'apikey': SUPABASE_KEY,
@@ -42,6 +42,12 @@ export default async function handler(req, res) {
         }
       }),
       fetch(`${SUPABASE_URL}/rest/v1/cadastros_completos?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        }
+      }),
+      fetch(`${SUPABASE_URL}/rest/v1/documentos_candidatos?select=*&order=created_at.desc`, {
         headers: {
           'apikey': SUPABASE_KEY,
           'Authorization': `Bearer ${SUPABASE_KEY}`
@@ -57,6 +63,8 @@ export default async function handler(req, res) {
 
     const candidaturas = await resCandidaturas.json();
     const completos = await resCompletos.json();
+    // documentos pode dar 404 se a tabela não existe ainda — não bloqueia
+    const documentos = resDocs.ok ? await resDocs.json() : [];
 
     // Marca origem em cada um pra UI saber qual tabela
     const candidaturasMarcadas = candidaturas.map(c => ({ ...c, origem: 'candidatura' }));
@@ -65,10 +73,12 @@ export default async function handler(req, res) {
     return res.status(200).json({
       candidaturas: candidaturasMarcadas,
       completos: completosMarcados,
+      documentos,
       stats: {
         total: candidaturasMarcadas.length + completosMarcados.length,
         candidaturas: candidaturasMarcadas.length,
-        completos: completosMarcados.length
+        completos: completosMarcados.length,
+        documentos: documentos.length
       }
     });
   } catch (error) {
