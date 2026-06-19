@@ -944,10 +944,10 @@ select {
 // Banner da vaga selecionada (vem da URL ?vaga=)
 (function() {
   const vagasInfo = {
-    'sdr': { titulo: 'SDR · Sales Development', meta: '3 vagas · R$ 2.500 – 3.500 + comissão · 100% home office' },
-    'atendimento': { titulo: 'Atendimento ao Cliente', meta: '7 vagas · R$ 2.400 – 3.200 + benefícios · 100% home office' },
-    'designer': { titulo: 'Designer Júnior', meta: '1 vaga · R$ 3.000 – 4.500 · 100% home office' },
-    'social-media': { titulo: 'Social Media', meta: '2 vagas · R$ 3.500 – 5.000 · 100% home office' }
+    'sdr': { titulo: 'SDR · Sales Development', meta: 'R$ 2.500 – 3.500 + comissão · 100% home office' },
+    'atendimento': { titulo: 'Atendimento ao Cliente', meta: 'R$ 2.400 – 3.200 + benefícios · 100% home office' },
+    'designer': { titulo: 'Designer Júnior', meta: 'R$ 3.000 – 4.500 · 100% home office' },
+    'social-media': { titulo: 'Social Media', meta: 'R$ 3.500 – 5.000 · 100% home office' }
   };
   const params = new URLSearchParams(window.location.search);
   const vaga = (params.get('vaga') || '').toLowerCase();
