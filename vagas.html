@@ -1956,7 +1956,7 @@ body.modal-open {
         </div>
         <div class="modal-field">
           <label for="modal-whats">WhatsApp</label>
-          <input type="tel" id="modal-whats" name="whats" placeholder="(00) 00000-0000" required />
+          <input type="tel" id="modal-whats" name="whats" placeholder="(00) 00000-0000" maxlength="15" required oninput="mascaraWhats(this)" />
         </div>
       </div>
 
@@ -1989,6 +1989,21 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
 // ====== CONFIGURAÇÃO ======
 // Número do WhatsApp do time de recrutamento (formato: 55+DDD+número)
+// Mascara pra formatar WhatsApp enquanto digita: (XX) XXXXX-XXXX
+function mascaraWhats(input) {
+  let valor = input.value.replace(/\D/g, '');
+  if (valor.length > 11) valor = valor.slice(0, 11);
+  if (valor.length > 10) {
+    input.value = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+  } else if (valor.length > 6) {
+    input.value = valor.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
+  } else if (valor.length > 2) {
+    input.value = valor.replace(/^(\d{2})(\d+)/, '($1) $2');
+  } else {
+    input.value = valor;
+  }
+}
+
 const WHATSAPP_NUMERO = '5561998127412';
 
 // ====== DADOS DAS VAGAS ======
@@ -2266,7 +2281,7 @@ async function handleModalSubmit(e) {
   const vagaSelecionada = data.vaga || 'Vagas Yep Brasil';
 
   const mensagemWhats = encodeURIComponent(
-    `Ola! Me inscrevi pra vaga de ${vagaSelecionada} e gostaria de saber como funciona o processo.`
+    `Olá! Me inscrevi para a vaga de ${vagaSelecionada} e gostaria de saber como funciona o processo.`
   );
   const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
 
@@ -2274,16 +2289,16 @@ async function handleModalSubmit(e) {
   const isEmergencial = vagaSelecionada.includes('SDR') || vagaSelecionada.includes('Atendimento');
 
   const tituloSucesso = isEmergencial
-    ? `${firstName}, essa vaga e EMERGENCIAL`
+    ? `${firstName}, essa vaga é URGENTE`
     : `Tudo certo, ${firstName}!`;
 
   const textoSucesso = isEmergencial
-    ? `Recebemos sua candidatura pra <strong>${vagaSelecionada}</strong>, mas como estamos com urgencia pra preencher essa vaga, <strong>chama nossa equipe no WhatsApp agora mesmo</strong> e informa seu e-mail pra agilizar o processo.`
-    : `Sua candidatura pra <strong>${vagaSelecionada}</strong> foi registrada. Nosso time vai analisar e te dar feedback em ate <strong>5 dias uteis</strong>.`;
+    ? `Recebemos sua candidatura para <strong>${vagaSelecionada}</strong>. Como estamos preenchendo essa vaga com <strong>máxima urgência</strong>, chama nossa equipe no WhatsApp agora e informa seu e-mail para agilizarmos o processo.`
+    : `Sua candidatura para <strong>${vagaSelecionada}</strong> foi registrada. Nosso time vai analisar e te dar um feedback em até <strong>5 dias úteis</strong>.`;
 
   const textoBotao = isEmergencial
-    ? `<p style="margin-top: 14px; color: #DC2626; font-weight: 600;">A vaga e por ordem de chegada, nao perde tempo:</p>`
-    : `<p style="margin-top: 12px;">Pra agilizar o processo, <strong>fala com a gente no WhatsApp</strong>:</p>`;
+    ? `<p style="margin-top: 14px; color: #DC2626; font-weight: 600;">A vaga é por ordem de chegada — não perca tempo:</p>`
+    : `<p style="margin-top: 12px;">Para agilizar o processo, <strong>fala com a gente no WhatsApp</strong>:</p>`;
 
   const labelBotao = isEmergencial ? 'Chamar no WhatsApp agora' : 'Falar no WhatsApp';
 
