@@ -271,7 +271,7 @@ h1.hero-title em {
 
 
 .vaga-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 32px 28px;
@@ -285,7 +285,7 @@ h1.hero-title em {
   flex-direction: column;
   min-height: 280px;
   color: #0F1B2D;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 .vaga-card::before {
   content: '';
@@ -298,9 +298,8 @@ h1.hero-title em {
 }
 .vaga-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 30px 70px rgba(255, 107, 26, 0.18), 0 12px 30px rgba(0, 0, 0, 0.45);
-  border-color: rgba(255, 107, 26, 0.4);
-  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 30px 70px rgba(255, 107, 26, 0.25), 0 16px 40px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 107, 26, 0.5);
 }
 .vaga-card:hover::before { transform: translateY(0); }
 .vaga-card:focus-visible {
