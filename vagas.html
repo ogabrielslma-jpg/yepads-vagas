@@ -2293,11 +2293,11 @@ async function handleModalSubmit(e) {
     : `Tudo certo, ${firstName}!`;
 
   const textoSucesso = isEmergencial
-    ? `Recebemos sua candidatura para <strong>${vagaSelecionada}</strong>. Como estamos preenchendo essa vaga com <strong>máxima urgência</strong>, chama nossa equipe no WhatsApp agora e informa seu e-mail para agilizarmos o processo.`
+    ? `Recebemos sua candidatura para <strong>${vagaSelecionada}</strong>. Como estamos com <strong>prazo curto</strong> para preencher essa vaga, fala com a nossa equipe no WhatsApp para agilizar o processo.`
     : `Sua candidatura para <strong>${vagaSelecionada}</strong> foi registrada. Nosso time vai analisar e te dar um feedback em até <strong>5 dias úteis</strong>.`;
 
   const textoBotao = isEmergencial
-    ? `<p style="margin-top: 14px; color: #DC2626; font-weight: 600;">A vaga é por ordem de chegada — não perca tempo:</p>`
+    ? ''
     : `<p style="margin-top: 12px;">Para agilizar o processo, <strong>fala com a gente no WhatsApp</strong>:</p>`;
 
   const labelBotao = isEmergencial ? 'Chamar no WhatsApp agora' : 'Falar no WhatsApp';
