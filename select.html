@@ -441,7 +441,7 @@ select {
   <section class="hero">
     <span class="hero-tag">⚡ Triagem · Acesso restrito</span>
     <h1>Vamos te <em>conhecer</em> melhor.</h1>
-    <p>3 etapas rápidas pra entender seu perfil. Leva uns 5 minutos. Ao final você recebe um <strong>número de protocolo</strong> pra enviar pra nossa equipe.</p>
+    <p>3 etapas rápidas pra entender seu perfil. Leva uns 5 minutos.</p>
   </section>
 
   <div class="stepper" id="stepper">
@@ -480,8 +480,8 @@ select {
 
       <div class="field-row">
         <div class="field">
-          <label for="idade">Idade <span class="required">*</span></label>
-          <input type="number" id="idade" required min="16" max="99" placeholder="00" />
+          <label for="data_nascimento">Data de nascimento <span class="required">*</span></label>
+          <input type="date" id="data_nascimento" required />
         </div>
         <div class="field">
           <label for="cidade">Cidade / Estado <span class="required">*</span></label>
@@ -503,52 +503,76 @@ select {
         <p class="section-subtitle">Pra entender sua rotina e formação.</p>
       </div>
 
-      <label>Qual sua disponibilidade de horário? <span class="required">*</span></label>
-      <div class="radio-cards" style="margin-bottom: 18px;">
+      <label>Qual sua disponibilidade de horário para a vaga desejada? <span class="required">*</span></label>
+      <div class="radio-cards" style="margin-bottom: 12px;">
         <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="integral" />
+          <input type="radio" name="disponibilidade" value="integral" onchange="toggleSubHorarios()" />
           <div class="radio-card-title">Horário integral</div>
-          <div class="radio-card-desc">Disponível 8h por dia, das 9h às 18h</div>
+          <div class="radio-card-desc">8h por dia, segunda a sexta</div>
         </label>
         <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="meio_expediente" />
+          <input type="radio" name="disponibilidade" value="meio_expediente" onchange="toggleSubHorarios()" />
           <div class="radio-card-title">Meio expediente</div>
-          <div class="radio-card-desc">Disponível 4h por dia (manhã ou tarde)</div>
+          <div class="radio-card-desc">4h por dia (manhã, tarde ou noite)</div>
         </label>
         <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="flexivel" />
-          <div class="radio-card-title">Horário flexível</div>
-          <div class="radio-card-desc">Por entregas, sem horário fixo</div>
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="noturno" />
-          <div class="radio-card-title">Período noturno</div>
-          <div class="radio-card-desc">Disponível à noite ou madrugada</div>
+          <input type="radio" name="disponibilidade" value="empresa_define" onchange="toggleSubHorarios()" />
+          <div class="radio-card-title">O que a empresa definir</div>
+          <div class="radio-card-desc">Qualquer horário disponível</div>
         </label>
       </div>
 
-      <label>Você já trabalha em algum lugar? <span class="required">*</span></label>
-      <div class="radio-cards" style="margin-bottom: 18px;">
+      <!-- Sub-opções: turno do meio expediente -->
+      <div id="sub-meio-expediente" style="display: none; margin-bottom: 18px;">
+        <label>Qual turno do meio expediente? <span class="required">*</span></label>
+        <div class="radio-cards">
+          <label class="radio-card">
+            <input type="radio" name="turno_meio" value="manha" />
+            <div class="radio-card-title">Manhã</div>
+            <div class="radio-card-desc">Geralmente 8h às 12h</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="turno_meio" value="tarde" />
+            <div class="radio-card-title">Tarde</div>
+            <div class="radio-card-desc">Geralmente 13h às 17h</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="turno_meio" value="noite" />
+            <div class="radio-card-title">Noite <span style="color:var(--orange); font-size:11px;">(+20% noturno)</span></div>
+            <div class="radio-card-desc">Geralmente 18h às 22h, com adicional</div>
+          </label>
+        </div>
+      </div>
+
+      <label style="margin-top: 8px;">Você já trabalha em algum lugar? <span class="required">*</span></label>
+      <div class="radio-cards" style="margin-bottom: 12px;">
         <label class="radio-card">
-          <input type="radio" name="trabalha_atualmente" value="sim_clt" />
-          <div class="radio-card-title">Sim, sou CLT</div>
-          <div class="radio-card-desc">Tô empregado(a) formalmente</div>
+          <input type="radio" name="trabalha_atualmente" value="sim_trabalha" onchange="toggleSubTrabalho()" />
+          <div class="radio-card-title">Sim, trabalho</div>
+          <div class="radio-card-desc">Quero informar meus horários</div>
         </label>
         <label class="radio-card">
-          <input type="radio" name="trabalha_atualmente" value="sim_pj" />
-          <div class="radio-card-title">Sim, freelancer/PJ</div>
-          <div class="radio-card-desc">Trabalho por conta</div>
+          <input type="radio" name="trabalha_atualmente" value="nao_livre" onchange="toggleSubTrabalho()" />
+          <div class="radio-card-title">Não, tô livre</div>
+          <div class="radio-card-desc">Sem trabalho no momento</div>
         </label>
         <label class="radio-card">
-          <input type="radio" name="trabalha_atualmente" value="nao" />
-          <div class="radio-card-title">Não, tô disponível</div>
-          <div class="radio-card-desc">Procurando emprego agora</div>
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="trabalha_atualmente" value="estudante" />
+          <input type="radio" name="trabalha_atualmente" value="estudante" onchange="toggleSubTrabalho()" />
           <div class="radio-card-title">Só estudo</div>
-          <div class="radio-card-desc">Procurando primeira vaga</div>
+          <div class="radio-card-desc">Quero informar meus horários de estudo</div>
         </label>
+      </div>
+
+      <!-- Sub-campo: horários de trabalho -->
+      <div id="sub-trabalho" class="field" style="display: none;">
+        <label for="horarios_trabalho">Quais seus horários de trabalho atualmente? <span class="required">*</span></label>
+        <input type="text" id="horarios_trabalho" placeholder="Ex: Segunda a sexta, 8h às 17h" />
+      </div>
+
+      <!-- Sub-campo: horários de estudo -->
+      <div id="sub-estudo" class="field" style="display: none;">
+        <label for="horarios_estudo">Quais seus horários de estudo? <span class="required">*</span></label>
+        <input type="text" id="horarios_estudo" placeholder="Ex: Segunda a sexta, 19h às 22h" />
       </div>
 
       <div class="field">
@@ -557,10 +581,8 @@ select {
           <option value="">Selecione sua escolaridade</option>
           <option value="fundamental_incompleto">Fundamental incompleto</option>
           <option value="fundamental_completo">Fundamental completo</option>
-          <option value="medio_incompleto">Médio incompleto (cursando)</option>
           <option value="medio_completo">Médio completo</option>
           <option value="tecnico">Curso técnico</option>
-          <option value="superior_incompleto">Superior incompleto (cursando)</option>
           <option value="superior_completo">Superior completo</option>
           <option value="pos_mestrado">Pós-graduação / Mestrado</option>
           <option value="doutorado">Doutorado</option>
@@ -601,7 +623,7 @@ select {
       </div>
 
       <div class="field">
-        <label for="sobre">Fala um pouco sobre você: do que gosta de fazer, hobbies, o que te motiva. <span class="required">*</span></label>
+        <label for="sobre">Fala um pouco sobre você: do que gosta de fazer, hobbies, e qual seu maior sonho. <span class="required">*</span></label>
         <textarea id="sobre" required placeholder="Pode escrever solto, do jeito que vier. Queremos te conhecer de verdade." minlength="100" oninput="contarCaracteres()"></textarea>
         <div class="charcount">
           <span><span class="charcount-num" id="charcount">0</span> caracteres</span>
@@ -629,6 +651,19 @@ select {
 </div>
 
 <script>
+// Mostra/esconde sub-opções de horário do meio expediente
+function toggleSubHorarios() {
+  const valor = document.querySelector('input[name="disponibilidade"]:checked').value;
+  document.getElementById('sub-meio-expediente').style.display = (valor === 'meio_expediente') ? 'block' : 'none';
+}
+
+// Mostra/esconde campos de horários conforme situação atual
+function toggleSubTrabalho() {
+  const valor = document.querySelector('input[name="trabalha_atualmente"]:checked').value;
+  document.getElementById('sub-trabalho').style.display = (valor === 'sim_trabalha') ? 'block' : 'none';
+  document.getElementById('sub-estudo').style.display = (valor === 'estudante') ? 'block' : 'none';
+}
+
 // ========== MÁSCARAS ==========
 function mascaraWhats(input) {
   let valor = input.value.replace(/\D/g, '');
@@ -685,7 +720,7 @@ function showError(etapa, msg) {
 // ========== VALIDAÇÃO ==========
 function proxima(de) {
   if (de === 1) {
-    const obrig = ['nome', 'email', 'whatsapp', 'idade', 'cidade'];
+    const obrig = ['nome', 'email', 'whatsapp', 'data_nascimento', 'cidade'];
     for (const id of obrig) {
       const el = document.getElementById(id);
       if (!el.value.trim()) {
@@ -699,9 +734,14 @@ function proxima(de) {
       showError(1, 'E-mail inválido.');
       return;
     }
-    const idade = parseInt(document.getElementById('idade').value);
+    // Valida idade pela data de nascimento (mínimo 16 anos)
+    const dataNasc = new Date(document.getElementById('data_nascimento').value);
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - dataNasc.getFullYear();
+    const m = hoje.getMonth() - dataNasc.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
     if (idade < 16 || idade > 99) {
-      showError(1, 'Idade precisa ser entre 16 e 99.');
+      showError(1, 'Você precisa ter pelo menos 16 anos.');
       return;
     }
     mostrarEtapa(2);
@@ -711,10 +751,34 @@ function proxima(de) {
       showError(2, 'Escolhe sua disponibilidade de horário.');
       return;
     }
+    // Se meio expediente, precisa do turno
+    if (disp.value === 'meio_expediente') {
+      const turno = document.querySelector('input[name="turno_meio"]:checked');
+      if (!turno) {
+        showError(2, 'Escolhe o turno do meio expediente (manhã, tarde ou noite).');
+        return;
+      }
+    }
     const trab = document.querySelector('input[name="trabalha_atualmente"]:checked');
     if (!trab) {
       showError(2, 'Informa se você trabalha atualmente.');
       return;
+    }
+    // Se trabalha, precisa dos horários
+    if (trab.value === 'sim_trabalha') {
+      const h = document.getElementById('horarios_trabalho').value.trim();
+      if (!h) {
+        showError(2, 'Informa seus horários de trabalho.');
+        return;
+      }
+    }
+    // Se estudante, precisa dos horários de estudo
+    if (trab.value === 'estudante') {
+      const h = document.getElementById('horarios_estudo').value.trim();
+      if (!h) {
+        showError(2, 'Informa seus horários de estudo.');
+        return;
+      }
     }
     if (!document.getElementById('escolaridade').value) {
       showError(2, 'Selecione sua escolaridade.');
@@ -781,7 +845,7 @@ function finalizar() {
         </div>
 
         <div class="protocolo-instrucao">
-          <strong>📲 Próximo passo:</strong> envia esse protocolo <strong>${protocolo}</strong> pra nossa equipe no WhatsApp. Ele funciona como sua <strong>ficha de inscrição</strong> pra vaga. Sem o protocolo, sua triagem não entra na fila.
+          <strong>📲 Próximo passo:</strong> envia esse protocolo <strong>${protocolo}</strong> pra nossa equipe no WhatsApp. Ele funciona como sua <strong>ficha de inscrição</strong> pra vaga. Vamos analisar seu perfil e te damos um retorno em até <strong>24 horas</strong>.
         </div>
 
         <a href="${linkWhats}" target="_blank" rel="noopener" class="btn-whats">
