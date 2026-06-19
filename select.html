@@ -532,6 +532,50 @@ select {
   border-color: var(--orange);
   color: white;
 }
+
+/* Banner com vaga selecionada (acima do título) */
+.banner-vaga {
+  background: linear-gradient(135deg, rgba(255, 107, 26, 0.10), rgba(255, 107, 26, 0.02));
+  border: 1px solid rgba(255, 107, 26, 0.28);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.banner-vaga::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -30px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.12), transparent 65%);
+  pointer-events: none;
+}
+.banner-vaga-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--orange);
+  font-weight: 600;
+}
+.banner-vaga-titulo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-top: 2px;
+}
+.banner-vaga-meta {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.banner-vaga-meta strong { color: var(--text); }
 </style>
 </head>
 <body>
@@ -543,6 +587,15 @@ select {
       <span class="logo-text">yep</span>
     </a>
   </header>
+
+  <!-- Banner da vaga (preenchido via JS conforme ?vaga= da URL) -->
+  <div id="banner-vaga" class="banner-vaga" style="display:none;">
+    <div class="banner-vaga-tag">★ Vaga selecionada</div>
+    <div class="banner-vaga-info">
+      <div class="banner-vaga-titulo" id="banner-vaga-titulo">—</div>
+      <div class="banner-vaga-meta" id="banner-vaga-meta">—</div>
+    </div>
+  </div>
 
   <section class="hero">
     <span class="hero-tag">⚡ Triagem · Acesso restrito</span>
@@ -1048,8 +1101,9 @@ function finalizar() {
   const protocolo = gerarProtocolo();
 
   const WHATSAPP_NUMERO = '5561998127412';
+  const vagaTxt = window.__vagaSelecionada ? ` para a vaga de ${window.__vagaSelecionada}` : '';
   const mensagem = encodeURIComponent(
-    `Olá! Acabei de fazer minha triagem no site. Meu protocolo é ${protocolo}. Meu nome é ${nome}.`
+    `Olá! Acabei de fazer minha triagem no site${vagaTxt}. Meu protocolo é ${protocolo}. Meu nome é ${nome}.`
   );
   const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`;
 
