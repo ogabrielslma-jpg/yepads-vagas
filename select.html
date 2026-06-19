@@ -940,6 +940,26 @@ select {
 </div>
 
 <script>
+
+// Banner da vaga selecionada (vem da URL ?vaga=)
+(function() {
+  const vagasInfo = {
+    'sdr': { titulo: 'SDR · Sales Development', meta: '3 vagas · R$ 2.500 – 3.500 + comissão · 100% home office' },
+    'atendimento': { titulo: 'Atendimento ao Cliente', meta: '7 vagas · R$ 2.400 – 3.200 + benefícios · 100% home office' },
+    'designer': { titulo: 'Designer Júnior', meta: '1 vaga · R$ 3.000 – 4.500 · 100% home office' },
+    'social-media': { titulo: 'Social Media', meta: '2 vagas · R$ 3.500 – 5.000 · 100% home office' }
+  };
+  const params = new URLSearchParams(window.location.search);
+  const vaga = (params.get('vaga') || '').toLowerCase();
+  if (vagasInfo[vaga]) {
+    const info = vagasInfo[vaga];
+    document.getElementById('banner-vaga-titulo').textContent = info.titulo;
+    document.getElementById('banner-vaga-meta').textContent = info.meta;
+    document.getElementById('banner-vaga').style.display = 'flex';
+    window.__vagaSelecionada = info.titulo;
+  }
+})();
+
 // Mostra/esconde campos de horários conforme situação atual
 function toggleSubTrabalho() {
   const valor = document.querySelector('input[name="trabalha_atualmente"]:checked').value;
