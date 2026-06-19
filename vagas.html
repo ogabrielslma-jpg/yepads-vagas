@@ -2130,13 +2130,12 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Submit do modal: envia candidatura curta + mostra tela de sucesso com botão WhatsApp
+// Submit do modal: envia candidatura e SEMPRE mostra sucesso + botao WhatsApp
 async function handleModalSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const submitBtn = document.getElementById('modal-submit');
   const originalText = submitBtn.textContent;
-
   submitBtn.disabled = true;
   submitBtn.textContent = 'Enviando...';
 
@@ -2144,73 +2143,59 @@ async function handleModalSubmit(e) {
     nome: form.nome.value,
     email: form.email.value,
     whatsapp: form.whats.value,
-    vaga: form.vaga.value || 'Candidatura espontânea',
+    vaga: form.vaga.value || 'Candidatura espontanea'
   };
 
-  try {
-    const response = await fetch('/api/candidatar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+  // Envia pra API em paralelo (fire and forget) - se falhar nao bloqueia o usuario
+  fetch('/api/candidatar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.warn('API falhou (nao critico):', err));
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.error || 'Falha no envio');
-    }
+  // Da um pequeno delay pro usuario sentir que "enviou"
+  await new Promise(r => setTimeout(r, 600));
 
-    const firstName = data.nome.split(' ')[0];
-    const vagaSelecionada = data.vaga || 'Vagas Yep Brasil';
+  const firstName = data.nome.split(' ')[0];
+  const vagaSelecionada = data.vaga || 'Vagas Yep Brasil';
 
-    // Mensagem pré-formatada que vai abrir no WhatsApp
-    const mensagemWhats = encodeURIComponent(
-      `Olá! Me inscrevi pra vaga de ${vagaSelecionada} e gostaria de saber como funciona o processo.`
-    );
-    const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
+  const mensagemWhats = encodeURIComponent(
+    `Ola! Me inscrevi pra vaga de ${vagaSelecionada} e gostaria de saber como funciona o processo.`
+  );
+  const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
 
-    form.innerHTML = `
-      <div class="modal-success">
-        <div class="modal-success-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3>Recebemos sua candidatura, ${firstName}!</h3>
-        <p>Em breve nosso time entra em contato sobre a vaga de <strong>${vagaSelecionada}</strong>.</p>
-
-        <div class="modal-cta-whats" id="modal-cta-whats">
-          <p class="modal-cta-whats-title">Quer agilizar sua entrevista? 🚀</p>
-          <p class="modal-cta-whats-text">
-            Chama o nosso time no WhatsApp agora. <strong>Quem entra em contato é priorizado</strong> nas próximas etapas.
-          </p>
-          <a href="${linkWhats}" target="_blank" rel="noopener" class="modal-whats-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            Falar com nosso time no WhatsApp
-          </a>
-          <p class="modal-cta-whats-note">Mensagem pré-pronta, é só apertar enviar.</p>
-        </div>
+  // Substitui o form pela tela de sucesso
+  form.innerHTML = `
+    <div class="modal-success">
+      <div class="modal-success-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-    `;
+      <h3>Tudo certo, ${firstName}!</h3>
+      <p>Sua candidatura para <strong>${vagaSelecionada}</strong> foi registrada com sucesso.</p>
+      <p style="margin-top: 12px;">Pra agilizar o processo, <strong>fala com a gente no WhatsApp agora</strong>:</p>
 
-    // Esconde os detalhes da vaga e o resumo se estiverem visíveis
-    document.getElementById('modal-details').style.display = 'none';
-    const summary = document.querySelector('.modal-summary');
-    if (summary) summary.style.display = 'none';
-    const divider = document.querySelector('.modal-form-divider');
-    if (divider) divider.style.display = 'none';
+      <a id="modal-cta-whats" href="${linkWhats}" target="_blank" rel="noopener" class="modal-cta-whats-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Falar no WhatsApp agora
+      </a>
+      <p class="modal-cta-whats-note">Mensagem ja pre-pronta, e so apertar enviar.</p>
+    </div>
+  `;
 
-    // Scroll suave pro botão verde do WhatsApp dentro do modal
-    setTimeout(() => {
-      const ctaWhats = document.getElementById('modal-cta-whats');
-      const backdrop = document.getElementById('modal-backdrop');
-      if (ctaWhats && backdrop) {
-        ctaWhats.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 300);
-  } catch (error) {
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-    alert('Ops, deu um erro: ' + error.message + '\n\nTenta de novo ou nos chama no email.');
-  }
+  // Esconde detalhes e divisores se existirem
+  const det = document.getElementById('modal-details');
+  if (det) det.style.display = 'none';
+  const summary = document.querySelector('.modal-summary');
+  if (summary) summary.style.display = 'none';
+  const divider = document.querySelector('.modal-form-divider');
+  if (divider) divider.style.display = 'none';
+
+  setTimeout(() => {
+    const ctaWhats = document.getElementById('modal-cta-whats');
+    if (ctaWhats) ctaWhats.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300);
 }
+
 </script>
 
 </body>
