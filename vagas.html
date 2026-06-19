@@ -262,21 +262,19 @@ h1.hero-title em {
 
 .hero-jobs-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-@media (max-width: 1080px) {
-  .hero-jobs-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .hero-jobs-grid { grid-template-columns: 1fr; }
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
+
+
 .vaga-card {
-  background: var(--cream);
-  border: 1px solid rgba(15, 27, 45, 0.08);
-  border-radius: 18px;
-  padding: 22px 22px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px 28px;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
@@ -285,8 +283,9 @@ h1.hero-title em {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  min-height: 260px;
+  min-height: 280px;
   color: #0F1B2D;
+  backdrop-filter: blur(10px);
 }
 .vaga-card::before {
   content: '';
@@ -298,9 +297,10 @@ h1.hero-title em {
   transition: transform 0.4s;
 }
 .vaga-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  border-color: var(--orange);
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(255, 107, 26, 0.18), 0 12px 30px rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 107, 26, 0.4);
+  background: rgba(255, 255, 255, 0.06);
 }
 .vaga-card:hover::before { transform: translateY(0); }
 .vaga-card:focus-visible {
@@ -1898,7 +1898,7 @@ body.modal-open {
 
       <div class="modal-field">
         <label for="modal-nome">Nome completo</label>
-        <input type="text" id="modal-nome" name="nome" placeholder="Como te chamam" required />
+        <input type="text" id="modal-nome" name="nome" placeholder="Seu nome completo" required />
       </div>
 
       <div class="modal-row">
