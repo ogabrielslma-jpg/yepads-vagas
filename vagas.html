@@ -1735,7 +1735,7 @@ body.modal-open {
       <div class="step reveal">
         <div class="step-num">01</div>
         <h3 class="step-title">Inscrição</h3>
-        <p class="step-desc">Preenche o formulário aqui mesmo. Anexa portfólio se for vaga criativa.</p>
+        <p class="step-desc">Preenche o formulário aqui mesmo. Leva uns 2 minutinhos.</p>
       </div>
       <div class="step reveal">
         <div class="step-num">02</div>
@@ -1854,10 +1854,6 @@ body.modal-open {
         </div>
       </div>
 
-      <div class="modal-field">
-        <label for="modal-link">LinkedIn ou portfólio (opcional)</label>
-        <input type="url" id="modal-link" name="link" placeholder="https://..." />
-      </div>
 
       <button type="submit" class="modal-submit" id="modal-submit">Enviar candidatura</button>
       <p class="modal-note">Seus dados ficam só com a gente. Sem spam, sem repassar.</p>
@@ -1887,7 +1883,7 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
 // ====== CONFIGURAÇÃO ======
 // Número do WhatsApp do time de recrutamento (formato: 55+DDD+número)
-const WHATSAPP_NUMERO = '5512982560862';
+const WHATSAPP_NUMERO = '5561998127412';
 
 // ====== DADOS DAS VAGAS ======
 const VAGAS = {
@@ -2169,7 +2165,7 @@ async function handleModalSubmit(e) {
 
     // Mensagem pré-formatada que vai abrir no WhatsApp
     const mensagemWhats = encodeURIComponent(
-      `Olá! Me interessei na vaga de ${vagaSelecionada}. Sou ${data.nome}, acabei de fazer minha candidatura no site e gostaria de saber como posso agendar uma entrevista.`
+      `Olá! Me inscrevi pra vaga de ${vagaSelecionada} e gostaria de saber como funciona o processo.`
     );
     const linkWhats = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagemWhats}`;
 
