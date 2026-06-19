@@ -426,6 +426,112 @@ select {
   font-size: 11px;
   color: var(--text-faint);
 }
+
+/* Grid dos 3 selects da data de nascimento */
+.data-nasc-grid {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px;
+  gap: 10px;
+}
+@media (max-width: 480px) {
+  .data-nasc-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* Sub-section divider (visual) */
+.sub-section-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-faint);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--navy-line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sub-section-title::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sub-section-title:first-of-type { margin-top: 0; }
+
+/* Cards dos 3 horários (A/B/C) */
+.horarios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.horario-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  background: var(--navy-deep);
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.horario-card:hover { border-color: var(--text-faint); }
+.horario-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+.horario-letra {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--navy-elev);
+  border: 1px solid var(--navy-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.horario-info { min-width: 0; }
+.horario-titulo {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.horario-detalhe {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  line-height: 1.45;
+}
+.horario-tempo {
+  font-size: 12.5px;
+  color: var(--orange);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.horario-card:has(input:checked) {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+}
+.horario-card:has(input:checked) .horario-letra {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
 </style>
 </head>
 <body>
@@ -480,8 +586,127 @@ select {
 
       <div class="field-row">
         <div class="field">
-          <label for="data_nascimento">Data de nascimento <span class="required">*</span></label>
-          <input type="date" id="data_nascimento" required />
+          <label>Data de nascimento <span class="required">*</span></label>
+          <div class="data-nasc-grid">
+            <select id="dia_nasc" required aria-label="Dia">
+              <option value="">Dia</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select id="mes_nasc" required aria-label="Mês">
+              <option value="">Mês</option>
+              <option value="01">Janeiro</option>
+              <option value="02">Fevereiro</option>
+              <option value="03">Março</option>
+              <option value="04">Abril</option>
+              <option value="05">Maio</option>
+              <option value="06">Junho</option>
+              <option value="07">Julho</option>
+              <option value="08">Agosto</option>
+              <option value="09">Setembro</option>
+              <option value="10">Outubro</option>
+              <option value="11">Novembro</option>
+              <option value="12">Dezembro</option>
+            </select>
+            <select id="ano_nasc" required aria-label="Ano">
+              <option value="">Ano</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>
+            <option value="1998">1998</option>
+            <option value="1997">1997</option>
+            <option value="1996">1996</option>
+            <option value="1995">1995</option>
+            <option value="1994">1994</option>
+            <option value="1993">1993</option>
+            <option value="1992">1992</option>
+            <option value="1991">1991</option>
+            <option value="1990">1990</option>
+            <option value="1989">1989</option>
+            <option value="1988">1988</option>
+            <option value="1987">1987</option>
+            <option value="1986">1986</option>
+            <option value="1985">1985</option>
+            <option value="1984">1984</option>
+            <option value="1983">1983</option>
+            <option value="1982">1982</option>
+            <option value="1981">1981</option>
+            <option value="1980">1980</option>
+            <option value="1979">1979</option>
+            <option value="1978">1978</option>
+            <option value="1977">1977</option>
+            <option value="1976">1976</option>
+            <option value="1975">1975</option>
+            <option value="1974">1974</option>
+            <option value="1973">1973</option>
+            <option value="1972">1972</option>
+            <option value="1971">1971</option>
+            <option value="1970">1970</option>
+            <option value="1969">1969</option>
+            <option value="1968">1968</option>
+            <option value="1967">1967</option>
+            <option value="1966">1966</option>
+            <option value="1965">1965</option>
+            <option value="1964">1964</option>
+            <option value="1963">1963</option>
+            <option value="1962">1962</option>
+            <option value="1961">1961</option>
+            <option value="1960">1960</option>
+            <option value="1959">1959</option>
+            <option value="1958">1958</option>
+            <option value="1957">1957</option>
+            <option value="1956">1956</option>
+            <option value="1955">1955</option>
+            <option value="1954">1954</option>
+            <option value="1953">1953</option>
+            <option value="1952">1952</option>
+            <option value="1951">1951</option>
+            <option value="1950">1950</option>
+            <option value="1949">1949</option>
+            <option value="1948">1948</option>
+            <option value="1947">1947</option>
+            <option value="1946">1946</option>
+            <option value="1945">1945</option>
+            </select>
+          </div>
         </div>
         <div class="field">
           <label for="cidade">Cidade / Estado <span class="required">*</span></label>
@@ -500,56 +725,18 @@ select {
       <div class="section-head">
         <div class="section-tag">Etapa 2 de 3</div>
         <h2 class="section-title">Disponibilidade e experiência</h2>
-        <p class="section-subtitle">Pra entender sua rotina e formação.</p>
+        <p class="section-subtitle">Vamos por partes pra ficar tranquilo.</p>
       </div>
 
-      <label>Qual sua disponibilidade de horário para a vaga desejada? <span class="required">*</span></label>
-      <div class="radio-cards" style="margin-bottom: 12px;">
-        <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="integral" onchange="toggleSubHorarios()" />
-          <div class="radio-card-title">Horário integral</div>
-          <div class="radio-card-desc">8h por dia, segunda a sexta</div>
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="meio_expediente" onchange="toggleSubHorarios()" />
-          <div class="radio-card-title">Meio expediente</div>
-          <div class="radio-card-desc">4h por dia (manhã, tarde ou noite)</div>
-        </label>
-        <label class="radio-card">
-          <input type="radio" name="disponibilidade" value="empresa_define" onchange="toggleSubHorarios()" />
-          <div class="radio-card-title">O que a empresa definir</div>
-          <div class="radio-card-desc">Qualquer horário disponível</div>
-        </label>
-      </div>
+      <!-- SUB-SECTION 1: Situação atual -->
+      <div class="sub-section-title">Sua situação atual</div>
 
-      <!-- Sub-opções: turno do meio expediente -->
-      <div id="sub-meio-expediente" style="display: none; margin-bottom: 18px;">
-        <label>Qual turno do meio expediente? <span class="required">*</span></label>
-        <div class="radio-cards">
-          <label class="radio-card">
-            <input type="radio" name="turno_meio" value="manha" />
-            <div class="radio-card-title">Manhã</div>
-            <div class="radio-card-desc">Geralmente 8h às 12h</div>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="turno_meio" value="tarde" />
-            <div class="radio-card-title">Tarde</div>
-            <div class="radio-card-desc">Geralmente 13h às 17h</div>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="turno_meio" value="noite" />
-            <div class="radio-card-title">Noite <span style="color:var(--orange); font-size:11px;">(+20% noturno)</span></div>
-            <div class="radio-card-desc">Geralmente 18h às 22h, com adicional</div>
-          </label>
-        </div>
-      </div>
-
-      <label style="margin-top: 8px;">Você já trabalha em algum lugar? <span class="required">*</span></label>
+      <label>Você já trabalha em algum lugar? <span class="required">*</span></label>
       <div class="radio-cards" style="margin-bottom: 12px;">
         <label class="radio-card">
           <input type="radio" name="trabalha_atualmente" value="sim_trabalha" onchange="toggleSubTrabalho()" />
           <div class="radio-card-title">Sim, trabalho</div>
-          <div class="radio-card-desc">Quero informar meus horários</div>
+          <div class="radio-card-desc">Tô em algum trabalho hoje</div>
         </label>
         <label class="radio-card">
           <input type="radio" name="trabalha_atualmente" value="nao_livre" onchange="toggleSubTrabalho()" />
@@ -559,21 +746,60 @@ select {
         <label class="radio-card">
           <input type="radio" name="trabalha_atualmente" value="estudante" onchange="toggleSubTrabalho()" />
           <div class="radio-card-title">Só estudo</div>
-          <div class="radio-card-desc">Quero informar meus horários de estudo</div>
+          <div class="radio-card-desc">Foco nos estudos por enquanto</div>
         </label>
       </div>
 
-      <!-- Sub-campo: horários de trabalho -->
       <div id="sub-trabalho" class="field" style="display: none;">
         <label for="horarios_trabalho">Quais seus horários de trabalho atualmente? <span class="required">*</span></label>
         <input type="text" id="horarios_trabalho" placeholder="Ex: Segunda a sexta, 8h às 17h" />
       </div>
 
-      <!-- Sub-campo: horários de estudo -->
       <div id="sub-estudo" class="field" style="display: none;">
         <label for="horarios_estudo">Quais seus horários de estudo? <span class="required">*</span></label>
         <input type="text" id="horarios_estudo" placeholder="Ex: Segunda a sexta, 19h às 22h" />
       </div>
+
+      <!-- SUB-SECTION 2: Disponibilidade pros nossos horários -->
+      <div class="sub-section-title">Disponibilidade pra vaga</div>
+
+      <label>Qual dos nossos horários você consegue cumprir? <span class="required">*</span></label>
+      <p class="helper" style="margin-top: 0; margin-bottom: 12px;">São os 3 turnos que oferecemos. Escolha um.</p>
+
+      <div class="horarios-grid">
+        <label class="horario-card">
+          <input type="radio" name="horario_vaga" value="horario_a" />
+          <div class="horario-letra">A</div>
+          <div class="horario-info">
+            <div class="horario-titulo">Integral</div>
+            <div class="horario-detalhe">Segunda a sexta</div>
+            <div class="horario-tempo">08h às 18h</div>
+          </div>
+        </label>
+
+        <label class="horario-card">
+          <input type="radio" name="horario_vaga" value="horario_b" />
+          <div class="horario-letra">B</div>
+          <div class="horario-info">
+            <div class="horario-titulo">Comercial com sábado</div>
+            <div class="horario-detalhe">Seg a sex · 09h às 16h</div>
+            <div class="horario-tempo">Sáb · 08h às 12h</div>
+          </div>
+        </label>
+
+        <label class="horario-card">
+          <input type="radio" name="horario_vaga" value="horario_c" />
+          <div class="horario-letra">C</div>
+          <div class="horario-info">
+            <div class="horario-titulo">Meio expediente</div>
+            <div class="horario-detalhe">4h por dia</div>
+            <div class="horario-tempo">Flexível com o gestor</div>
+          </div>
+        </label>
+      </div>
+
+      <!-- SUB-SECTION 3: Formação -->
+      <div class="sub-section-title">Formação e experiência</div>
 
       <div class="field">
         <label for="escolaridade">Escolaridade <span class="required">*</span></label>
@@ -651,12 +877,6 @@ select {
 </div>
 
 <script>
-// Mostra/esconde sub-opções de horário do meio expediente
-function toggleSubHorarios() {
-  const valor = document.querySelector('input[name="disponibilidade"]:checked').value;
-  document.getElementById('sub-meio-expediente').style.display = (valor === 'meio_expediente') ? 'block' : 'none';
-}
-
 // Mostra/esconde campos de horários conforme situação atual
 function toggleSubTrabalho() {
   const valor = document.querySelector('input[name="trabalha_atualmente"]:checked').value;
@@ -720,7 +940,7 @@ function showError(etapa, msg) {
 // ========== VALIDAÇÃO ==========
 function proxima(de) {
   if (de === 1) {
-    const obrig = ['nome', 'email', 'whatsapp', 'data_nascimento', 'cidade'];
+    const obrig = ['nome', 'email', 'whatsapp', 'cidade'];
     for (const id of obrig) {
       const el = document.getElementById(id);
       if (!el.value.trim()) {
@@ -734,37 +954,34 @@ function proxima(de) {
       showError(1, 'E-mail inválido.');
       return;
     }
-    // Valida idade pela data de nascimento (mínimo 16 anos)
-    const dataNasc = new Date(document.getElementById('data_nascimento').value);
+    // Valida data de nascimento (3 selects)
+    const dia = document.getElementById('dia_nasc').value;
+    const mes = document.getElementById('mes_nasc').value;
+    const ano = document.getElementById('ano_nasc').value;
+    if (!dia || !mes || !ano) {
+      showError(1, 'Selecione sua data de nascimento completa.');
+      return;
+    }
+    const dataNasc = new Date(parseInt(ano), parseInt(mes) - 1, parseInt(dia));
     const hoje = new Date();
     let idade = hoje.getFullYear() - dataNasc.getFullYear();
     const m = hoje.getMonth() - dataNasc.getMonth();
     if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
-    if (idade < 16 || idade > 99) {
+    if (idade < 16) {
       showError(1, 'Você precisa ter pelo menos 16 anos.');
+      return;
+    }
+    if (idade > 99) {
+      showError(1, 'Confira sua data de nascimento.');
       return;
     }
     mostrarEtapa(2);
   } else if (de === 2) {
-    const disp = document.querySelector('input[name="disponibilidade"]:checked');
-    if (!disp) {
-      showError(2, 'Escolhe sua disponibilidade de horário.');
-      return;
-    }
-    // Se meio expediente, precisa do turno
-    if (disp.value === 'meio_expediente') {
-      const turno = document.querySelector('input[name="turno_meio"]:checked');
-      if (!turno) {
-        showError(2, 'Escolhe o turno do meio expediente (manhã, tarde ou noite).');
-        return;
-      }
-    }
     const trab = document.querySelector('input[name="trabalha_atualmente"]:checked');
     if (!trab) {
       showError(2, 'Informa se você trabalha atualmente.');
       return;
     }
-    // Se trabalha, precisa dos horários
     if (trab.value === 'sim_trabalha') {
       const h = document.getElementById('horarios_trabalho').value.trim();
       if (!h) {
@@ -772,13 +989,17 @@ function proxima(de) {
         return;
       }
     }
-    // Se estudante, precisa dos horários de estudo
     if (trab.value === 'estudante') {
       const h = document.getElementById('horarios_estudo').value.trim();
       if (!h) {
         showError(2, 'Informa seus horários de estudo.');
         return;
       }
+    }
+    const horario = document.querySelector('input[name="horario_vaga"]:checked');
+    if (!horario) {
+      showError(2, 'Escolhe um dos nossos horários disponíveis (A, B ou C).');
+      return;
     }
     if (!document.getElementById('escolaridade').value) {
       showError(2, 'Selecione sua escolaridade.');
