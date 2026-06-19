@@ -347,82 +347,25 @@ h1.hero-title em {
 
 /* Borda destacada pra card emergencial */
 
-/* === SELO DE VAGA EMERGENCIAL (canto superior direito) === */
-.vaga-card-urgent::after {
-  content: 'Emergencial';
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 3;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #FFFFFF;
-  background: linear-gradient(135deg, #DC2626 0%, #F97316 100%);
-  padding: 6px 11px 6px 22px;
-  border-radius: 999px;
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45), 0 2px 6px rgba(0, 0, 0, 0.15);
-  animation: pulse-urgent 2.4s ease-in-out infinite;
-  white-space: nowrap;
-  pointer-events: none;
-}
+
 
 /* Pontinho branco pulsante antes do texto */
-.vaga-card-urgent .vaga-card-head::after {
-  content: '';
-  position: absolute;
-  top: 23px;
-  right: 84px;
-  width: 7px;
-  height: 7px;
-  background: #FFFFFF;
-  border-radius: 50%;
-  z-index: 4;
-  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.85);
-  animation: pulse-dot-urgent 1.4s ease-in-out infinite;
-  pointer-events: none;
-}
 
-@keyframes pulse-urgent {
-  0%, 100% { box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45), 0 0 0 0 rgba(220, 38, 38, 0.55); }
+
+
   50% { box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45), 0 0 0 10px rgba(220, 38, 38, 0); }
 }
-@keyframes pulse-dot-urgent {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9); transform: scale(1); }
+
   50% { box-shadow: 0 0 0 5px rgba(255, 255, 255, 0); transform: scale(0.85); }
 }
 
 @media (max-width: 480px) {
-  .vaga-card-urgent::after {
-    font-size: 8.5px;
-    padding: 5px 9px 5px 19px;
-    top: 12px;
-    right: 12px;
-  }
-  .vaga-card-urgent .vaga-card-head::after {
-    top: 19px;
-    right: 72px;
-    width: 5px;
-    height: 5px;
-  }
+  
+  
 }
 
-.vaga-card-urgent {
-  position: relative;
-  border-color: rgba(220, 38, 38, 0.25) !important;
-}
-.vaga-card-urgent::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #DC2626, #FF6B1A);
-  border-radius: 18px 18px 0 0;
-}
+
+
 
 .vaga-title {
   font-family: var(--font-display);
@@ -1605,6 +1548,57 @@ body.modal-open {
   font-style: italic;
 }
 
+
+/* === VAGA EMERGENCIAL - card destacado + selo via HTML === */
+.vaga-card-urgent {
+  border-color: rgba(220, 38, 38, 0.35) !important;
+  box-shadow: 0 12px 36px rgba(220, 38, 38, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+.vaga-card-urgent:hover {
+  border-color: rgba(220, 38, 38, 0.6) !important;
+  box-shadow: 0 30px 70px rgba(220, 38, 38, 0.30), 0 16px 40px rgba(0, 0, 0, 0.35) !important;
+}
+
+.vaga-urgent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #DC2626 0%, #F97316 100%);
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45);
+  animation: pulse-urgent-badge 2.4s ease-in-out infinite;
+  margin-bottom: 14px;
+  align-self: flex-start;
+  z-index: 5;
+  position: relative;
+}
+.vaga-urgent-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse-dot-badge 1.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9);
+}
+
+@keyframes pulse-urgent-badge {
+  0%, 100% { box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45), 0 0 0 0 rgba(220, 38, 38, 0.55); }
+  50% { box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45), 0 0 0 10px rgba(220, 38, 38, 0); }
+}
+@keyframes pulse-dot-badge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9); }
+  50% { box-shadow: 0 0 0 5px rgba(255, 255, 255, 0); }
+}
+
 </style>
 </head>
 <body>
@@ -1659,6 +1653,7 @@ body.modal-open {
 
         <!-- SDR -->
         <button class="vaga-card vaga-card-urgent reveal" onclick="prefillRole('SDR')">
+          <span class="vaga-urgent-badge">Vaga Emergencial</span>
           <div class="vaga-card-head">
             <div class="vaga-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1680,6 +1675,7 @@ body.modal-open {
 
         <!-- Atendimento -->
         <button class="vaga-card vaga-card-urgent reveal" onclick="prefillRole('Atendimento ao Cliente')">
+          <span class="vaga-urgent-badge">Vaga Emergencial</span>
           <div class="vaga-card-head">
             <div class="vaga-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
