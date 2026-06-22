@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Social Media · Yep Ads Brasil</title>
-<meta name="description" content="Vaga de Social Media na Yep Ads. R$ 2.940 fixo + auxílio home office, podendo chegar a R$ 4.500. PJ ou CLT, horário livre, home office." />
+<title>Analista de Social Media · Yep Ads Brasil</title>
+<meta name="description" content="Vaga de Analista de Social Media na Yep Ads Brasil. Remuneração fixa de R$ 2.940 + auxílio home office. Modalidade home office, contrato PJ ou CLT." />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
@@ -47,7 +47,6 @@ body {
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
-/* NAV */
 .nav { border-bottom: 1px solid var(--navy-line); }
 .nav-inner {
   max-width: 720px;
@@ -81,7 +80,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 .nav-link:hover { color: var(--orange); }
 
-/* CARD ÚNICO */
 .wrap {
   max-width: 560px;
   margin: 0 auto;
@@ -119,41 +117,36 @@ button { font-family: inherit; cursor: pointer; }
 
 h1 {
   font-family: 'Fraunces', serif;
-  font-size: 38px;
+  font-size: 36px;
   font-weight: 600;
-  line-height: 1.0;
+  line-height: 1.05;
   letter-spacing: -0.025em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 h1 em { font-style: italic; color: var(--orange); }
 
 .lead {
   font-size: 14.5px;
   color: var(--text-dim);
-  line-height: 1.5;
+  line-height: 1.55;
   margin-bottom: 22px;
 }
-.lead strong { color: var(--text); }
+.lead strong { color: var(--text); font-weight: 600; }
 
-/* DESTAQUE SALÁRIO */
 .salario-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   background: linear-gradient(135deg, rgba(255, 107, 26, 0.10), rgba(255, 107, 26, 0.02));
   border: 1px solid rgba(255, 107, 26, 0.25);
   border-radius: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.salario-info { flex: 1; }
 .salario-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--text-faint);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 .salario-valor {
   font-family: 'Fraunces', serif;
@@ -161,16 +154,22 @@ h1 em { font-style: italic; color: var(--orange); }
   font-weight: 600;
   color: var(--orange);
   letter-spacing: -0.01em;
-  line-height: 1.1;
+  line-height: 1.15;
+}
+.salario-valor span {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
 .salario-extra {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-dim);
-  margin-top: 2px;
+  margin-top: 4px;
+  line-height: 1.45;
 }
-.salario-extra strong { color: var(--text); }
+.salario-extra strong { color: var(--text); font-weight: 600; }
 
-/* AVISO PJ/CLT */
 .aviso-clt {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10.5px;
@@ -179,15 +178,15 @@ h1 em { font-style: italic; color: var(--orange); }
   margin-bottom: 20px;
   padding: 0 4px;
   letter-spacing: 0.02em;
+  line-height: 1.5;
 }
 .aviso-clt strong { color: var(--text-dim); }
 
-/* GRID META compacto */
 .meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 .meta-item {
   background: var(--navy-elev);
@@ -209,7 +208,20 @@ h1 em { font-style: italic; color: var(--orange); }
   font-weight: 600;
 }
 
-/* LISTA BULLETS */
+.subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.subtitle::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
+
 .bullets {
   list-style: none;
   padding: 0;
@@ -220,37 +232,22 @@ h1 em { font-style: italic; color: var(--orange); }
   padding-left: 22px;
   color: var(--text-dim);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
   margin-bottom: 10px;
 }
 .bullets li::before {
   content: '';
   position: absolute;
-  left: 0; top: 7px;
+  left: 0; top: 8px;
   width: 7px; height: 7px;
   background: var(--orange);
   border-radius: 2px;
 }
 .bullets li strong { color: var(--text); font-weight: 600; }
 
-/* BLOCO TÍTULO */
-.subtitle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--orange);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.subtitle::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
-
-/* CTA WHATSAPP */
 .cta {
   margin-top: 8px;
-  padding: 20px;
+  padding: 22px 20px;
   background: var(--navy-elev);
   border: 1px solid var(--navy-line);
   border-radius: 14px;
@@ -267,8 +264,8 @@ h1 em { font-style: italic; color: var(--orange); }
 .cta-sub {
   font-size: 13px;
   color: var(--text-dim);
-  margin-bottom: 14px;
-  line-height: 1.5;
+  margin-bottom: 16px;
+  line-height: 1.55;
 }
 .btn-whats {
   display: inline-flex;
@@ -295,7 +292,6 @@ h1 em { font-style: italic; color: var(--orange); }
   box-shadow: 0 10px 24px rgba(37, 211, 102, 0.35);
 }
 
-/* FOOTER */
 footer {
   border-top: 1px solid var(--navy-line);
   background: var(--navy);
@@ -317,7 +313,7 @@ footer strong { color: var(--text-dim); }
       <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
       <span class="logo-text">yep</span>
     </a>
-    <a href="/" class="nav-link">← Voltar pra home</a>
+    <a href="/" class="nav-link">← Voltar para a home</a>
   </div>
 </nav>
 
@@ -328,20 +324,18 @@ footer strong { color: var(--text-dim); }
     Vaga aberta
   </span>
 
-  <h1>Vaga pra <em>Social Media.</em></h1>
+  <h1>Analista de <em>Social Media.</em></h1>
 
-  <p class="lead">Você vai planejar e cuidar das redes das <strong>marcas que atendemos</strong>. Salário fixo, sem bater ponto, entrega semanal. Se for bom, ganha mais.</p>
+  <p class="lead">Profissional responsável pelo <strong>planejamento e gestão de redes sociais</strong> das marcas atendidas pela Yep Ads Brasil. Posição estratégica, com autonomia de horário e foco em entregas semanais consistentes.</p>
 
   <div class="salario-row">
-    <div class="salario-info">
-      <div class="salario-label">Salário fixo</div>
-      <div class="salario-valor">R$ 2.940 <span style="font-size:14px; color:var(--text-dim); font-weight:400;">+ auxílio home office</span></div>
-      <div class="salario-extra">Pode chegar a <strong>R$ 4.500</strong> com demandas extras</div>
-    </div>
+    <div class="salario-label">Remuneração</div>
+    <div class="salario-valor">R$ 2.940 <span>+ auxílio home office</span></div>
+    <div class="salario-extra">Potencial de <strong>R$ 4.500</strong> com bonificação por demandas adicionais e resultados.</div>
   </div>
 
   <div class="aviso-clt">
-    ⚙️ <strong>Auxílio home office</strong> de R$ 200 disponível apenas para contrato CLT
+    ⚙️ <strong>Auxílio home office</strong> de R$ 200 mensais aplicável somente ao regime CLT
   </div>
 
   <div class="meta">
@@ -351,27 +345,36 @@ footer strong { color: var(--text-dim); }
     </div>
     <div class="meta-item">
       <div class="meta-label">Horário</div>
-      <div class="meta-value">Livre</div>
+      <div class="meta-value">Flexível</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Modelo</div>
-      <div class="meta-value">100% home</div>
+      <div class="meta-value">Home office</div>
     </div>
   </div>
 
-  <div class="subtitle">A vaga em 60 segundos</div>
+  <div class="subtitle">Responsabilidades</div>
   <ul class="bullets">
-    <li><strong>Planejar e produzir conteúdo</strong> pras redes das marcas que atendemos (Instagram, TikTok, LinkedIn)</li>
-    <li><strong>Calendário editorial semanal</strong> — você organiza seu tempo, sem bater ponto</li>
-    <li><strong>Escrever copy</strong> que para o scroll: legendas, roteiros e CTAs</li>
-    <li><strong>Acompanhar métricas</strong> e ajustar a estratégia conforme o que performa</li>
-    <li><strong>Trocar ideia com o time de Design</strong> pra alinhar visual e mensagem</li>
-    <li><strong>Saber a linguagem</strong> de cada plataforma — Reels não é TikTok não é LinkedIn</li>
+    <li><strong>Planejamento editorial</strong> das redes sociais dos clientes (Instagram, TikTok, LinkedIn), com calendário semanal estruturado</li>
+    <li><strong>Produção de conteúdo</strong>: legendas, roteiros para vídeos curtos, copies e CTAs alinhados à estratégia de cada marca</li>
+    <li><strong>Acompanhamento de métricas</strong> e ajustes táticos com base em performance e engajamento</li>
+    <li><strong>Alinhamento com a equipe de Design</strong> para garantir coerência entre identidade visual e mensagem</li>
+    <li><strong>Domínio da linguagem</strong> de cada plataforma — entendendo as particularidades de Reels, TikTok, LinkedIn e demais formatos</li>
+    <li><strong>Reporting periódico</strong> aos gestores das contas, com análise de resultados e propostas de evolução</li>
+  </ul>
+
+  <div class="subtitle">Requisitos</div>
+  <ul class="bullets">
+    <li>Experiência prévia em <strong>gestão de redes sociais</strong> (em agência, inhouse ou freela)</li>
+    <li>Portfólio que demonstre <strong>planejamento e execução</strong> de conteúdo</li>
+    <li>Boa escrita em português, com domínio de tom de voz para diferentes marcas</li>
+    <li>Familiaridade com ferramentas de agendamento e análise (Meta Business Suite, Metricool ou similares)</li>
+    <li>Autogestão e disciplina para entregar dentro dos prazos sem necessidade de supervisão constante</li>
   </ul>
 
   <div class="cta">
-    <div class="cta-title">Manda teu <em>portfólio</em>.</div>
-    <p class="cta-sub">Perfis que já cuidou, posts que fez, planejamento de campanha — o que tiver.</p>
+    <div class="cta-title">Envie seu <em>portfólio</em></div>
+    <p class="cta-sub">Perfis que já gerenciou, exemplos de planejamento ou cases de campanha. Avaliamos cada candidatura individualmente.</p>
     <a id="btn-whats" class="btn-whats" href="#" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Enviar portfólio no WhatsApp
@@ -386,7 +389,7 @@ footer strong { color: var(--text-dim); }
 
 <script>
 const WHATSAPP_NUMERO = '5561998127412';
-const mensagem = encodeURIComponent('Olá! Vi a vaga de Social Media da Yep e quero enviar meu portfólio. Segue:');
+const mensagem = encodeURIComponent('Olá. Vi a vaga de Analista de Social Media da Yep Ads Brasil e gostaria de enviar meu portfólio para análise. Segue em anexo:');
 document.getElementById('btn-whats').href = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`;
 </script>
 
